@@ -1,29 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap 5 Website Example</title>
+  <title>HackHive</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+
+
   <style>
+
+    body {
+      background-image: url("./Assets/Background.jpg");
+      background-repeat: repeat; 
+      background-position: center; 
+      background-size: cover;  
+    }
+   
+  
   .fakeimg {
     height: 100px;
     background: #aaa;
   }
-.navbar {
+
+   .navbar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.center {
+   .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
+ 
+   .nav-link.btn {
+  background-color: black;
+  color: white;
+  margin-right: 10px; /* Adiciona algum espaço à direita para alinhar os botões */
+}
 
-.h3 {
-     color: #ffff00;
-    }
+.nav-item {
+  margin-right: 10px; /* Adiciona algum espaço à direita para alinhar os itens */
+  color: black;
+}
+
+.icone-interativo:hover {
+  transform: scale(1.2);
+}
+
+
+#open-profile-button:hover {
+  background-color: #333;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.a{
+  color: black;
+}
+
 
  </style>
 </head>
@@ -31,78 +67,75 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm bg-warning navbar-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img src="/Assets/HackHive.jpg" alt="Avatar Logo" style="width:40px;" class="rounded-pill"> 
-          </a>
-        </div>
-      </nav> 
-        
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="Menu.html">Home</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Login.html">End Session</a>
-                </li>
-            </ul>
-        </div>
-    </header>
+  <nav class="navbar navbar-expand-sm bg-warning navbar-dark">
+    <div class="container-fluid">
+      <img src="/Assets/HackHive.jpg" alt="Avatar Logo" style="width:40px;" class="rounded-pill icone-interativo"><a>  HackHive  </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav ms-auto">  <li class="nav-item">
+            <a class="nav-link btn" href="#" style="padding: 5px 10px;">Login</a>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link btn" id="open-profile-button" style="padding: 5px 10px;">Perfil</button>
+          </li>
+        </ul>
+      </div>
+     <button class="navbar-toggler" type="button" onclick="window.location.href='Login.html';" id="Logout-Button" style ="display: none;">Logout</button>
+          <span class="navbar-toggler-icon"></span>
+      </div>
+  </nav>
+
+  <script>
+    function logout() {
+      // Implemente a lógica para encerrar a sessão aqui
+    }
+  </script>
 
 <div class="container mt-5">
   <div class="row">
     <div class="col-sm-4">
-      <h2>About Me</h2>
-      <h5>Photo of me:</h5>
+      <h2 class="text-warning">Welcome, Ethical Hacker</h2>
+      <h5>Sign up here ...</h5>
       <div class="fakeimg">Fake Image</div>
-      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-      <h3 class="mt-4">Some Links</h3>
-      <p>Lorem ipsum dolor sit ame.</p>
+      <p>Join our community of ethical hackers who are committed to making the digital world safer.</p>
+      <h3 class="mt-4 text-warning">Useful Links</h3>
+      <p>Explore these resources to enhance your ethical hacking skills.</p>
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Active</a>
+          <a class="nav-link active" href="#">Latest Vulnerabilities</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">Hacking Tools</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">Community Forum</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+          <a class="nav-link disabled" href="#">Coming Soon</a>
         </li>
       </ul>
       <hr class="d-sm-none">
     </div>
     <div class="col-sm-8">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Dec 7, 2020</h5>
+      <h2 class="text-warning">Latest Security News</h2>
+      <h5>Security breach, Dec 7, 2020</h5>
       <div class="fakeimg">Fake Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+      <p>Details about the security breach..</p>
+      <p>Our community of ethical hackers is working to fix this. Here's what we know so far...</p>
 
-      <h2 class="mt-5">TITLE HEADING</h2>
-      <h5>Title description, Sep 2, 2020</h5>
+      <h2 class="mt-5 text-warning">Hacking Event</h2>
+      <h5>Capture the Flag, Sep 2, 2020</h5>
       <div class="fakeimg">Fake Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+      <p>Event details..</p>
+      <p>Join our Capture the Flag event to test your hacking skills and learn from others.</p>
     </div>
   </div>
 </div>
 
-<div class="mt-5 p-4 bg-dark text-white text-center">
-  <p>Footer</p>
+<div class="mt-5 p-4 bg-warning text-white text-center">
+  <p>&copy; Copyright 2024 - All rights reserved by HackHive</p>
 </div>
 
 </body>
