@@ -93,7 +93,9 @@ h6 span{
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   perspective: 800px;
-  margin-top: 60px;
+  margin: 0 auto; 
+  top: 50%; 
+  transform: translateY(10%); 
 }
 .card-3d-wrapper {
   width: 100%;
