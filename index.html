@@ -11,16 +11,37 @@
   
   
   <style>
+     
     body {
-      background-image: url("./Assets/Background.p");
-      background-repeat: repeat; 
-      background-position: center; 
-      background-size: cover;  
+      background-color:  whitesmoke; /* Light gray background */
+      text-align: center; /* Center-aligned text */
     }
    
     .fakeimg {
       height: 100px;
       background: #aaa;
+    }
+
+    h2 {
+      margin-bottom: 15px; 
+    }
+
+    
+    .col-sm-4,
+    .col-sm-8 {  
+    padding: 10px;
+}
+    
+    .container {
+     padding-top: 30px; 
+    }
+
+    .navbar-nav {
+    justify-content: center; 
+    }
+
+    .navbar-brand {
+     margin: 0 auto; 
     }
 
     .navbar {
@@ -70,6 +91,10 @@
       height: 300px; /* Altura do carrossel */
     }
 
+    .Login.button {
+      margin-left: auto;
+    }
+
   </style>
 </head>
 <body>
@@ -90,17 +115,11 @@
         <li class="nav-item">
           <a class="nav-link btn" href="Login.html" style="padding: 5px 10px;">Login</a>
         </li>
-        <li class="nav-item">
-          <button class="nav-link btn" id="open-profile-button" style="padding: 5px 10px;">Profile</button>
-        </li>
       </ul>
     </div>
     <div style="display: flex; align-items: center;">
-      <button class="navbar-toggler" type="button" onclick="window.location.href='Login.html';" id="Logout-Button" style="margin-right: 10px;">
+      <button class="navbar-toggler" type="button" onclick="window.location.href='Login.html';" id="Login.Button">
         Login
-      </button>
-      <button class="navbar-toggler" type="button" onclick="logout()" id="Logout-Button">
-        Logout
       </button>
     </div>
   </div>
@@ -142,46 +161,73 @@
 </div>
 
 
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-sm-4">
-      <h2 class="text-warning">Welcome, Ethical Hacker</h2>
-      <h5>Sign up here ...</h5>
-      <div class="fakeimg">Fake Image</div>  
-      <p>Join our community of ethical hackers who are committed to making the digital world safer.</p>
-      <h3 class="mt-4 text-warning">Useful Links</h3> 
-      <p>Explore these resources to enhance your ethical hacking skills.</p>
-      <ul class="nav nav-pills flex-column">
+  <section class="eventos">
+    <div class="container">
+      <h2>Hacking Events</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <h3 class="text-warning">Capture the Flag</h3>
+          <h5>September 2nd, 2020</h5>
+          <img src="./Assets/Hacking event.jpg" alt="Capture the Flag Event Poster" class="img-fluid rounded mb-3">
+          <p>Test your hacking skills and learn from others at our Capture the Flag event!</p>
+          <p>Details about the event...</p>
+          <a href="#" class="btn btn-warning btn-lg d-block mx-auto mt-4">Register Now</a>
+          <a href="#" class="text-warning d-block mt-3">See All Events</a>
+        </div>
+        <div class="col-md-6">
+          <h3 class="text-warning">Latest Security News</h3>
+          <h5>Security Breach, December 7th, 2020</h5>
+          <img src="./Assets/Cybersecurity news.jpg" alt="Security Breach Illustration" class="img-fluid rounded mb-3">
+          <p>Our community is working to address this security breach. Here's what we know so far...</p>
+          <p>Details about the security breach...</p>
+          <a href="#" class="text-warning d-block mt-3">Read Full Article</a>
+          <a href="#" class="text-warning d-block mt-3">More Security News</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="boas-vindas">
+    <div class="container">
+      <h2 class="text-warning text-center">Welcome, Ethical Hacker</h2>
+      <img src="./Assets/Sign in.jpg" alt="Ethical Hacker Group" class="img-fluid rounded mx-auto mt-4">
+      <p class="text-center">Join our community of ethical hackers who are committed to making the digital world safer.</p>
+      <p>HackHive is a community of ethical hackers who work together to identify and fix vulnerabilities in computer systems. We believe that ethical hacking is essential for keeping the digital world safe.</p>
+      <a href="Login.html" class="btn btn-warning btn-lg d-block mx-auto mt-4">Sign Up Here</a>
+      <h3 class="mt-4 text-warning text-center">Useful Links</h3>
+      <ul class="nav nav-pills flex-column text-center">
         <li class="nav-item">
-          <a class="nav-link active" href="login.html">Latest Vulnerabilities</a>
+          <a class="nav-link" href="https://thehackernews.com/search/label/Vulnerability">Latest Vulnerabilities</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login.html">Hacking Tools</a>
+          <a class="nav-link" href="#">Hacking Tools</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login.html">Community Forum</a>
+          <a class="nav-link" href="#">Community Forum</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login.html">More about us</a>
+          <a class="nav-link" href="#">More About Us</a>
         </li>
       </ul>
-      <hr class="d-sm-none">
+      <ul class="nav justify-content-center mt-4">
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fab fa-facebook-f"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fab fa-twitter"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fab fa-linkedin-in"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fab fa-instagram"></i></a>
+        </li>
+      </ul>
     </div>
-    <div class="col-sm-8">
-      <h2 class="text-warning">Latest Security News</h2>
-      <h5>Security breach, Dec 7, 2020</h5>
-      <div class="fakeimg">Fake Image</div>
-      <p>Details about the security breach..</p>
-      <p>Our community of ethical hackers is working to fix this. Here's what we know so far...</p>
+  </section>
+  
+  <!-- Footer -->
 
-      <h2 class="mt-5 text-warning">Hacking Event</h2>
-      <h5>Capture the Flag, Sep 2, 2020</h5>
-      <div class="fakeimg">Fake Image</div>
-      <p>Event details..</p>
-      <p>Join our Capture the Flag event to test your hacking skills and learn from others.</p>
-    </div>
-  </div>
-</div>
 
 <div class="mt-5 p-4 bg-warning text-white text-center">
   <p>&copy; Copyright 2024 - All rights reserved by HackHive</p>
@@ -189,7 +235,7 @@
 
 <script>
   $(document).ready(function(){
-    // Inicializa o Carousel
+    
     $('.carousel').carousel();
   });
 </script>
