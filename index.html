@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  
+  
   <style>
-
     body {
       background-image: url("./Assets/Background.p");
       background-repeat: repeat; 
@@ -18,81 +18,129 @@
       background-size: cover;  
     }
    
-  
-  .fakeimg {
-    height: 100px;
-    background: #aaa;
-  }
-
-   .navbar {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-   .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
- 
-   .nav-link.btn {
-  background-color: white;
-  color: black;
-  margin-right: 10px; /* Adiciona algum espaço à direita para alinhar os botões */
-}
-
-.nav-item {
-  margin-right: 10px; /* Adiciona algum espaço à direita para alinhar os itens */
-  color: black ;
-}
-
-.icone-interativo:hover {
-  transform: scale(1.2);
-}
-
-
-#open-profile-button:hover {
-  background-color: #333;
-  color: black;
-  transition: 0.3s;
-}
-
-.p{
-  
-  color: white;
-}
-
-
- </style>
-</head>
-<body>
-
-</head>
-<body>
-  <nav class="navbar navbar-expand-sm bg-warning navbar-dark">
-    <div class="container-fluid">
-      <img src="/Assets/HackHive.jpg" alt="Avatar Logo" style="width:40px;" class="rounded-pill icone-interativo"><a>  HackHive  </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav ms-auto">  <li class="nav-item">
-            <a class="nav-link btn" href="Login.html" style="padding: 5px 10px;">Login</a>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link btn" id="open-profile-button" style="padding: 5px 10px;">Perfil</button>
-          </li>
-        </ul>
-      </div>
-     <button class="navbar-toggler" type="button" onclick="window.location.href='Login.html';" id="Logout-Button" style ="display: none;">Logout</button>
-          <span class="navbar-toggler-icon"></span>
-      </div>
-  </nav>
-
-  <script>
-    function logout() {
-      // Implemente a lógica para encerrar a sessão aqui
+    .fakeimg {
+      height: 100px;
+      background: #aaa;
     }
-  </script>
+
+    .navbar {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+ 
+    .nav-link.btn {
+      background-color: white;
+      color: black;
+      margin-right: 10px; /* Adiciona algum espaço à direita para alinhar os botões */
+    }
+
+    .nav-item {
+      margin-right: 10px; /* Adiciona algum espaço à direita para alinhar os itens */
+      color: black;
+    }
+
+    .icone-interativo:hover {
+      transform: scale(1.2);
+    }
+
+    #open-profile-button:hover {
+      background-color: #333;
+      color: black;
+      transition: 0.3s;
+    }
+
+    .p {
+      color: white;
+    }
+
+    .navbar-toggler {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      margin-right: 10px; /* Adicione margem direita se necessário */
+    }
+
+    /* Estilo para o carrossel */
+    .carousel-item {
+      height: 300px; /* Altura do carrossel */
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-warning navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="/Assets/HackHive.jpg" alt="Avatar Logo" style="width:40px;" class="rounded-pill icone-interativo"> HackHive
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <form class="d-flex ms-auto mb-0">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      </form>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-auto">
+        <li class="nav-item">
+          <a class="nav-link btn" href="Login.html" style="padding: 5px 10px;">Login</a>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn" id="open-profile-button" style="padding: 5px 10px;">Profile</button>
+        </li>
+      </ul>
+    </div>
+    <div style="display: flex; align-items: center;">
+      <button class="navbar-toggler" type="button" onclick="window.location.href='Login.html';" id="Logout-Button" style="margin-right: 10px;">
+        Login
+      </button>
+      <button class="navbar-toggler" type="button" onclick="logout()" id="Logout-Button">
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>
+
+
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="./Assets/News 1.jpg" class="d-block w-100" alt="Noticia 1">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>New Security Breach on Instagram!</h5>
+        <p>Latest news here</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="./Assets/News 2.jpg" class="d-block w-100" alt="Noticia 2">
+      <div class="carousel-caption d-none d-md-block">
+        <h5> Wich path should we follow to become Cyber Exeperts?</h5>
+        <p>More information here</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="./Assets/News 3.jpg" class="d-block w-100" alt="Noticia 3">
+      <div class="carousel-caption d-none d-md-block">
+        <h5> Russian group suspect of atack to  US election system.</h5>
+        <p> More information here</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
 
 <div class="container mt-5">
   <div class="row">
@@ -101,7 +149,7 @@
       <h5>Sign up here ...</h5>
       <div class="fakeimg">Fake Image</div>
       <p>Join our community of ethical hackers who are committed to making the digital world safer.</p>
-      <h3 class="mt-4 text-warning">Useful Links</h3>
+      <h3 class="mt-4 text-warning">Useful Links</h3> 
       <p>Explore these resources to enhance your ethical hacking skills.</p>
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
@@ -138,6 +186,15 @@
 <div class="mt-5 p-4 bg-warning text-white text-center">
   <p>&copy; Copyright 2024 - All rights reserved by HackHive</p>
 </div>
+
+<script>
+  $(document).ready(function(){
+    // Inicializa o Carousel
+    $('.carousel').carousel();
+  });
+</script>
+
+
 
 </body>
 </html>
