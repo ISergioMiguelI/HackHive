@@ -11,17 +11,17 @@ body {
     overflow: hidden;
 }
 
-.boas-vindas {
+.welcome {
     padding: 30px 0;
     background: #333;
     color: #ffffff;
 }
 
-.boas-vindas h2 {
+.welcome h2 {
     margin-bottom: 10px;
 }
 
-.boas-vindas p {
+.welcome p {
     margin-bottom: 10px;
 }
 
