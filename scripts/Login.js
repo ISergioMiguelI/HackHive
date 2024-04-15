@@ -40,3 +40,27 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         alert('Please fill in both email and password fields.');
     }
 });
+
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Get the email and password values from the form
+    var email = document.getElementById('logemail').value;
+    var password = document.getElementById('logpass').value;
+
+    // Check if both email and password fields are filled
+    if (email && password) {
+        // Check if the entered email and password match the required values
+        if (email === "admin" && password === 'admin') {
+            alert('Login successful!');
+            window.location.href = "profile_admin.html";
+            
+            
+        } else {
+            alert('Incorrect password or Email!');
+        }
+    } else {
+        alert('Please fill in both email and password fields.');
+    }
+});
