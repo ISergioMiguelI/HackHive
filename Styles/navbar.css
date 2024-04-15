@@ -1,0 +1,174 @@
+body {
+    background-color:  whitesmoke; /* Light gray background */
+    text-align: center; /* Center-aligned text */
+  }
+ 
+  .fakeimg {
+    height: 100px;
+    background: #aaa;
+  }
+
+  h2 {
+    margin-bottom: 15px; 
+  }
+
+  
+  .col-sm-4,
+  .col-sm-8 {  
+  padding: 10px;
+}
+  
+  .container {
+   padding-top: 30px; 
+  }
+
+  .navbar-nav {
+  justify-content: center; 
+  }
+
+  .navbar-brand {
+   margin: 0 auto; 
+  }
+
+  .navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .nav-link.btn {
+    background-color: white;
+    color: black;
+    margin-right: 10px; /* Adiciona algum espaço à direita para alinhar os botões */
+  }
+
+  .nav-item {
+    margin-right: 10px; /* Adiciona algum espaço à direita para alinhar os itens */
+    color: black;
+  }
+
+  .icone-interativo:hover {
+    transform: scale(1.2);
+  }
+
+  #open-profile-button:hover {
+    background-color: #333;
+    color: black;
+    transition: 0.3s;
+  }
+
+  .p {
+    color: white;
+  }
+
+  .navbar-toggler {
+    display: flex;
+    align-items: center;  
+    height: 100%;
+    margin-right: 10px; /* Adicione margem direita se necessário */
+  }
+
+  /* Estilo para o carrossel */
+  .carousel-item {
+    height: 300px; /* Altura do carrossel */
+  }
+
+  .Login.button {
+    margin-left: auto;
+  }
+
+  body {
+    background-color:  #f8f9fa; /* Cor de fundo mais clara */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+    text-align: center; /* Alinhamento central do texto */
+  }
+
+  .navbar {
+    background-color: #343a40; /* Cor de fundo da barra de navegação */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+
+  .navbar-brand img {
+    width: 40px;
+    margin-right: 10px;
+  }
+
+  .carousel-inner img {
+    height: 300px; /* Altura do carousel */
+    object-fit: cover;
+  }
+
+  .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    color: white; /* Texto branco */
+    padding: 20px; /* Espaçamento interno */
+  }
+
+  .carousel-caption h5 {
+    font-size: 24px; /* Tamanho de fonte aumentado */
+  }
+
+  .icone-interativo:hover {
+    transform: scale(1.2); /* Efeito de zoom ao passar o mouse */
+  }
+
+  .btn {
+    border-radius: 20px; /* Bordas arredondadas */
+  }
+
+  .footer {
+    background-color: #343a40; /* Cor de fundo do rodapé */
+    color: white; /* Texto branco */
+    padding: 50px 0; /* Espaçamento interno */
+  }
+
+  .footer img {
+    width: 40px;
+    margin: 0 10px;
+  }
+
+  .mt-5 {
+    margin-top: 50px; /* Espaçamento superior aumentado */
+  }
+
+  .p {
+    color: white;
+  }
+
+  /* Estilo para os cartões de eventos */
+  .card {
+    border: none; /* Sem bordas */
+    border-radius: 20px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.3s ease; /* Transição suave ao passar o mouse */
+  }
+
+  .card:hover {
+    transform: translateY(-10px); /* Efeito de levantamento ao passar o mouse */
+  }
+
+  .card-title {
+    font-size: 24px; /* Tamanho de fonte aumentado */
+    margin-bottom: 10px; /* Espaçamento inferior reduzido */
+  }
+
+  .card-text {
+    font-size: 18px; /* Tamanho de fonte aumentado */
+  }
+
+  /* Estilo para os ícones de redes sociais */
+  .social-icons a {
+    color: white; /* Ícones brancos */
+    font-size: 24px; /* Tamanho de fonte aumentado */
+    margin: 0 10px; /* Espaçamento entre os ícones */
+  }
+
+  /* Estilo para os links do rodapé */
+  .footer-links a {
+    color: white; /* Links brancos */
+    margin-right: 20px; /* Espaçamento entre os links */
+  }
