@@ -5,13 +5,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Login / Sign Up</title>
 	<link rel="stylesheet" href="./Styles/Login.css">
-    <link rel="scripts" href="./Scripts/Login.js">
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
 	<link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'><link rel="stylesheet" href="./Styles/Login.css">
 </head>
 <body>
     <a href="https://front.codes/" class="logo" target="_blank"></a>
-    <a href="index.html" class="logo" target="_blank">
+    <a href="index_login.html" class="logo" target="_blank">
         <img src="/Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-circle mx-auto d-block" style="width: 100px; height: 100px;">
     </a>
 
@@ -72,8 +71,66 @@
                 </div>
             </div>
         </div>
-    </div>
-
-   <script src="./Scripts/Login.js"></script>
+    </div>    
 </body>
+
+
+<script>
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+    
+        // Get the email and password values from the form
+        var email = document.getElementById('logemail').value;
+        var password = document.getElementById('logpass').value;
+    
+        // Check if both email and password fields are filled
+        if (email && password) {
+            // Check if the entered email and password match the required values for admin
+            if (email === "admin@gmail.com" && password === 'admin') {
+                alert('Login successful for admin!');
+                window.location.href = "profile_admin.html";
+                return; // Exit the function to prevent further execution
+            }
+            // Check if the entered email and password match the required values for normal user
+            else if (email === "batata@gmail.com" && password === 'batata') {
+                alert('Login successful for normal user!');
+                window.location.href = "index_login.html";
+                return; // Exit the function to prevent further execution
+            } else {
+                alert('Incorrect password or email!');
+            }
+        } else {
+            alert('Please fill in both email and password fields.');
+        }
+    });
+    
+    
+
+    
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+        // Previne o comportamento padrão de submissão do formulário
+        event.preventDefault();
+    
+        // Obtém os valores dos campos de nome, e-mail e senha do formulário
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('pass').value;
+    
+        // Verifica se todos os campos estão preenchidos
+        if (name && email && password) {
+            alert('Registration successful!');
+            window.location.href = "index_login.html";
+        } else {
+            alert('Please fill in all fields.');
+        }
+    });
+    
+
+
+</script>
+
+
+
 </html>
