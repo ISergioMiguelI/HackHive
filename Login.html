@@ -89,13 +89,11 @@
         if (email && password) {
             // Check if the entered email and password match the required values for admin
             if (email === "admin@gmail.com" && password === 'admin') {
-                alert('Login successful for admin!');
                 window.location.href = "profile_admin.html";
                 return; // Exit the function to prevent further execution
             }
             // Check if the entered email and password match the required values for normal user
             else if (email === "batata@gmail.com" && password === 'batata') {
-                alert('Login successful for normal user!');
                 window.location.href = "index_login.html";
                 return; // Exit the function to prevent further execution
             } else {
@@ -107,7 +105,7 @@
     });
     
     
-
+    //corrigir o codigo de registar
     
     document.getElementById('registerForm').addEventListener('submit', function(event) {
         // Previne o comportamento padrão de submissão do formulário

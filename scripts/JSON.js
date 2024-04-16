@@ -1,76 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles/admin.css">
-</head>
-<body>
-
-    <div class="container mt-5">
-        <h1 class="mb-4">Admin Dashboard</h1>
-        
-        <!-- Button trigger modal for adding a new user -->
-        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addUserModal">
-            Add User
-        </button>
-
-        <!-- Table to display registered users -->
-        <table id="userTable" class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- User data will be dynamically added here -->
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Modals -->
-
-    <!-- Modal for adding a new user -->
-    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
-        <!-- Modal content will be dynamically loaded here -->
-    </div>
-
-    <!-- Modal for editing an existing user -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
-        <!-- Modal content will be dynamically loaded here -->
-    </div>
-
-    <!-- Modal for deleting a user -->
-    <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
-        <!-- Modal content will be dynamically loaded here -->
-    </div>
-
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="scripts/admin.js"></script>
-</body>
-</html>
-
-
-
-<script>
-
-  $(document).ready(function() {
+$(document).ready(function() {
     // JSON fictício de usuários
     var users = [
-        { "name": "Sérgio Gonçalves", "email": "sergio@gmail.com", "phone": "(123) 456-7890", "mobile": "(098) 765-4321", "address": "ESTG, Viana do Castelo, PT" },
-        { "name": "Klismann Barros", "email": "Klismann@gmail.com", "phone": "(111) 222-3333", "mobile": "(444) 555-6666", "address": "ESTG, Viana do Castelo, PT" }
+        { "name": "John Doe", "email": "john@example.com", "phone": "(123) 456-7890", "mobile": "(098) 765-4321", "address": "123 Main St, Anytown, USA" },
+        { "name": "Jane Smith", "email": "jane@example.com", "phone": "(111) 222-3333", "mobile": "(444) 555-6666", "address": "456 Elm St, Othertown, USA" }
     ];
 
     // Função para carregar os usuários na tabela
@@ -152,11 +84,3 @@
         }
     });
 });
-
-
-
-</script>
-
-
-
-</html>
