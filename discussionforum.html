@@ -8,18 +8,15 @@
     <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <a class="navbar-brand" href="#">Discussion Forum</a>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffd700;">
+        <a class="navbar-brand" href="#"><i class="uil uil-comment-dots"></i> Discussion Forum</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Discussion Board <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class = "nav-link" href="Communityforum.html">Community Forum</a>
+                    <a class="nav-link" href="index.html"><i class="uil uil-home"></i> Home <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
@@ -32,19 +29,19 @@
                 <div class="col-md-8">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <<a class="navbar-brand" href="Communityforum.html">Community Forum</a>
+                            <a class="navbar-brand" href="#"><i class="uil uil-arrow-left"></i> Back to Community Forum</a>
                         </div>
                         <div class="card-body">
                             <form>
                                 <div class="form-group">
-                                    <label for="exampleFormControlInput1">Post Title</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter post title">
+                                    <label for="postTitle">Post Title</label>
+                                    <input type="text" class="form-control" id="postTitle" placeholder="Enter post title">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Post Content</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <label for="postContent">Post Content</label>
+                                    <textarea class="form-control" id="postContent" rows="3"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit Post</button>
+                                <button type="submit" class="btn btn-primary"><i class="uil uil-message"></i> Submit Post</button>
                             </form>
                         </div>
                     </div>
@@ -66,5 +63,9 @@
             </div>
         </div>
     </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
 </html>

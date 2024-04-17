@@ -3,160 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles/admin.css">
+    <title>HackHive Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
+
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        .navbar {
+            background-color: #8b0000 !important;
+        }
+        .navbar-brand img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        .nav-link {
+            color: #ffffff;
+        }
+        .nav-link:hover {
+            color: #ffc107;
+        }
+        .card {
+            background-color: #3c3c3c;
+            color: #ffffff;
+            border: 1px solid #8b0000;
+        }
+        .card-title {
+            color: #ffc107;
+        }
+        .card-text {
+            color: #ffffff;
+        }
+        .btn-primary {
+            background-color: #8b0000;
+            border-color: #8b0000;
+        }
+        .btn-primary:hover {
+            background-color: #ff6347;
+            border-color: #ff6347;
+        }
+        footer {
+            background-color: #3c3c3c;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index_login.html">
+                <img src="/Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive Admin Panel
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <!-- Logout Option -->
+                    <li class="nav-item">
+                        <a class="dropdown-item" href="index.html">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <div class="container mt-5">
-        <h1 class="mb-4">Admin Dashboard</h1>
-        
-        <!-- Button trigger modal for adding a new user -->
-        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addUserModal">
-            Add User
-        </button>
-
-        <!-- Table to display registered users -->
-        <table id="userTable" class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- User data will be dynamically added here -->
-            </tbody>
-        </table>
+        <h2 class="text-warning mb-4">Admin Dashboard</h2>
+        <div class="row admin-dashboard">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="uil uil-exclamation-triangle"></i> Manage Users</h5>
+                        <p class="card-text">Add, remove, or edit users.</p>
+                        <a href="#" class="btn btn-primary"><i class="uil uil-user-plus"></i> Manage Users</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="uil uil-exclamation-triangle"></i> Add/Edit Posts</h5>
+                        <p class="card-text">Create or edit forum posts.</p>
+                        <a href="#" class="btn btn-primary"><i class="uil uil-message"></i> Manage Posts</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="uil uil-exclamation-triangle"></i> Site Settings</h5>
+                        <p class="card-text">Customize site settings.</p>
+                        <a href="#" class="btn btn-primary"><i class="uil uil-cog"></i> Settings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Modals -->
-
-    <!-- Modal for adding a new user -->
-    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
-        <!-- Modal content will be dynamically loaded here -->
-    </div>
-
-    <!-- Modal for editing an existing user -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
-        <!-- Modal content will be dynamically loaded here -->
-    </div>
-
-    <!-- Modal for deleting a user -->
-    <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
-        <!-- Modal content will be dynamically loaded here -->
-    </div>
-
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="scripts/admin.js"></script>
+    <footer>
+        <p>&copy; 2024 HackHive - All rights reserved</p>
+    </footer>
 </body>
-</html>
-
-
-
-<script>
-
-  $(document).ready(function() {
-    // JSON fictício de usuários
-    var users = [
-        { "name": "Sérgio Gonçalves", "email": "sergio@gmail.com", "phone": "(123) 456-7890", "mobile": "(098) 765-4321", "address": "ESTG, Viana do Castelo, PT" },
-        { "name": "Klismann Barros", "email": "Klismann@gmail.com", "phone": "(111) 222-3333", "mobile": "(444) 555-6666", "address": "ESTG, Viana do Castelo, PT" }
-    ];
-
-    // Função para carregar os usuários na tabela
-    function loadUsers() {
-        var tableBody = $("#userTable tbody");
-        tableBody.empty();
-        users.forEach(function(user) {
-            var row = "<tr><td>" + user.name + "</td><td>" + user.email + "</td><td>" + user.phone + "</td><td>" + user.mobile + "</td><td>" + user.address + "</td><td><button class='btn btn-info btn-edit' data-email='" + user.email + "'>Edit</button> <button class='btn btn-danger btn-delete' data-email='" + user.email + "'>Delete</button></td></tr>";
-            tableBody.append(row);
-        });
-    }
-
-    // Carregar usuários na inicialização
-    loadUsers();
-
-    // Adicionar novo usuário
-    $("#addUserModal button.btn-primary").click(function() {
-        var name = $("#name").val();
-        var email = $("#email").val();
-        var phone = $("#phone").val();
-        var mobile = $("#mobile").val();
-        var address = $("#address").val();
-        if (name && email && phone && mobile && address) {
-            users.push({ "name": name, "email": email, "phone": phone, "mobile": mobile, "address": address });
-            loadUsers();
-            $('#addUserModal').modal('hide');
-            // Limpar os campos do formulário
-            $("#addUserModal input").val("");
-        } else {
-            alert("Please fill in all fields.");
-        }
-    });
-
-    // Editar usuário
-    $("#editUserModal button.btn-primary").click(function() {
-        var email = $("#editEmail").val();
-        var userIndex = users.findIndex(user => user.email === email);
-        if (userIndex !== -1) {
-            var name = $("#editName").val();
-            var phone = $("#editPhone").val();
-            var mobile = $("#editMobile").val();
-            var address = $("#editAddress").val();
-            if (name && phone && mobile && address) {
-                users[userIndex].name = name;
-                users[userIndex].phone = phone;
-                users[userIndex].mobile = mobile;
-                users[userIndex].address = address;
-                loadUsers();
-                $('#editUserModal').modal('hide');
-                // Limpar os campos do formulário
-                $("#editUserModal input").val("");
-            } else {
-                alert("Please fill in all fields.");
-            }
-        }
-    });
-
-    // Excluir usuário
-    $(document).on("click", ".btn-delete", function() {
-        var email = $(this).data("email");
-        var userIndex = users.findIndex(user => user.email === email);
-        if (userIndex !== -1) {
-            users.splice(userIndex, 1);
-            loadUsers();
-        }
-    });
-
-    // Preencher o formulário de edição ao clicar no botão Editar
-    $(document).on("click", ".btn-edit", function() {
-        var email = $(this).data("email");
-        var user = users.find(user => user.email === email);
-        if (user) {
-            $("#editEmail").val(user.email);
-            $("#editName").val(user.name);
-            $("#editPhone").val(user.phone);
-            $("#editMobile").val(user.mobile);
-            $("#editAddress").val(user.address);
-            $('#editUserModal').modal('show');
-        }
-    });
-});
-
-
-
-</script>
-
-
-
 </html>

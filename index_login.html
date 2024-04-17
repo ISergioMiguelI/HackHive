@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+  
   
   
   <style>
@@ -105,60 +108,76 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="index_login.html">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index_login.html">
             <img src="/Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="profile.html">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Logout</a>
-              </li>
+      
+                <!-- Dropdown de Opções de Conta -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="uil uil-user-circle"></i> My Account
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="profile.html">Profile</a></li>  
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="index.html">Sign Out</a></li>
+                    </ul>
+                </li>
+                <!-- Links para Redes Sociais -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="uil uil-facebook-f"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="uil uil-twitter"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="uil uil-instagram"></i></a>
+                </li>
             </ul>
-          </div>
         </div>
-      </nav>
+    </div>
+</nav>
       
 
 
-<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="./Assets/News 1.jpg" class="d-block w-100" alt="Noticia 1">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>New Security Breach on Instagram!</h5>
+      <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="./Assets/News 1.jpg" class="d-block w-100" alt="Noticia 1">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>New Security Breach on Instagram!</h5>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./Assets/News 2.jpg" class="d-block w-100" alt="Noticia 2">
+            <div class="carousel-caption d-none d-md-block">
+              <h5> Wich path should we follow to become Cyber Experts?</h5>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./Assets/News 3.jpg" class="d-block w-100" alt="Noticia 3">
+            <div class="carousel-caption d-none d-md-block">
+              <h5> Russian group suspect of attack to US election system.</h5>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-    </div>
-    <div class="carousel-item">
-      <img src="./Assets/News 2.jpg" class="d-block w-100" alt="Noticia 2">
-      <div class="carousel-caption d-none d-md-block">
-        <h5> Wich path should we follow to become Cyber Experts?</h5>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="./Assets/News 3.jpg" class="d-block w-100" alt="Noticia 3">
-      <div class="carousel-caption d-none d-md-block">
-        <h5> Russian group suspect of attack to US election system.</h5>
-      </div>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
+      
 
   <section class="eventos mt-5">
     <div class="container">
