@@ -6,6 +6,7 @@
     <title>Discussion Forum</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+    <link rel="stylesheet" href="./Styles/discussionforum.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffd700;">
@@ -29,10 +30,10 @@
                 <div class="col-md-8">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <a class="navbar-brand" href="#"><i class="uil uil-arrow-left"></i> Back to Community Forum</a>
+                            <a class="navbar-brand" href="Communityforum.html"><i class="uil uil-arrow-left"></i> Back to Community Forum</a>
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form id="postForm">
                                 <div class="form-group">
                                     <label for="postTitle">Post Title</label>
                                     <input type="text" class="form-control" id="postTitle" placeholder="Enter post title">
@@ -51,12 +52,8 @@
                         <div class="card-header">
                             <h5 class="card-title">Latest Posts</h5>
                         </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Post 1</li>
-                                <li class="list-group-item">Post 2</li>
-                                <li class="list-group-item">Post 3</li>
-                            </ul>
+                        <div class="card-body" id="latestPosts">
+                            <!-- Latest posts will be dynamically added here -->
                         </div>
                     </div>
                 </div>
@@ -64,8 +61,86 @@
         </div>
     </section>
 
+    <!-- Modal for displaying post details -->
+    <div class="modal fade" id="postDetailsModal" tabindex="-1" role="dialog" aria-labelledby="postDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="postDetailsModalLabel">Post Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="postDetails">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script>
+        // Array to store posts
+        let posts = [];
+
+        // Function to add a new post
+        function addPost(title, content) {
+            // Generate unique ID for the post
+            const id = Math.random().toString(36).substring(7); // para gerar IDS de forma rápida e eficiente 
+            // Create the post object
+            const post = { id, title, content };
+            // Add post to the array
+            posts.push(post);
+            // Update latest posts list
+            updateLatestPosts();
+            // Reset form fields
+            $('#postTitle').val('');
+            $('#postContent').val('');
+        }
+
+        // update the latest posts 
+        function updateLatestPosts() {
+            const latestPostsContainer = $('#latestPosts');
+            latestPostsContainer.empty();
+            posts.forEach(post => {
+                latestPostsContainer.append(`<div class="post-item" data-id="${post.id}"><a href="#" class="post-link">${post.title}</a></div>`);
+            });
+        }
+
+        // show posst details modal
+        function showPostDetails(id) {
+            const post = posts.find(p => p.id === id);
+            const postDetailsContainer = $('#postDetails');
+            postDetailsContainer.empty();
+            postDetailsContainer.append(`<h5>${post.title}</h5><p>${post.content}</p>`);
+            $('#postDetailsModal').modal('show');
+        }
+
+        // Submit post form
+        $('#postForm').submit(function(event) {
+            event.preventDefault();
+            const title = $('#postTitle').val();
+            const content = $('#postContent').val();
+            addPost(title, content);
+        });
+
+        // Click event
+        $(document).on('click', '.post-link', function(event) {
+            event.preventDefault();
+            const postId = $(this).closest('.post-item').data('id');
+            showPostDetails(postId);
+        });
+    </script>
+
+    <div class="footer mt-5 text-center">
+        <div class="container">
+          <p>&copy; Copyright 2024 - All rights reserved by HackHive</p>
+        </div>
+      </div>
+
 </body>
 </html>
