@@ -57,6 +57,38 @@
             bottom: 0;
             left: 0;
         }
+
+        .modal-content {
+            background-color: #1e1e1e;
+            color: #51159f;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #8b0000;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #8b0000;
+        }   
+
+        .modal-title {
+            color: #ffc107;
+        }
+
+        .modal-body {
+            color: #ffffff;
+        }
+
+        .modal-footer .btn {
+            background-color: #8b0000;
+            border-color: #8b0000;
+        }
+
+        .modal-footer .btn:hover {
+            background-color: #ff6347;
+            border-color: #ff6347;
+        }
+</style>
     </style>
 </head>
 <body>
@@ -105,7 +137,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><i class="uil uil-exclamation-triangle"></i> Site Settings</h5>
                         <p class="card-text">Customize site settings.</p>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#settingsModal">
                             <i class="uil uil-cog"></i> Settings
                         </button>
                     </div>
@@ -120,17 +152,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="settingsModalLabel">Site Settings</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Under Attack</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Under Maintenance</button>
+                            <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Under Maintenance</button>
                         </li>
                     </ul>
                    <div class="tab-content" id="myTabContent">
