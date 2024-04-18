@@ -34,10 +34,42 @@
         .progress {
             border-radius: 10px;
         }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        /* Custom table width */
+        #userTable {
+            width: 100%;
+        }
+        /* Additional styling */
+        .additional-info {
+            margin-top: 20px;
+        }
+        .additional-info h2 {
+            color: #333;
+        }
+        .additional-info p {
+            color: #666;
+        }
+        .cta-section {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .cta-section h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .cta-section p {
+            color: #666;
+        }
     </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="index_login.html">
             <img src="/Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive
@@ -47,8 +79,6 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
             <ul class="navbar-nav">
-      
-               
                 <!-- Links para Redes Sociais -->
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="uil uil-facebook-f"></i></a>
@@ -64,109 +94,177 @@
     </div>
 </nav>
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6 offset-md-6">
-                <table id="userTable" class="table">
-                    <thead>
+<div class="container mt-5">
+    <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <label for="profileImageInput">
+                            <img id="profileImage" src="https://banner2.cleanpng.com/20180420/xle/kisspng-computer-icons-computer-security-hacker-hacker-vector-5ad96f90cf6ff7.0129112715241993128497.jpg" alt="Admin" class="rounded-circle profile-image" width="150">
+                            <span class="mt-2">Change Profile Picture</span>
+                        </label>
+                        <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
+                        <div class="mt-3">
+                            <h4>Sérgio</h4>
+                            <p class="text-secondary mb-1">Student</p>
+                            <p class="text-muted font-size-sm">Novice</p>
+                            <button class="btn btn-primary">Follow</button>
+                            <button class="btn btn-outline-primary">Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Full Name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            Sérgio Gonçalves
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            <a href="mailto:sergio.goncalves@ua.pt">sergio.goncalves@ipvc.pt</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="additional-info">
+                <h2>Additional Information</h2>
+                <p>Hi! Meet me on HackHive were People and Hackers meet alike :)</p>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="userTable" class="table">
+                        <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>IP</th>
-                            <th>Password</th>
+                            <th>Status</th>
+                            <th>Completion (%)</th>
                             <th>Actions</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
-                    Add User
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
+                        Add Task
+                    </button>
+                </div>
+            </div>
+            <div class="cta-section">
+                <h2>Call to the Community</h2>
+                <p>Join HackHive now to connect with a community of like-minded individuals and explore opportunities in the world of hacking and cybersecurity!</p>
+                <button class="btn btn-success" onclick="window.location.href='Communityforum.html'">Join Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Task Modal -->
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserModalLabel">Add Task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        </div>
-    </div>
-
-    <!-- Add User Modal -->
-    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addUserModalLabel">Add Task</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Add User Form Here -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit User Modal -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editUserModalLabel">Edit Task</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Edit User Form Here -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="main-body">
-            <div class="row gutters-sm">
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center">
-                                <img src="https://banner2.cleanpng.com/20180420/xle/kisspng-computer-icons-computer-security-hacker-hacker-vector-5ad96f90cf6ff7.0129112715241993128497.jpg" alt="Admin" class="rounded-circle" width="150">
-                                <div class="mt-3">
-                                    <h4>Sérgio</h4>
-                                    <p class="text-secondary mb-1">Student</p>
-                                    <p class="text-muted font-size-sm">Novice</p>
-                                    <button class="btn btn-primary">Follow</button>
-                                    <button class="btn btn-outline-primary">Message</button>
-                                </div>
-                            </div>
+            <div class="modal-body">
+                <form id="addTaskForm">
+                    <div class="form-group">
+                        <label for="taskName">Task Name</label>
+                        <input type="text" class="form-control" id="taskName" placeholder="Enter task name">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskStatus">Status</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="taskStatusCompleted" name="taskStatus" value="Completed">
+                            <label class="form-check-label" for="taskStatusCompleted">Completed</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="taskStatusPending" name="taskStatus" value="Pending" checked>
+                            <label class="form-check-label" for="taskStatusPending">Pending</label>
                         </div>
                     </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Full Name</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    Sérgio Gonçalves
-                                </div>
-                            </div>
-                            <!-- Add more profile information here -->
-                        </div>
+                    <div class="form-group">
+                        <label for="taskCompletion">Completion (%)</label>
+                        <input type="number" class="form-control" id="taskCompletion" placeholder="Enter completion percentage">
                     </div>
-                    <!-- Add project status here -->
-                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addTask()">Save changes</button>
             </div>
         </div>
     </div>
+</div>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+    function addTask() {
+        var taskName = document.getElementById('taskName').value;
+        var taskStatus = document.querySelector('input[name="taskStatus"]:checked').value;
+        var taskCompletion = document.getElementById('taskCompletion').value;
 
-    <script src="./Scripts/profile.js"></script>
+        var table = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow(table.rows.length);
+
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+
+        cell1.innerHTML = taskName;
+        cell2.innerHTML = taskStatus;
+        cell3.innerHTML = taskCompletion + '%';
+        cell4.innerHTML = '<button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button>';
+    }
+
+    function deleteTask(btn) {
+        var row = btn.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
+
+    function editTask(btn) {
+        var row = btn.parentNode.parentNode;
+        var cells = row.getElementsByTagName("td");
+        var taskName = cells[0].innerText;
+        var taskStatus = cells[1].innerText;
+        var taskCompletion = cells[2].innerText.split('%')[0]; 
+        document.getElementById('taskName').value = taskName;
+        if (taskStatus === 'Completed') {
+            document.getElementById('taskStatusCompleted').checked = true;
+        } else {
+            document.getElementById('taskStatusPending').checked = true;
+        }
+        document.getElementById('taskCompletion').value = taskCompletion;
+        $('#addUserModal').modal('show');
+    }
+
+    document.getElementById('profileImageInput').addEventListener('change', function() {
+        var file = this.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profileImage').src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 </body>
 </html>
