@@ -214,35 +214,32 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="./Scripts/profile.js"></script> <!-- Moved to the correct location -->
 <script>
     function addTask() {
         var taskName = document.getElementById('taskName').value;
         var taskStatus = document.querySelector('input[name="taskStatus"]:checked').value;
         var taskCompletion = document.getElementById('taskCompletion').value;
-
-<<<<<<< HEAD
-    <script src="./Scripts/profile.js"></script>
     
-=======
         var table = document.getElementById('userTable').getElementsByTagName('tbody')[0];
         var newRow = table.insertRow(table.rows.length);
-
+    
         var cell1 = newRow.insertCell(0);
         var cell2 = newRow.insertCell(1);
         var cell3 = newRow.insertCell(2);
         var cell4 = newRow.insertCell(3);
-
+    
         cell1.innerHTML = taskName;
         cell2.innerHTML = taskStatus;
         cell3.innerHTML = taskCompletion + '%';
         cell4.innerHTML = '<button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button>';
     }
-
+    
     function deleteTask(btn) {
         var row = btn.parentNode.parentNode;
         row.parentNode.removeChild(row);
     }
-
+    
     function editTask(btn) {
         var row = btn.parentNode.parentNode;
         var cells = row.getElementsByTagName("td");
@@ -258,7 +255,7 @@
         document.getElementById('taskCompletion').value = taskCompletion;
         $('#addUserModal').modal('show');
     }
-
+    
     document.getElementById('profileImageInput').addEventListener('change', function() {
         var file = this.files[0];
         if (file) {
@@ -270,6 +267,5 @@
         }
     });
 </script>
->>>>>>> 7098875138c87d8f5fc82b0873c8e5914c41b441
 </body>
 </html>
