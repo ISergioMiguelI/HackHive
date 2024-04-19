@@ -80,22 +80,22 @@
     document.getElementById('loginForm').addEventListener('submit', function(event) {
         event.preventDefault();
     
-        // Get login data from the form
+        
         var email = document.getElementById('logemail').value;
         var password = document.getElementById('logpass').value;
     
-        // Simulate authentication by checking in JSON
+        
         var users = getUsers();
         var authenticatedUser = users.find(function(user) {
             return user.email === email && user.password === password;
         });
     
         if (authenticatedUser) {
-            // Redirect to administration page or login page depending on user role
+            
             if (authenticatedUser.role === 'admin') {
                 window.location.href = 'profile_admin.html';
             } else {
-                window.location.href = 'index_login.html'; // Redirect regular user to index_login.html page
+                window.location.href = 'index_login.html'; 
             }
         } else {
             alert('Incorrect email or password. Please try again.');
@@ -105,12 +105,12 @@
     document.getElementById('registerForm').addEventListener('submit', function(event) {
         event.preventDefault();
     
-        // Get registration data from the form
+        
         var username = document.getElementById('regUsername').value;
         var email = document.getElementById('regEmail').value;
         var password = document.getElementById('regPassword').value;
     
-        // Check if user already exists
+        
         var users = getUsers();
         var existingUser = users.find(function(user) {
             return user.email === email;
@@ -119,26 +119,26 @@
         if (existingUser) {
             alert('Email is already in use. Please choose another one.');
         } else {
-            // Add new user to JSON
+            
             var newUser = {
-                id: users.length + 1, // Generate a new incremental ID
+                id: users.length + 1, 
                 username: username,
                 email: email,
                 password: password,
-                role: (username.toLowerCase() === 'admin') ? 'admin' : 'user' // Set role as 'admin' if username is 'admin', otherwise 'user'
+                role: (username.toLowerCase() === 'admin') ? 'admin' : 'user' 
             };
             users.push(newUser);
             saveUsers(users);
             alert('Registration successful. You can login now.');
-            // No need to redirect here as login will be performed after registration
+            
         }
     });
     
     function getUsers() {
-        // Check if users are in local storage
+        
         var storedUsers = localStorage.getItem('users');
         if (!storedUsers) {
-            // Save default users locally
+            
             var defaultUsers = [
                 {
                     id: 1,
@@ -151,13 +151,13 @@
             localStorage.setItem('users', JSON.stringify(defaultUsers));
             return defaultUsers;
         } else {
-            // Return users stored locally as JavaScript object
+            
             return JSON.parse(storedUsers);
         }
     }
     
     function saveUsers(users) {
-        // Save users to local storage
+        
         localStorage.setItem('users', JSON.stringify(users));
     }
 
