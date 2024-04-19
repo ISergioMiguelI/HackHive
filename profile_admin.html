@@ -57,47 +57,44 @@
             bottom: 0;
             left: 0;
         }
-
+        footer p {
+            margin-bottom: 0;
+        }
         .modal-content {
             background-color: #1e1e1e;
-            color: #51159f;
+            color: #ffffff;
         }
-
         .modal-header {
             border-bottom: 1px solid #8b0000;
+            background-color: #1e1e1e;
         }
-
         .modal-footer {
             border-top: 1px solid #8b0000;
-        }   
-
+            background-color: #1e1e1e;
+        }
         .modal-title {
             color: #ffc107;
         }
-
         .modal-body {
             color: #ffffff;
         }
-
         .modal-footer .btn {
             background-color: #8b0000;
             border-color: #8b0000;
         }
-
         .modal-footer .btn:hover {
             background-color: #ff6347;
             border-color: #ff6347;
         }
-</style>
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid">
+        <div class="container">
             <a class="navbar-brand" href="index_login">
                 <img src="/Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive Admin Panel
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
@@ -119,7 +116,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><i class="uil uil-exclamation-triangle"></i> Manage Users</h5>
                         <p class="card-text">Add, remove, or edit users.</p>
-                        <a href="#" class="btn btn-primary"><i class="uil uil-user-plus"></i> Manage Users</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#manageUsersModal"><i class="uil uil-user-plus"></i> Manage Users</button>
                     </div>
                 </div>
             </div>
@@ -146,9 +143,31 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal para gerenciar usuários -->
+    <div class="modal fade" id="manageUsersModal" tabindex="-1" aria-labelledby="manageUsersModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="manageUsersModalLabel">Manage Users</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="user-list">
+                        <!-- Lista de usuários será exibida aqui -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para alterar o status do site -->
     <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="settingsModalLabel">Change Site Status</h5>
@@ -157,22 +176,29 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Under Maintenance</button>
-                        </li>
-                    </ul>
-                   <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <p>If the site is under attack, you can redirect users to the <a href="underattack.html">Under Attack</a> page.</p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button class="btn btn-dark btn-block mb-3" id="underAttack-tab" data-toggle="tab" data-target="#underAttack" type="button" role="tab" aria-controls="underAttack" aria-selected="true">
+                                <i class="uil uil-exclamation-triangle"></i> Under Attack
+                            </button>
+                            <div class="tab-pane fade show active" id="underAttack" role="tabpanel" aria-labelledby="underAttack-tab">
+                                <p>Are you sure you want to set the site status to "Under Attack"? This will display a warning message to visitors.</p>
+                                <a href="underattack.html" class="btn btn-danger">Confirm</a>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <p>If the site is under maintenance, you can redirect users to the <a href="undermaint.html">Under Maintenance</a> page.</p>
+                        <div class="col-sm-6">
+                            <button class="btn btn-dark btn-block mb-3" id="underMaintenance-tab" data-toggle="tab" data-target="#underMaintenance" type="button" role="tab" aria-controls="underMaintenance" aria-selected="false">
+                                <i class="uil uil-exclamation-triangle"></i> Under Maintenance
+                            </button>
+                            <div class="tab-pane fade" id="underMaintenance" role="tabpanel" aria-labelledby="underMaintenance-tab">
+                                <p>Are you sure you want to set the site status to "Under Maintenance"? This will inform visitors that the site is currently undergoing maintenance.</p>
+                                <a href="undermaint.html" class="btn btn-danger">Confirm</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -183,6 +209,47 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var users = [
+                { id: 1, name: 'sergio1', email: 'sergio1@gmail.com' },
+                { id: 2, name: 'sergio2', email: 'sergio2@gmail.com' },
+                { id: 3, name: 'sergio3', email: 'sergio3@gmail.com' }
+            ];
+
+            
+            function displayUsersInModal() {
+                var userList = document.getElementById('user-list');
+                userList.innerHTML = ''; 
+
+                users.forEach(function(user) {
+                    var userDiv = document.createElement('div');
+                    userDiv.innerHTML = '<p>ID: ' + user.id + ', Name: ' + user.name + ', Email: ' + user.email + ' <button onclick="deleteUser(' + user.id + ')" class="btn btn-danger btn-sm ml-2">Delete</button></p>';
+                    userList.appendChild(userDiv);
+                });
+            }
+
+           
+            function deleteUser(userId) {
+                var index = users.findIndex(function(user) {
+                    return user.id === userId;
+                });
+
+                if (index !== -1) {
+                    users.splice(index, 1); 
+                    displayUsersInModal(); 
+                    alert('User deleted successfully.');
+                } else {
+                    alert('User not found.');
+                }
+            }
+
+            $('#manageUsersModal').on('show.bs.modal', function (e) {
+                displayUsersInModal();
+            });
+        });
+    </script>
 
 </body>
 </html>

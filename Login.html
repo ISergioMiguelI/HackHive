@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login / Sign Up</title>
-	<link rel="stylesheet" href="./Styles/Login.css">
-	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
-	<link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'><link rel="stylesheet" href="./Styles/Login.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Sign Up</title>
+    <link rel="stylesheet" href="./Styles/Login.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+    <link rel="stylesheet" href="./Styles/Login.css">
 </head>
 <body>
     <a href="https://front.codes/" class="logo" target="_blank"></a>
-    <a href="index_login.html" class="logo" target="_blank">
+    <a href="index.html" class="logo" target="_blank">
         <img src="/Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-circle mx-auto d-block" style="width: 100px; height: 100px;">
     </a>
 
@@ -28,7 +29,7 @@
                                     <div class="center-wrap">
                                         <div class="section text-center">
                                             <h4 class="mb-4 pb-3">Log In</h4>
-                                            <form id="loginForm" action="index_login.html" method="post">
+                                            <form id="loginForm" action="#" method="post">
                                                 <div class="form-group">
                                                     <input type="email" name="logemail" id="logemail" class="form-style" placeholder="Email" autocomplete="off">
                                                     <i class="input-icon uil uil-at"></i>
@@ -47,21 +48,21 @@
                                     <div class="center-wrap">
                                         <div class="section text-center"> 
                                             <h4 class="mb-4 pb-3">Sign Up</h4>
-                                            <form action="index_login.html" method="post">
-												<div class="form-group">
-													<input type="text" name="name" class="form-style" placeholder="Full Name" id="name" autocomplete="off">
-													<i class="input-icon uil uil-user"></i>
-												</div>  
-												<div class="form-group mt-2">
-													<input type="email" name="email" class="form-style" placeholder="Email" id="email" autocomplete="off">
-													<i class="input-icon uil uil-at"></i>
-												</div>  
-												<div class="form-group mt-2">
-													<input type="password" name="pass" class="form-style" placeholder="Password" id="pass" autocomplete="off">
-													<i class="input-icon uil uil-lock-alt"></i>
-												</div>
-												<input type="submit" class="btn mt-4" value="Submit">
-											</form>
+                                            <form id="registerForm" action="#" method="post">
+                                                <div class="form-group">
+                                                    <input type="text" name="name" class="form-style" placeholder="Full Name" id="regUsername" autocomplete="off">
+                                                    <i class="input-icon uil uil-user"></i>
+                                                </div>  
+                                                <div class="form-group mt-2">
+                                                    <input type="email" name="email" class="form-style" placeholder="Email" id="regEmail" autocomplete="off">
+                                                    <i class="input-icon uil uil-at"></i>
+                                                </div>  
+                                                <div class="form-group mt-2">
+                                                    <input type="password" name="pass" class="form-style" placeholder="Password" id="regPassword" autocomplete="off">
+                                                    <i class="input-icon uil uil-lock-alt"></i>
+                                                </div>
+                                                <input type="submit" class="btn mt-4" value="Submit">
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -74,61 +75,92 @@
     </div>    
 </body>
 
-
 <script>
 
     document.getElementById('loginForm').addEventListener('submit', function(event) {
-        // Prevent the default form submission behavior
         event.preventDefault();
     
-        // Get the email and password values from the form
+        // Get login data from the form
         var email = document.getElementById('logemail').value;
         var password = document.getElementById('logpass').value;
     
-        // Check if both email and password fields are filled
-        if (email && password) {
-            // Check if the entered email and password match the required values for admin
-            if (email === "admin@gmail.com" && password === 'admin') {
-                window.location.href = "profile_admin.html";
-                return; // Exit the function to prevent further execution
-            }
-            // Check if the entered email and password match the required values for normal user
-            else if (email === "sergio.goncalves@ipvc.pt" && password === 'batata') {
-                window.location.href = "index_login.html";
-                return; // Exit the function to prevent further execution
+        // Simulate authentication by checking in JSON
+        var users = getUsers();
+        var authenticatedUser = users.find(function(user) {
+            return user.email === email && user.password === password;
+        });
+    
+        if (authenticatedUser) {
+            // Redirect to administration page or login page depending on user role
+            if (authenticatedUser.role === 'admin') {
+                window.location.href = 'profile_admin.html';
             } else {
-                alert('Incorrect password or email!');
+                window.location.href = 'index_login.html'; // Redirect regular user to index_login.html page
             }
         } else {
-            alert('Please fill in both email and password fields.');
+            alert('Incorrect email or password. Please try again.');
         }
     });
-    
-    
-    //corrigir o codigo de registar
     
     document.getElementById('registerForm').addEventListener('submit', function(event) {
-        // Previne o comportamento padrão de submissão do formulário
         event.preventDefault();
     
-        // Obtém os valores dos campos de nome, e-mail e senha do formulário
-        var name = document.getElementById('name').value;
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('pass').value;
+        // Get registration data from the form
+        var username = document.getElementById('regUsername').value;
+        var email = document.getElementById('regEmail').value;
+        var password = document.getElementById('regPassword').value;
     
-        // Verifica se todos os campos estão preenchidos
-        if (name && email && password) {
-            alert('Registration successful!');
-            window.location.href = "index_login.html";
+        // Check if user already exists
+        var users = getUsers();
+        var existingUser = users.find(function(user) {
+            return user.email === email;
+        });
+    
+        if (existingUser) {
+            alert('Email is already in use. Please choose another one.');
         } else {
-            alert('Please fill in all fields.');
+            // Add new user to JSON
+            var newUser = {
+                id: users.length + 1, // Generate a new incremental ID
+                username: username,
+                email: email,
+                password: password,
+                role: (username.toLowerCase() === 'admin') ? 'admin' : 'user' // Set role as 'admin' if username is 'admin', otherwise 'user'
+            };
+            users.push(newUser);
+            saveUsers(users);
+            alert('Registration successful. You can login now.');
+            // No need to redirect here as login will be performed after registration
         }
     });
     
-
+    function getUsers() {
+        // Check if users are in local storage
+        var storedUsers = localStorage.getItem('users');
+        if (!storedUsers) {
+            // Save default users locally
+            var defaultUsers = [
+                {
+                    id: 1,
+                    username: 'admin',
+                    email: 'admin@example.com',
+                    password: 'admin123',
+                    role: 'admin'
+                }
+            ];
+            localStorage.setItem('users', JSON.stringify(defaultUsers));
+            return defaultUsers;
+        } else {
+            // Return users stored locally as JavaScript object
+            return JSON.parse(storedUsers);
+        }
+    }
+    
+    function saveUsers(users) {
+        // Save users to local storage
+        localStorage.setItem('users', JSON.stringify(users));
+    }
 
 </script>
-
-
 
 </html>

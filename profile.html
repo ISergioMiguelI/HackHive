@@ -54,17 +54,13 @@
         .additional-info p {
             color: #666;
         }
-        .cta-section {
-            background-color: #f9f9f9;
-            padding: 50px 0;
-            text-align: center;
+        .follow-btn, .message-btn {
+            width: 120px;
+            margin: 5px;
         }
-        .cta-section h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .cta-section p {
-            color: #666;
+        .btn-container {
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
@@ -101,7 +97,7 @@
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
                         <label for="profileImageInput">
-                            <img id="profileImage" src="https://banner2.cleanpng.com/20180420/xle/kisspng-computer-icons-computer-security-hacker-hacker-vector-5ad96f90cf6ff7.0129112715241993128497.jpg" alt="Admin" class="rounded-circle profile-image" width="150">
+                            <img id="profileImage" src="./Assets/giphy.gif" alt="Admin" class="rounded-circle profile-image" width="150">
                             <span class="mt-2">Change Profile Picture</span>
                         </label>
                         <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
@@ -109,8 +105,10 @@
                             <h4>Sérgio</h4>
                             <p class="text-secondary mb-1">Student</p>
                             <p class="text-muted font-size-sm">Novice</p>
-                            <button class="btn btn-primary">Follow</button>
-                            <button class="btn btn-outline-primary">Message</button>
+                            <div class="btn-container">
+                                <button class="btn btn-primary follow-btn">Follow</button>
+                                <button class="btn btn-outline-primary message-btn">Message</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -138,7 +136,7 @@
             </div>
             <div class="additional-info">
                 <h2>Additional Information</h2>
-                <p>Hi! Meet me on HackHive were People and Hackers meet alike :)</p>
+                <p>Hi! Meet me on HackHive where People and Hackers meet alike :)</p>
             </div>
         </div>
         <div class="col-md-8">
@@ -154,6 +152,24 @@
                         </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <td>Learn Ethical Hacking</td>
+                                <td>Completed</td>
+                                <td>100%</td>
+                                <td><button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button></td>
+                            </tr>
+                            <tr>
+                                <td>Network Penetration Testing</td>
+                                <td>Pending</td>
+                                <td>70%</td>
+                                <td><button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button></td>
+                            </tr>
+                            <tr>
+                                <td>Web Application Security</td>
+                                <td>Pending</td>
+                                <td>50%</td>
+                                <td><button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button></td>
+                            </tr>
                         </tbody>
                     </table>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
@@ -265,6 +281,16 @@
             }
             reader.readAsDataURL(file);
         }
+    });
+
+    // Follow Button Logic
+    document.querySelector('.follow-btn').addEventListener('click', function() {
+        alert('You are now following this user!');
+    });
+
+    // Message Button Logic
+    document.querySelector('.message-btn').addEventListener('click', function() {
+        alert('Message sent to this user!');
     });
 </script>
 </body>
