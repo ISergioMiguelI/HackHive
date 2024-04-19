@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='./Styles/Communityforum.css'>
 
     <style>
         body {
@@ -32,12 +33,19 @@
             padding-bottom: 50px;
         }
 
-        #about-us img {
-            width: 100px; /* Tamanho ajustado aqui */
+        .testimonial {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        .testimonial img {
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             margin-bottom: 20px;
-            float: left; /* Adicionado para alinhar a imagem com o texto */
-            margin-right: 20px; /* Espaçamento entre a imagem e o texto */
         }
 
         .footer {
@@ -70,27 +78,44 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
-            <h2 class="text-center mb-4">Creators:</h2>
-            <img src="./Assets/profile.jpg" alt="Avatar Logo" class="rounded-circle img-thumbnail" style="width: 250px;">
-            <img src="./Assets/profile2.jpeg" alt="Avatar Logo" class="rounded-circle img-thumbnail" style="width: 250px;">
-
+            <h2 class="text-center mb-4">Meet the Creators</h2>
+            <div class="testimonial">
+                <img src="./Assets/profile.jpg" alt="Avatar Logo" class="rounded-circle">
+                <p><strong>Sérgio Gonçalves</strong><br> Engenheiro de Redes e Sistemas de Computadores.</p>
+            </div>
+            <div class="testimonial">
+                <img src="./Assets/profile2.jpeg" alt="Avatar Logo" class="rounded-circle">
+                <p><strong>Klinsmann Barros</strong><br> Engenheiro de Redes e Sistemas de Computadores.</p>
+            </div>
         </div>
         <div class="col-lg-6">
             <h2 class="text-center mb-4">About HackHive</h2>
-            <p>HackHive is a dynamic online platform born out of the necessity to provide a centralized hub for cybersecurity enthusiasts, ethical hackers, and technology enthusiasts.</p>
-            <p>With a mission to foster learning, collaboration, and innovation in the cybersecurity realm, HackHive offers a plethora of resources, tools, and community-driven initiatives to empower individuals and organizations in safeguarding digital assets and promoting cybersecurity awareness.</p>
-            <p>Join us today and be part of a growing community of cybersecurity enthusiasts!</p>
+            <p>HackHive is a dynamic online platform dedicated to empowering cybersecurity enthusiasts, ethical hackers, and technology enthusiasts worldwide. Our mission is to provide a centralized hub for individuals passionate about cybersecurity to collaborate, learn, and innovate.</p>
+            <p>At HackHive, we believe in the power of community-driven initiatives to advance cybersecurity awareness and knowledge. That's why we offer a plethora of resources, tools, and educational content to support our members in their journey to safeguard digital assets and combat cyber threats.</p>
+            <p>Join us today and become part of a vibrant community of cybersecurity enthusiasts committed to making the digital world a safer place for everyone!</p>
         </div>
     </div>
 </div>
 
-<footer class="footer">
+<footer class="footer bg-dark text-white py-5">
     <div class="container">
-        <h3 class="mb-4">Follow us on social media</h3>
-        <a href="#"><img src="./Assets/Instagram.jpg" alt="Instagram"></a>
-        <a href="#"><img src="./Assets/twitter.png" alt="Twitter"></a>
-        <a href="#"><img src="./Assets/Facebook.png" alt="Facebook"></a>
-        <a href="#"><img src="./Assets/Linkedin.png" alt="LinkedIn"></a>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h5>Contact Us</h5>
+                <p>Email: sergio.miguel@ipvc.pt</p>
+                <p>Phone: +351 568 215 587</p>
+                <p>Address: Portugal, Viana do Castelo</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Follow Us</h5>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#"><img src="./Assets/Facebook.png" alt="Facebook"></a></li>
+                    <li class="list-inline-item"><a href="#"><img src="./Assets/twitter.png" alt="Twitter"></a></li>
+                    <li class="list-inline-item"><a href="#"><img src="./Assets/Instagram.jpg" alt="Instagram"></a></li>
+                    <li class="list-inline-item"><a href="#"><img src="./Assets/Linkedin.png" alt="Linkedin"></a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </footer>
 
