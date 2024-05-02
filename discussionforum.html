@@ -107,7 +107,7 @@
 
         // update the latest posts 
         function updateLatestPosts() {
-            const latestPostsContainer = $('#latestPosts');
+            const latestPostsContainer = $('#latestPosts'); //Usao o jQuery para selecionar o elemento com o ID latestPosts
             latestPostsContainer.empty();
             posts.forEach(post => {
                 latestPostsContainer.append(`<div class="post-item" data-id="${post.id}"><a href="#" class="post-link">${post.title}</a></div>`);
@@ -125,7 +125,7 @@
 
         // Submit post form
         $('#postForm').submit(function(event) {
-            event.preventDefault();
+            event.preventDefault(); // prevents the page from reloading aftear submission
             const title = $('#postTitle').val();
             const content = $('#postContent').val();
             addPost(title, content);
