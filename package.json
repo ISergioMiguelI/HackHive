@@ -1,0 +1,30 @@
+{
+  "name": "hackhive",
+  "version": "1.0.0",
+  "description": "Projeto De Programação Web",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ISergioMiguelI/HackHive.git"
+  },
+  "keywords": [
+    "ws"
+  ],
+  "author": "Sérgio Gonçalves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ISergioMiguelI/HackHive/issues"
+  },
+  "homepage": "https://github.com/ISergioMiguelI/HackHive#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0"
+  }
+}
