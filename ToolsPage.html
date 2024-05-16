@@ -1,55 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tools for Ethical Hacking</title>
-  <link rel="stylesheet" href="./Styles/Tools.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacking Tools and Software</title>
+    <meta name="description" content="Explore our collection of hacking tools and software. Learn how to use them and understand their workings.">
+    <meta name="keywords" content="Hacking Tools, Software, Cybersecurity, Vulnerabilities, HackHive">
+    <link rel="stylesheet" href="/Styles/Tools.css">
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include UIkit Icon Library CSS if needed -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.6.16/css/uikit.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS to make the navbar thinner */
+        .navbar {
+            padding: 0.5rem 1rem;
+        }
+        .navbar-brand img {
+            height: 40px; /* Adjust the logo height */
+        }
+        .nav-link {
+            padding: 0.5rem 0.75rem; /* Adjust link padding */
+        }
+        .dropdown-menu {
+            margin-top: 0.5rem; /* Adjust dropdown menu margin */
+        }
+        /* Form styling */
+        .form-section {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .form-section h3 {
+            margin-bottom: 20px;
+        }
+        /* Table styling */
+        .table-section {
+            margin-top: 50px;
+        }
+        .table-section h3 {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index_login.html">
+            <img src="/Assets/HackHive.jpg" alt="HackHive Logo" class="rounded-pill icone-interativo"> HackHive
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        <i class="uil uil-user-circle"></i> My Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="profile.html">Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="index.html">Sign Out</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="uil uil-facebook-f"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="uil uil-twitter"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="uil uil-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-  <!-- Navbar -->
-  <nav class="navbar">
+<section class="boas-vindas mt-5">
     <div class="container">
-      <a href="index.html" class="navbar-brand">
-        <img src="logo.png" alt="HackHive Logo" class="logo">
-        HackHive
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="tools.html" class="active">Tools</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+        <h2 class="text-warning">Hacking Tools and Software</h2>
+        <p>Explore our collection of hacking tools and software. Learn how to use them and understand their workings.</p>
     </div>
-  </nav>
+</section>
 
-  <!-- Page Content -->
-  <div class="container">
-    <h1>Tools for Ethical Hacking</h1>
-    <div class="tools-list">
-      <div class="tool">
-        <img src="tool1.png" alt="Tool 1">
-        <h2>Tool 1</h2>
-        <p>Description of Tool 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <a href="download/tool1.exe" class="btn-download">Download</a>
-      </div>
-      <div class="tool">
-        <img src="tool2.png" alt="Tool 2">
-        <h2>Tool 2</h2>
-        <p>Description of Tool 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <a href="download/tool2.zip" class="btn-download">Download</a>
-      </div>
-      <!-- Adicione mais ferramentas conforme necessário -->
-    </div>
-  </div>
+<section class="table-section container mt-5">
+    <h3 class="text-warning">Example Tools and Software</h3>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Tool/Software</th>
+                <th>Description</th>
+                <th>Resources</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Metasploit</td>
+                <td>An open-source framework for developing, testing, and executing exploits against remote targets.</td>
+                <td><a href="https://www.metasploit.com/" target="_blank">Official Site</a></td>
+            </tr>
+            <tr>
+                <td>Wireshark</td>
+                <td>A network protocol analyzer that captures and displays data packets in real time.</td>
+                <td><a href="https://www.wireshark.org/" target="_blank">Official Site</a></td>
+            </tr>
+            <tr>
+                <td>John the Ripper</td>
+                <td>A fast password cracker that detects weak passwords and can test different password cracking techniques.</td>
+                <td><a href="https://www.openwall.com/john/" target="_blank">Official Site</a></td>
+            </tr>
+            <tr>
+                <td>Nmap</td>
+                <td>A network scanner used to discover hosts and services on a computer network by sending packets and analyzing the responses.</td>
+                <td><a href="https://nmap.org/" target="_blank">Official Site</a></td>
+            </tr>
+            <tr>
+                <td>Burp Suite</td>
+                <td>An integrated platform for performing security testing of web applications.</td>
+                <td><a href="https://portswigger.net/burp" target="_blank">Official Site</a></td>
+            </tr>
+            <tr>
+                <td>Aircrack-ng</td>
+                <td>A suite of tools for assessing Wi-Fi network security.</td>
+                <td><a href="https://www.aircrack-ng.org/" target="_blank">Official Site</a></td>
+            </tr>
+            <tr>
+                <td>Hydra</td>
+                <td>A parallelized login cracker that supports numerous protocols to attack.</td>
+                <td><a href="https://github.com/vanhauser-thc/thc-hydra" target="_blank">GitHub Repository</a></td>
+            </tr>
+            <tr>
+                <td>SQLmap</td>
+                <td>An open-source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws.</td>
+                <td><a href="http://sqlmap.org/" target="_blank">Official Site</a></td>
+            </tr>
+            <tr>
+                <td>OWASP ZAP</td>
+                <td>An open-source web application security scanner.</td>
+                <td><a href="https://www.zaproxy.org/" target="_blank">Official Site</a></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
 
-  <!-- Footer -->
-  <footer class="footer">
+<section class="form-section container mt-5">
+    <h3 class="text-warning">Request Hacking Tools and Software</h3>
+    <form>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+            <label for="tool">Tool/Software Needed:</label>
+            <input type="text" class="form-control" id="tool" placeholder="Enter the tool/software you need" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" rows="3" placeholder="Provide a brief description of your need" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-warning mt-3">Submit Request</button>
+    </form>
+</section>
+
+<!-- Footer -->
+<div class="footer mt-5">
     <div class="container">
-      <p>&copy; 2024 HackHive. All rights reserved.</p>
+        <p>&copy; 2024 HackHive. All rights reserved.</p>
     </div>
-  </footer>
+</div>
 
+<!-- Include jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
