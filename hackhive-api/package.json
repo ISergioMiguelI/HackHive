@@ -1,11 +1,10 @@
 {
   "name": "hackhive",
   "version": "1.0.0",
-  "description": "Projeto De Programação Web",
-  "main": "server.js",
+  "description": "API-HackHive",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \\\"Error: no test specified\\\" && exit 1",
-    "start": "nodemon server.js"
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -21,10 +20,9 @@
   },
   "homepage": "https://github.com/ISergioMiguelI/HackHive#readme",
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
+    "@prisma/client": "^5.14.0",
+    "bcryptjs": "^2.4.3",
     "express": "^4.19.2",
-    "morgan": "^1.10.0",
-    "nodemon": "^3.1.0"
+    "jsonwebtoken": "^9.0.2"
   }
 }
