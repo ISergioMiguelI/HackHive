@@ -2,13 +2,15 @@
   "name": "hackhive",
   "version": "1.0.0",
   "description": "API-HackHive",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ISergioMiguelI/HackHive.git"
+    "url": "https://github.com/ISergioMiguelI/HackHive"
   },
   "keywords": [
     "ws"
@@ -20,9 +22,14 @@
   },
   "homepage": "https://github.com/ISergioMiguelI/HackHive#readme",
   "dependencies": {
-    "@prisma/client": "^5.14.0",
+    "@prisma/client": "^5.15.0",
     "bcryptjs": "^2.4.3",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "prisma": "^3.0.0"
   }
+  
 }
