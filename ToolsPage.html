@@ -148,7 +148,7 @@
 
 <section class="form-section container mt-5">
     <h3 class="text-warning">Request Hacking Tools and Software</h3>
-    <form>
+    <form id="requestForm">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
@@ -180,5 +180,30 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('requestForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const tool = document.getElementById('tool').value;
+        const description = document.getElementById('description').value;
+
+        const requestData = { name, email, tool, description };
+
+        // Store the data in localStorage (for simplicity)
+        let requests = localStorage.getItem('requests');
+        if (requests) {
+            requests = JSON.parse(requests);
+        } else {
+            requests = [];
+        }
+        requests.push(requestData);
+        localStorage.setItem('requests', JSON.stringify(requests));
+
+        alert('Request submitted successfully!');
+        document.getElementById('requestForm').reset();
+    });
+</script>
 </body>
 </html>
