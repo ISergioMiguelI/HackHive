@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <link rel="stylesheet" href="./Styles/profile.css">
+    <link rel="stylesheet" href="./styles/profile.css">
     <link rel="stylesheet" href="./styles/navbar.css">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
     <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
@@ -53,6 +53,7 @@
         }
         .additional-info p {
             color: #666;
+
         }
         .follow-btn, .message-btn {
             width: 120px;
@@ -68,7 +69,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="index_login.html">
-            <img src="/Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive
+            <img src="/assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -97,12 +98,12 @@
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
                         <label for="profileImageInput">
-                            <img id="profileImage" src="./Assets/giphy.gif" alt="Admin" class="rounded-circle profile-image" width="150">
+                            <img id="profileImage" src="./assets/giphy.gif" alt="Admin" class="rounded-circle profile-image" width="150">
                             <span class="mt-2">Change Profile Picture</span>
                         </label>
                         <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
                         <div class="mt-3">
-                            <h4>Sérgio</h4>
+                            <h4 id="userName">Sérgio</h4>
                             <p class="text-secondary mb-1">Student</p>
                             <p class="text-muted font-size-sm">Novice</p>
                             <div class="btn-container">
@@ -119,7 +120,7 @@
                         <div class="col-sm-3">
                             <h6 class="mb-0">Full Name</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
+                        <div class="col-sm-9 text-secondary" id="fullName">
                             Sérgio Gonçalves
                         </div>
                     </div>
@@ -129,14 +130,14 @@
                             <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            <a href="mailto:sergio.goncalves@ua.pt">sergio.goncalves@ipvc.pt</a>
+                            <a href="mailto:sergio.goncalves@ua.pt" id="email">sergio.goncalves@ipvc.pt</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="additional-info">
                 <h2>Additional Information</h2>
-                <p>Hi! Meet me on HackHive where People and Hackers meet alike :)</p>
+                <p id="additionalInfo">Hi! Meet me on HackHive where People and Hackers meet alike :)</p>
             </div>
         </div>
         <div class="col-md-8">
@@ -152,24 +153,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Learn Ethical Hacking</td>
-                                <td>Completed</td>
-                                <td>100%</td>
-                                <td><button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button></td>
-                            </tr>
-                            <tr>
-                                <td>Network Penetration Testing</td>
-                                <td>Pending</td>
-                                <td>70%</td>
-                                <td><button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button></td>
-                            </tr>
-                            <tr>
-                                <td>Web Application Security</td>
-                                <td>Pending</td>
-                                <td>50%</td>
-                                <td><button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button></td>
-                            </tr>
                         </tbody>
                     </table>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
@@ -230,38 +213,63 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="./Scripts/profile.js"></script> <!-- Moved to the correct location -->
 <script>
+    // Fetch and display user data
+    fetch('/api/user')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('userName').innerText = data.fullName;
+            document.getElementById('fullName').innerText = data.fullName;
+            document.getElementById('email').innerText = data.email;
+            document.getElementById('email').href = `mailto:${data.email}`;
+            const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+            data.tasks.forEach(task => {
+                const newRow = userTable.insertRow();
+                newRow.insertCell(0).innerText = task.name;
+                newRow.insertCell(1).innerText = task.status;
+                newRow.insertCell(2).innerText = task.completion + '%';
+                newRow.insertCell(3).innerHTML = '<button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button>';
+            });
+        });
+
     function addTask() {
-        var taskName = document.getElementById('taskName').value;
-        var taskStatus = document.querySelector('input[name="taskStatus"]:checked').value;
-        var taskCompletion = document.getElementById('taskCompletion').value;
-    
-        var table = document.getElementById('userTable').getElementsByTagName('tbody')[0];
-        var newRow = table.insertRow(table.rows.length);
-    
-        var cell1 = newRow.insertCell(0);
-        var cell2 = newRow.insertCell(1);
-        var cell3 = newRow.insertCell(2);
-        var cell4 = newRow.insertCell(3);
-    
-        cell1.innerHTML = taskName;
-        cell2.innerHTML = taskStatus;
-        cell3.innerHTML = taskCompletion + '%';
-        cell4.innerHTML = '<button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button>';
+        const taskName = document.getElementById('taskName').value;
+        const taskStatus = document.querySelector('input[name="taskStatus"]:checked').value;
+        const taskCompletion = document.getElementById('taskCompletion').value;
+        const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+
+        const newRow = userTable.insertRow();
+        newRow.insertCell(0).innerText = taskName;
+        newRow.insertCell(1).innerText = taskStatus;
+        newRow.insertCell(2).innerText = taskCompletion + '%';
+        newRow.insertCell(3).innerHTML = '<button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button>';
+
+        // Save the new task to the database (send it to the server)
+        fetch('/api/user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: taskName, status: taskStatus, completion: taskCompletion })
+        });
     }
-    
+
     function deleteTask(btn) {
-        var row = btn.parentNode.parentNode;
+        const row = btn.parentNode.parentNode;
+        const taskName = row.cells[0].innerText;
         row.parentNode.removeChild(row);
+
+        // Remove the task from the database
+        fetch(`/api/user/${taskName}`, {
+            method: 'DELETE'
+        });
     }
-    
+
     function editTask(btn) {
-        var row = btn.parentNode.parentNode;
-        var cells = row.getElementsByTagName("td");
-        var taskName = cells[0].innerText;
-        var taskStatus = cells[1].innerText;
-        var taskCompletion = cells[2].innerText.split('%')[0]; 
+        const row = btn.parentNode.parentNode;
+        const taskName = row.cells[0].innerText;
+        const taskStatus = row.cells[1].innerText;
+        const taskCompletion = row.cells[2].innerText.split('%')[0];
         document.getElementById('taskName').value = taskName;
         if (taskStatus === 'Completed') {
             document.getElementById('taskStatusCompleted').checked = true;
@@ -270,15 +278,33 @@
         }
         document.getElementById('taskCompletion').value = taskCompletion;
         $('#addUserModal').modal('show');
+
+        // Update the task in the database
+        fetch(`/api/user/${taskName}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: taskName, status: taskStatus, completion: taskCompletion })
+        });
     }
-    
+
     document.getElementById('profileImageInput').addEventListener('change', function() {
-        var file = this.files[0];
+        const file = this.files[0];
         if (file) {
-            var reader = new FileReader();
+            const reader = new FileReader();
             reader.onload = function(e) {
                 document.getElementById('profileImage').src = e.target.result;
-            }
+
+                // Update the profile image in the database
+                fetch('/api/user/profile-image', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ profileImage: e.target.result })
+                });
+            };
             reader.readAsDataURL(file);
         }
     });
