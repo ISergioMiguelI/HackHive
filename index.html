@@ -9,17 +9,16 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
   <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
-  
   <style>
     body {
-      background-color:  #f8f9fa; /* Cor de fundo mais clara */
-      font-family: Arial, sans-serif; /* Fonte padrão */
-      text-align: center; /* Alinhamento central do texto */
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+      text-align: center;
     }
 
     .navbar {
-      background-color: #343a40; /* Cor de fundo da barra de navegação */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+      background-color: #343a40;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .navbar-brand img {
@@ -28,32 +27,32 @@
     }
 
     .carousel-inner img {
-      height: 300px; /* Altura do carousel */
+      height: 300px;
       object-fit: cover;
     }
 
     .carousel-caption {
-      background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
-      color: white; /* Texto branco */
-      padding: 20px; /* Espaçamento interno */
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 20px;
     }
 
     .carousel-caption h5 {
-      font-size: 24px; /* Tamanho de fonte aumentado */
+      font-size: 24px;
     }
 
     .icone-interativo:hover {
-      transform: scale(1.2); /* Efeito de zoom ao passar o mouse */
+      transform: scale(1.2);
     }
 
     .btn {
-      border-radius: 20px; /* Bordas arredondadas */
+      border-radius: 20px;
     }
 
     .footer {
-      background-color: #343a40; /* Cor de fundo do rodapé */
-      color: white; /* Texto branco */
-      padding: 50px 0; /* Espaçamento interno */
+      background-color: #343a40;
+      color: white;
+      padding: 50px 0;
     }
 
     .footer img {
@@ -62,144 +61,142 @@
     }
 
     .mt-5 {
-      margin-top: 50px; /* Espaçamento superior aumentado */
+      margin-top: 50px;
     }
 
     .p {
       color: white;
     }
 
-    /* Estilo para os cartões de eventos */
     .card {
-      border: none; /* Sem bordas */
-      border-radius: 20px; /* Bordas arredondadas */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-      transition: transform 0.3s ease; /* Transição suave ao passar o mouse */
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
     }
 
     .card:hover {
-      transform: translateY(-10px); /* Efeito de levantamento ao passar o mouse */
+      transform: translateY(-10px);
     }
 
     .card-title {
-      font-size: 24px; /* Tamanho de fonte aumentado */
-      margin-bottom: 10px; /* Espaçamento inferior reduzido */
+      font-size: 24px;
+      margin-bottom: 10px;
     }
 
     .card-text {
-      font-size: 18px; /* Tamanho de fonte aumentado */
+      font-size: 18px;
     }
 
-    /* Estilo para os ícones de redes sociais */
     .social-icons a {
-      color: white; /* Ícones brancos */
-      font-size: 24px; /* Tamanho de fonte aumentado */
-      margin: 0 10px; /* Espaçamento entre os ícones */
+      color: white;
+      font-size: 24px;
+      margin: 0 10px;
     }
 
-    /* Estilo para os links do rodapé */
     .footer-links a {
-      color: white; /* Links brancos */
-      margin-right: 20px; /* Espaçamento entre os links */
+      color: white;
+      margin-right: 20px;
     }
   </style>
 </head>
 <body>
-
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index_login.html">
-            <img src="/Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <!-- Opção de Login -->
-                <li class="nav-item">
-                    <a class="nav-link" href="Login.html"><i class="uil uil-signin"></i> Login</a>
-                </li>
-                <!-- Links para Redes Sociais (mantidos) -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="uil uil-facebook-f"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="uil uil-twitter"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="uil uil-instagram"></i></a>
-                </li>
-            </ul>
+      <a class="navbar-brand" href="index_login.html">
+        <img src="/Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="Login.html"><i class="uil uil-signin"></i> Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="uil uil-facebook-f"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="uil uil-twitter"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="uil uil-instagram"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="./Assets/News 1.gif" class="d-block w-100" alt="Noticia 1">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>New Security Breach on Instagram!</h5>
         </div>
-    </div>
-</nav>
-
-
-
-
-<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="./Assets/News 1.gif" class="d-block w-100" alt="Noticia 1">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>New Security Breach on Instagram!</h5>
+      </div>
+      <div class="carousel-item">
+        <img src="./Assets/News 2.gif" class="d-block w-100" alt="Noticia 2">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Which path should we follow to become Cyber Experts?</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="./Assets/News 2.jpg" class="d-block w-100" alt="Noticia 3">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Learn Ethical Hacking Now!</h5>
+        </div>
       </div>
     </div>
-    <div class="carousel-item">
-      <img src="./Assets/News 2.gif" class="d-block w-100" alt="Noticia 2">
-      <div class="carousel-caption d-none d-md-block">
-        <h5> Wich path should we follow to become Cyber Experts?</h5>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="./Assets/News 2.jpg" class="d-block w-100" alt="Noticia 3">
-      <div class="carousel-caption d-none d-md-block">
-        <h5> Learn Ethical Hacking Now!</h5>
-      </div>
-    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
 
-
-<section class="eventos mt-5">
-<div class="container">
-  <h2 class="text-warning mb-4">Welcome, to our Cave!</h2>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <img src="./Assets/Hacking event.jpg" alt="Capture the Flag" class="card-img-top">
-        <div class="card-body">
-          <div class="card-body">
-            <h3 class="card-title text-warning">Community Forum</h3>
-            <p class="card-text">If you have any questions please check our Community forum to seek help on any question you have!</p>
-            <a href="Login.html" class="btn btn-warning">Register Now</a>
+  <section class="eventos mt-5">
+    <div class="container">
+      <h2 class="text-warning mb-4">Welcome, to our Cave!</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <img src="./Assets/Hacking event.jpg" alt="Capture the Flag" class="card-img-top">
+            <div class="card-body">
+              <h3 class="card-title text-warning">Community Forum</h3>
+              <p class="card-text">If you have any questions please check our Community forum to seek help on any question you have!</p>
+              <a href="Communityforum.html" class="btn btn-warning">Register Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img src="./Assets/Cybersecurity news.jpg" alt="Latest Security News" class="card-img-top">
+            <div class="card-body">
+              <h3 class="card-title text-warning">Latest Security News</h3>
+              <h5 class="text-muted">Security Breach, December 7th, 2024</h5>
+              <p class="card-text">Stay updated on the latest security breaches and learn how to protect yourself and your systems.</p>
+              <a href="https://www.securityweek.com/" class="btn btn-warning">Read Full Article</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img src="./Assets/Hacking-tools.png" alt="Hacking Tools and Software" class="card-img-top">
+            <div class="card-body">
+              <h3 class="card-title text-warning">Hacking Tools and Software</h3>
+              <p class="card-text">Explore our collection of hacking tools and software. Learn how to use them and understand their workings.</p>
+              <a href="toolspage.html" class="btn btn-warning">Explore Now</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="card">
-        <img src="./Assets/Cybersecurity news.jpg" alt="Latest Security News" class="card-img-top">
-        <div class="card-body">
-          <h3 class="card-title text-warning">Latest Security News</h3>
-          <h5 class="text-muted">Security Breach, December 7th, 2024</h5>
-          <p class="card-text">Stay updated on the latest security breaches and learn how to protect yourself and your systems.</p>
-          <a href="https://www.securityweek.com/" class="btn btn-warning">Read Full Article</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
+  </section>
 
   <section class="boas-vindas mt-5">
     <div class="container">
@@ -214,8 +211,10 @@
           <a class="nav-link" href="https://thehackernews.com/search/label/Vulnerability">Latest Vulnerabilities</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="Login.html">Hacking Tools</a>
+          <a class="nav-link
+          href="Login.html">Hacking Tools</a>
         </li>
+        <li class="nav-item">
           <a class="nav-link" href="Aboutus.html">More About Us</a>
         </li>
       </ul>
@@ -235,23 +234,20 @@
       </ul>
     </div>
   </section>
-  
- 
 
-
-<div class="footer mt-5">
-  <div class="container">
-    <p>&copy; Copyright 2024 - All rights reserved by HackHive</p>
+  <div class="footer mt-5">
+    <div class="container">
+      <p>&copy; Copyright 2024 - All rights reserved by HackHive</p>
+    </div>
   </div>
-</div>
 
-<script>
-  $(document).ready(function(){
+  <script>
+    $(document).ready(function(){
       $('.carousel').carousel({
-          interval: 5000 
+        interval: 5000 
       });
-  });
-</script>
+    });
+  </script>
 
 </body>
 </html>
