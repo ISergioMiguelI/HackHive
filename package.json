@@ -1,0 +1,30 @@
+{
+  "name": "hackhive",
+  "version": "1.0.0",
+  "description": "Projeto PW",
+  "main": "index.js",
+  "scripts": {
+    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ISergioMiguelI/HackHive.git"
+  },
+  "keywords": [
+    "ws"
+  ],
+  "author": "Sérgio Gonçalves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ISergioMiguelI/HackHive/issues"
+  },
+  "homepage": "https://github.com/ISergioMiguelI/HackHive#readme",
+  "devDependencies": {
+    "prisma": "^5.15.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.15.0",
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2"
+  }
+}
