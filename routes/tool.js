@@ -1,54 +1,12 @@
-const { PrismaClient } = require('@prisma/client');
+const express = require('express');
+const router = express.Router();
+const toolsController = require('../controllers/tool');
+const { authenticateToken } = require('../auth');
 
-const prisma = new PrismaClient();
+router.get('/tools', authenticateToken, toolsController.getTools);
+router.get('/tools/:id', authenticateToken, toolsController.getToolById);
+router.post('/tools', authenticateToken, toolsController.createTool);
+router.put('/tools/:id', authenticateToken, toolsController.updateTool);
+router.delete('/tools/:id', authenticateToken, toolsController.deleteTool);
 
-exports.getTools = async (req, res) => {
-  const tools = await prisma.tool.findMany();
-  res.json(tools);
-};
-
-exports.getToolById = async (req, res) => {
-  const toolId = parseInt(req.params.id);
-  const tool = await prisma.tool.findUnique({ where: { id: toolId } });
-  if (tool) {
-    res.json(tool);
-  } else {
-    res.status(404).json({ message: 'Tool not found' });
-  }
-};
-
-exports.createTool = async (req, res) => {
-  const { name, description, url } = req.body;
-
-  const tool = await prisma.tool.create({
-    data: {
-      name,
-      description,
-      url,
-    },
-  });
-
-  res.status(201).json(tool);
-};
-
-exports.updateTool = async (req, res) => {
-  const toolId = parseInt(req.params.id);
-  const { name, description, url } = req.body;
-
-  const tool = await prisma.tool.update({
-    where: { id: toolId },
-    data: { name, description, url },
-  });
-
-  res.json(tool);
-};
-
-exports.deleteTool = async (req, res) => {
-  const toolId = parseInt(req.params.id);
-
-  await prisma.tool.delete({
-    where: { id: toolId },
-  });
-
-  res.status(204).send();
-};
+module.exports = router;

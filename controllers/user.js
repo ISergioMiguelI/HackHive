@@ -1,17 +1,65 @@
-const express = require('express');
-const { check } = require('express-validator');
-const router = express.Router();
-const usersController = require('../controllers/user');
-const { authenticateToken } = require('../auth');
+const { PrismaClient } = require('@prisma/client');
+const { validationResult } = require('express-validator');
+const { generateToken, bcrypt } = require('../auth');
 
-router.get('/users', authenticateToken, usersController.getUsers);
-router.get('/users/:id', authenticateToken, usersController.getUserById);
-router.post('/register', [
-  check('name').not().isEmpty().withMessage('Name is required'),
-  check('email').isEmail().withMessage('Enter a valid email'),
-  check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
-], usersController.createUser);
-router.put('/users/:id', authenticateToken, usersController.updateUser);
-router.delete('/users/:id', authenticateToken, usersController.deleteUser);
+const prisma = new PrismaClient();
 
-module.exports = router;
+exports.getUsers = async (req, res) => {
+  const users = await prisma.user.findMany();
+  res.json(users);
+};
+
+exports.getUserById = async (req, res) => {
+  const userId = parseInt(req.params.id);
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404).json({ message: 'User not found' });
+  }
+};
+
+exports.createUser = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { name, email, password } = req.body;
+
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+  const user = await prisma.user.create({
+    data: {
+      name,
+      email,
+      password: hashedPassword,
+    },
+  });
+
+  const token = generateToken(user);
+  res.status(201).json({ token });
+};
+
+exports.updateUser = async (req, res) => {
+  const userId = parseInt(req.params.id);
+  const { name, email } = req.body;
+
+  const user = await prisma.user.update({
+    where: { id: userId },
+    data: { name, email },
+  });
+
+  res.json(user);
+};
+
+exports.deleteUser = async (req, res) => {
+  const userId = parseInt(req.params.id);
+
+  await prisma.user.delete({
+    where: { id: userId },
+  });
+
+  res.status(204).send();
+};
