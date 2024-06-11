@@ -1,29 +1,24 @@
-const express = require('express');
-const { PrismaClient } = require('@prisma/client');
-const app = express();
-const prisma = new PrismaClient();
+require('dotenv').config(); // Load environment variables from .env file
 
-app.use(express.json());
+const bodyParser = require('body-parser'); // Middleware to parse incoming request bodies
+const cors = require('cors'); // Middleware to enable Cross-Origin Resource Sharing
+const express = require('express'); // Import the express framework
 
-app.post('/users', async (req, res) => {
-  const { name, email } = req.body;
+// const routerLocal = require('./Routes/Local/Index'); // Import local routes (commented out)
+const routerPgs = require('./routes/Pgs/index'); // Import Pgs routes
+const publicRouter = require('./routes/Publico'); // Import public routes
+const privateRouter = require('./routes/Privado'); // Import private routes
 
-  if (!name || !email) {
-    return res.status(400).json({ error: 'Name and email are required' });
-  }
+const app = express(); // Create an instance of express
+app.use(bodyParser.json()); // Use body-parser middleware to parse JSON request bodies
+app.use(cors()); // Use CORS middleware to enable Cross-Origin Resource Sharing
 
-  try {
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email
-      }
-    });
-    res.status(201).json(user);
-  } catch (error) {
-    res.status(500).json({ error: 'Something went wrong' });
-  }
-});
+app.use(express.static('Pages')); // Serve static files from Pages directory
+
+// Main routes
+app.use('/', publicRouter); // Use publicRouter for the root path
+app.use('/Private/', privateRouter); // Use privateRouter for /Private path
+app.use('/Api/Pgs/', routerPgs); // Use routerPgs for /Api/Pgs path
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
