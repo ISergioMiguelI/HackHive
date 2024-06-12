@@ -53,7 +53,6 @@
         }
         .additional-info p {
             color: #666;
-
         }
         .follow-btn, .message-btn {
             width: 120px;
@@ -213,22 +212,24 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     // Fetch and display user data
-    fetch('/api/user')
-        .then(response => response.json())
-        .then(data => {
+    axios.get('/api/user')
+        .then(response => {
+            const data = response.data;
             document.getElementById('userName').innerText = data.fullName;
             document.getElementById('fullName').innerText = data.fullName;
             document.getElementById('email').innerText = data.email;
             document.getElementById('email').href = `mailto:${data.email}`;
             const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+            userTable.innerHTML = ''; // Clear existing rows
             data.tasks.forEach(task => {
                 const newRow = userTable.insertRow();
                 newRow.insertCell(0).innerText = task.name;
                 newRow.insertCell(1).innerText = task.status;
                 newRow.insertCell(2).innerText = task.completion + '%';
-                newRow.insertCell(3).innerHTML = '<button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button>';
+                newRow.insertCell(3).innerHTML = `<button class="btn btn-danger btn-sm" onclick="deleteTask('${task.id}', this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask('${task.id}', this)">Edit</button>`;
             });
         });
 
@@ -236,36 +237,31 @@
         const taskName = document.getElementById('taskName').value;
         const taskStatus = document.querySelector('input[name="taskStatus"]:checked').value;
         const taskCompletion = document.getElementById('taskCompletion').value;
-        const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
-
-        const newRow = userTable.insertRow();
-        newRow.insertCell(0).innerText = taskName;
-        newRow.insertCell(1).innerText = taskStatus;
-        newRow.insertCell(2).innerText = taskCompletion + '%';
-        newRow.insertCell(3).innerHTML = '<button class="btn btn-danger btn-sm" onclick="deleteTask(this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask(this)">Edit</button>';
-
-        // Save the new task to the database (send it to the server)
-        fetch('/api/user', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name: taskName, status: taskStatus, completion: taskCompletion })
+        
+        axios.post('/api/user/tasks', {
+            name: taskName,
+            status: taskStatus,
+            completion: taskCompletion
+        }).then(response => {
+            const task = response.data;
+            const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+            const newRow = userTable.insertRow();
+            newRow.insertCell(0).innerText = task.name;
+            newRow.insertCell(1).innerText = task.status;
+            newRow.insertCell(2).innerText = task.completion + '%';
+            newRow.insertCell(3).innerHTML = `<button class="btn btn-danger btn-sm" onclick="deleteTask('${task.id}', this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask('${task.id}', this)">Edit</button>`;
         });
     }
 
-    function deleteTask(btn) {
-        const row = btn.parentNode.parentNode;
-        const taskName = row.cells[0].innerText;
-        row.parentNode.removeChild(row);
-
-        // Remove the task from the database
-        fetch(`/api/user/${taskName}`, {
-            method: 'DELETE'
-        });
+    function deleteTask(taskId, btn) {
+        axios.delete(`/api/user/tasks/${taskId}`)
+            .then(() => {
+                const row = btn.parentNode.parentNode;
+                row.parentNode.removeChild(row);
+            });
     }
 
-    function editTask(btn) {
+    function editTask(taskId, btn) {
         const row = btn.parentNode.parentNode;
         const taskName = row.cells[0].innerText;
         const taskStatus = row.cells[1].innerText;
@@ -279,14 +275,18 @@
         document.getElementById('taskCompletion').value = taskCompletion;
         $('#addUserModal').modal('show');
 
-        // Update the task in the database
-        fetch(`/api/user/${taskName}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name: taskName, status: taskStatus, completion: taskCompletion })
-        });
+        document.querySelector('.modal-footer .btn-primary').onclick = function() {
+            axios.put(`/api/user/tasks/${taskId}`, {
+                name: taskName,
+                status: document.querySelector('input[name="taskStatus"]:checked').value,
+                completion: document.getElementById('taskCompletion').value
+            }).then(() => {
+                row.cells[0].innerText = taskName;
+                row.cells[1].innerText = document.querySelector('input[name="taskStatus"]:checked').value;
+                row.cells[2].innerText = document.getElementById('taskCompletion').value + '%';
+                $('#addUserModal').modal('hide');
+            });
+        };
     }
 
     document.getElementById('profileImageInput').addEventListener('change', function() {
@@ -297,12 +297,8 @@
                 document.getElementById('profileImage').src = e.target.result;
 
                 // Update the profile image in the database
-                fetch('/api/user/profile-image', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ profileImage: e.target.result })
+                axios.put('/api/user/profile-image', {
+                    profileImage: e.target.result
                 });
             };
             reader.readAsDataURL(file);
