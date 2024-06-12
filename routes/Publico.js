@@ -1,7 +1,9 @@
 const publicRouter = require('express').Router();
 
 publicRouter.get('/', (req, res) => {
-    res.sendFile('C:/Users/azar0/Documents/GitHub/HACKHIVE/Pages/index.html');
+    const filePath = path.join(__dirname, '..', '..', 'Pages', 'index.html');
+    console.log('Sending file:', filePath);
+    res.sendFile(filePath);
 });
 
 module.exports = publicRouter;

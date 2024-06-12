@@ -56,14 +56,14 @@
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="uil uil-user-circle"></i> My Account
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="profile.html">Profile</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="index.html">Sign Out</a>
-                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="profile.html">Profile</a></li>  
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="index.html">Sign Out</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="uil uil-facebook-f"></i></a>
@@ -88,7 +88,7 @@
 
 <section class="table-section container mt-5">
     <h3 class="text-warning">Example Tools and Software</h3>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="toolsTable">
         <thead class="thead-dark">
             <tr>
                 <th>Tool/Software</th>
@@ -97,50 +97,16 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Static data for initial display -->
             <tr>
-                <td>Metasploit</td>
-                <td>An open-source framework for developing, testing, and executing exploits against remote targets.</td>
-                <td><a href="https://www.metasploit.com/" target="_blank">Official Site</a></td>
-            </tr>
-            <tr>
-                <td>Wireshark</td>
-                <td>A network protocol analyzer that captures and displays data packets in real time.</td>
-                <td><a href="https://www.wireshark.org/" target="_blank">Official Site</a></td>
-            </tr>
-            <tr>
-                <td>John the Ripper</td>
-                <td>A fast password cracker that detects weak passwords and can test different password cracking techniques.</td>
-                <td><a href="https://www.openwall.com/john/" target="_blank">Official Site</a></td>
+                <td>Metasploitable</td>
+                <td>Intentionally vulnerable Linux virtual machine that can be used to conduct security training</td>
+                <td><a href="https://www.metasploit.com/">Official Site</a></td>
             </tr>
             <tr>
                 <td>Nmap</td>
-                <td>A network scanner used to discover hosts and services on a computer network by sending packets and analyzing the responses.</td>
-                <td><a href="https://nmap.org/" target="_blank">Official Site</a></td>
-            </tr>
-            <tr>
-                <td>Burp Suite</td>
-                <td>An integrated platform for performing security testing of web applications.</td>
-                <td><a href="https://portswigger.net/burp" target="_blank">Official Site</a></td>
-            </tr>
-            <tr>
-                <td>Aircrack-ng</td>
-                <td>A suite of tools for assessing Wi-Fi network security.</td>
-                <td><a href="https://www.aircrack-ng.org/" target="_blank">Official Site</a></td>
-            </tr>
-            <tr>
-                <td>Hydra</td>
-                <td>A parallelized login cracker that supports numerous protocols to attack.</td>
-                <td><a href="https://github.com/vanhauser-thc/thc-hydra" target="_blank">GitHub Repository</a></td>
-            </tr>
-            <tr>
-                <td>SQLmap</td>
-                <td>An open-source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws.</td>
-                <td><a href="http://sqlmap.org/" target="_blank">Official Site</a></td>
-            </tr>
-            <tr>
-                <td>OWASP ZAP</td>
-                <td>An open-source web application security scanner.</td>
-                <td><a href="https://www.zaproxy.org/" target="_blank">Official Site</a></td>
+                <td> Nmap is a network scanner utility used for port mapping, host discovery and vulnerability scanning</td>
+                <td><a href="https://nmap.org/">Official Site</a></td>
             </tr>
         </tbody>
     </table>
@@ -177,7 +143,7 @@
 </div>
 
 <!-- Include jQuery and Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
@@ -189,21 +155,54 @@
         const tool = document.getElementById('tool').value;
         const description = document.getElementById('description').value;
 
-        const requestData = { name, email, tool, description };
+        const requestData = {
+            name: name,
+            description: description,
+            url: '', // Note: You can add the URL if needed
+        };
 
-        // Store the data in localStorage (for simplicity)
-        let requests = localStorage.getItem('requests');
-        if (requests) {
-            requests = JSON.parse(requests);
-        } else {
-            requests = [];
-        }
-        requests.push(requestData);
-        localStorage.setItem('requests', JSON.stringify(requests));
-
-        alert('Request submitted successfully!');
-        document.getElementById('requestForm').reset();
+        fetch('/api/tools', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Request submitted successfully!');
+                document.getElementById('requestForm').reset(); // Reset form after successful submission
+                populateToolsTable(); // Update table with new data (if necessary)
+            } else {
+                throw new Error('Failed to submit request');
+            }
+        })
+        .catch(error => console.error('Error submitting request:', error));
     });
+
+    // Function to fetch tools data and populate the table
+    const populateToolsTable = () => {
+        fetch('/api/tools')
+            .then(response => response.json())
+            .then(data => {
+                const toolsTable = document.getElementById('toolsTable');
+                toolsTable.querySelector('tbody').innerHTML = ''; // Clear existing rows
+                data.forEach(tool => {
+                    const row = `
+                        <tr>
+                            <td>${tool.name}</td>
+                            <td>${tool.description}</td>
+                            <td><a href="${tool.url}" target="_blank">Official Site</a></td>
+                        </tr>
+                    `;
+                    toolsTable.querySelector('tbody').insertAdjacentHTML('beforeend', row);
+                });
+            })
+            .catch(error => console.error('Error fetching tools:', error));
+    };
+
+    // Populate the table when the page loads
+    populateToolsTable();
 </script>
 </body>
 </html>

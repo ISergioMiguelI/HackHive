@@ -214,25 +214,40 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    // Fetch and display user data
-    axios.get('/api/user')
-        .then(response => {
-            const data = response.data;
-            document.getElementById('userName').innerText = data.fullName;
-            document.getElementById('fullName').innerText = data.fullName;
-            document.getElementById('email').innerText = data.email;
-            document.getElementById('email').href = `mailto:${data.email}`;
-            const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
-            userTable.innerHTML = ''; // Clear existing rows
-            data.tasks.forEach(task => {
-                const newRow = userTable.insertRow();
-                newRow.insertCell(0).innerText = task.name;
-                newRow.insertCell(1).innerText = task.status;
-                newRow.insertCell(2).innerText = task.completion + '%';
-                newRow.insertCell(3).innerHTML = `<button class="btn btn-danger btn-sm" onclick="deleteTask('${task.id}', this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask('${task.id}', this)">Edit</button>`;
-            });
-        });
+    // Function to fetch user data and populate the profile
+    function fetchUserData() {
+        axios.get('/api/user')
+            .then(response => {
+                const data = response.data;
 
+                // Update profile information
+                document.getElementById('userName').innerText = data.fullName;
+                document.getElementById('fullName').innerText = data.fullName;
+                document.getElementById('email').innerText = data.email;
+                document.getElementById('email').href = `mailto:${data.email}`;
+                
+                // Update profile image
+                if (data.profileImage) {
+                    document.getElementById('profileImage').src = data.profileImage;
+                }
+
+                // Update user tasks
+                const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+                userTable.innerHTML = ''; // Clear existing rows
+                data.tasks.forEach(task => {
+                    const newRow = userTable.insertRow();
+                    newRow.insertCell(0).innerText = task.name;
+                    newRow.insertCell(1).innerText = task.status;
+                    newRow.insertCell(2).innerText = task.completion + '%';
+                    newRow.insertCell(3).innerHTML = `<button class="btn btn-danger btn-sm" onclick="deleteTask('${task.id}', this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask('${task.id}', this)">Edit</button>`;
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching user data', error);
+            });
+    }
+
+    // Function to add a new task
     function addTask() {
         const taskName = document.getElementById('taskName').value;
         const taskStatus = document.querySelector('input[name="taskStatus"]:checked').value;
@@ -242,7 +257,8 @@
             name: taskName,
             status: taskStatus,
             completion: taskCompletion
-        }).then(response => {
+        })
+        .then(response => {
             const task = response.data;
             const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
             const newRow = userTable.insertRow();
@@ -250,17 +266,25 @@
             newRow.insertCell(1).innerText = task.status;
             newRow.insertCell(2).innerText = task.completion + '%';
             newRow.insertCell(3).innerHTML = `<button class="btn btn-danger btn-sm" onclick="deleteTask('${task.id}', this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask('${task.id}', this)">Edit</button>`;
+        })
+        .catch(error => {
+            console.error('Error adding task', error);
         });
     }
 
+    // Function to delete a task
     function deleteTask(taskId, btn) {
         axios.delete(`/api/user/tasks/${taskId}`)
             .then(() => {
                 const row = btn.parentNode.parentNode;
                 row.parentNode.removeChild(row);
+            })
+            .catch(error => {
+                console.error('Error deleting task', error);
             });
     }
 
+    // Function to edit a task
     function editTask(taskId, btn) {
         const row = btn.parentNode.parentNode;
         const taskName = row.cells[0].innerText;
@@ -280,15 +304,20 @@
                 name: taskName,
                 status: document.querySelector('input[name="taskStatus"]:checked').value,
                 completion: document.getElementById('taskCompletion').value
-            }).then(() => {
+            })
+            .then(() => {
                 row.cells[0].innerText = taskName;
                 row.cells[1].innerText = document.querySelector('input[name="taskStatus"]:checked').value;
                 row.cells[2].innerText = document.getElementById('taskCompletion').value + '%';
                 $('#addUserModal').modal('hide');
+            })
+            .catch(error => {
+                console.error('Error editing task', error);
             });
         };
     }
 
+    // Event listener for profile image upload
     document.getElementById('profileImageInput').addEventListener('change', function() {
         const file = this.files[0];
         if (file) {
@@ -299,6 +328,9 @@
                 // Update the profile image in the database
                 axios.put('/api/user/profile-image', {
                     profileImage: e.target.result
+                })
+                .catch(error => {
+                    console.error('Error updating profile image', error);
                 });
             };
             reader.readAsDataURL(file);
@@ -314,6 +346,9 @@
     document.querySelector('.message-btn').addEventListener('click', function() {
         alert('Message sent to this user!');
     });
+
+    // Fetch user data when the page loads
+    fetchUserData();
 </script>
 </body>
 </html>

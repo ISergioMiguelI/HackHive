@@ -4,6 +4,7 @@ const bodyParser = require('body-parser'); // Middleware to parse incoming reque
 const cors = require('cors'); // Middleware to enable Cross-Origin Resource Sharing
 const express = require('express'); // Import the express framework
 const { PrismaClient } = require('@prisma/client'); // Import PrismaClient
+const path = require('path'); // Importar módulo path para trabalhar com caminhos de arquivos
 
 const prisma = new PrismaClient(); // Create an instance of PrismaClient
 
@@ -12,6 +13,7 @@ const routerPgs = require('./routes/Pgs/index'); // Import Pgs routes
 const publicRouter = require('./routes/Publico'); // Import public routes
 const privateRouter = require('./routes/Privado'); // Import private routes
 const userRouter = require('./routes/Pgs/user'); // Import user routes
+
 
 const app = express(); // Create an instance of express
 app.use(bodyParser.json()); // Use body-parser middleware to parse JSON request bodies
@@ -36,60 +38,8 @@ app.get('/api/users/login', async (req, res) => {
   }
 });
 
-app.post('/api/users/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const user = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
-
-    if (!user) {
-      return res.status(401).json({ message: 'Incorrect email or password' });
-    }
-    
-    const passwordMatch = user.password === password;
-
-    if (passwordMatch) {
-      res.json({ message: 'Login successful', token: 'jwt-token' });
-    } else {
-      res.status(401).json({ message: 'Incorrect email or password' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-
-app.post('/api/users/register', async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
-    });
-
-    if (existingUser) {
-      return res.status(400).json({ message: 'Email already registered' });
-    }
-    const newUser = await prisma.user.create({
-      data: {
-        email,
-        password, 
-      },
-    });
-
-    res.json({ message: 'Registration successful', token: 'jwt-token' });
-  } catch (error) {
-    console.error('Error in registration:', error);
-    res.status(500).json({ message: 'Registration failed: ' + error.message });
-  }
-});
-
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const port = process.env.SERVER_PORT || 3000; // Definir a porta do servidor, padrão para 4242 se não especificado
+app.listen(port, () => { // Iniciar o servidor express
+    console.log('Express server listening on port', port); // Mensagem de log do servidor escutando
+    console.log('Port open', port); // Mensagem de log de porta aberta
 });
