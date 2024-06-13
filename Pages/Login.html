@@ -78,80 +78,8 @@
     </div>    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="Scripts/Autentication.js"></script>
+    <script src="Scripts/authentication.js"></script>
     <script src="Scripts/index.js"></script>
 
-    <script type="text/JavaScript">
-        function validatePassword(password) {
-            var passwordCheck = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-            return passwordCheck.test(password);
-        }
-
-        async function validateLogin(event) {
-            event.preventDefault();
-            var dados = {
-                email: document.getElementById("logemail").value,
-                password: document.getElementById("logpass").value,
-            };
-            const response = await fetch("http://localhost:3000/api/pgs/auth/signin", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(dados),
-            });
-
-            if (!response.ok) {
-                alert("Erro ao fazer login");
-            } else {
-                const data = await response.json();
-                alert("Login efetuado com sucesso");
-                // Store the token in local storage
-                localStorage.setItem("token", data.token);
-                window.location.href = "http://localhost:3000/index_login.html";
-            }
-        }
-
-        async function validateRegister(event) {
-            event.preventDefault();
-            var name = document.getElementById("regUsername").value;
-            var email = document.getElementById("regEmail").value;
-            var password1 = document.getElementById("regPassword").value;
-            var password2 = document.getElementById("regConfirmPassword").value;
-
-            if (!validatePassword(password1)) {
-                alert("Invalid password. Password must be 8-15 characters long and include at least one lowercase letter, one uppercase letter, one numeric digit, and one special character.");
-                return false;
-            }
-            if (password1 !== password2) {
-                alert("Passwords do not match.");
-                return false;
-            }
-
-            var dados = {
-                email: email,
-                name: name,
-                password: password1,
-                isAdmin: false
-            };
-
-            try {
-                const response = await fetch("http://localhost:3000/api/pgs/Auth/signup", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(dados)
-                });
-
-                if (!response.ok) {
-                    throw new Error("Error registering user");
-                }
-
-                const data = await response.json();
-                alert(name + " has been successfully registered!");
-            } catch (error) {
-                alert("Registration failed: " + error.message);
-            }
-        }
-    </script>
 </body>
 </html>
