@@ -1,253 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>HackHive</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-  <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
-  <style>
-    body {
-      background-color: #f8f9fa;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    .navbar {
-      background-color: #343a40;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbar-brand img {
-      width: 40px;
-      margin-right: 10px;
-    }
-
-    .carousel-inner img {
-      height: 300px;
-      object-fit: cover;
-    }
-
-    .carousel-caption {
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      padding: 20px;
-    }
-
-    .carousel-caption h5 {
-      font-size: 24px;
-    }
-
-    .icone-interativo:hover {
-      transform: scale(1.2);
-    }
-
-    .btn {
-      border-radius: 20px;
-    }
-
-    .footer {
-      background-color: #343a40;
-      color: white;
-      padding: 50px 0;
-    }
-
-    .footer img {
-      width: 40px;
-      margin: 0 10px;
-    }
-
-    .mt-5 {
-      margin-top: 50px;
-    }
-
-    .p {
-      color: white;
-    }
-
-    .card {
-      border: none;
-      border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-    }
-
-    .card-title {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .card-text {
-      font-size: 18px;
-    }
-
-    .social-icons a {
-      color: white;
-      font-size: 24px;
-      margin: 0 10px;
-    }
-
-    .footer-links a {
-      color: white;
-      margin-right: 20px;
-    }
-  </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/api/site-status')
+                .then(response => response.json())
+                .then(data => {
+                    var siteStatus = data.status;
+                    if (siteStatus === 'under-maintenance') {
+                        window.location.href = 'maintenance.html';
+                    } else if (siteStatus === 'being-attacked') {
+                        window.location.href = 'under-attack.html';
+                    }
+                })
+                .catch(error => console.error('Error fetching site status:', error));
+        });
+    </script>
+    <title>HackHive</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .navbar {
+            background-color: #343a40;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        .carousel-inner img {
+            height: 300px;
+            object-fit: cover;
+        }
+        .carousel-caption {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 20px;
+        }
+        .carousel-caption h5 {
+            font-size: 24px;
+        }
+        .icone-interativo:hover {
+            transform: scale(1.2);
+        }
+        .btn {
+            border-radius: 20px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 50px 0;
+        }
+        .footer img {
+            width: 40px;
+            margin: 0 10px;
+        }
+        .mt-5 {
+            margin-top: 50px;
+        }
+        .p {
+            color: white;
+        }
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .card-text {
+            font-size: 18px;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 24px;
+            margin: 0 10px;
+        }
+        .footer-links a {
+            color: white;
+            margin-right: 20px;
+        }
+    </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index_login.html">
-        <img src="./Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="Login.html"><i class="uil uil-signin"></i> Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="uil uil-facebook-f"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="uil uil-twitter"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="uil uil-instagram"></i></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="./Assets/News 1.gif" class="d-block w-100" alt="Noticia 1">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>New Security Breach on Instagram!</h5>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="./Assets/News 2.gif" class="d-block w-100" alt="Noticia 2">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Which path should we follow to become Cyber Experts?</h5>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="./Assets/News 2.jpg" class="d-block w-100" alt="Noticia 3">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Learn Ethical Hacking Now!</h5>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-
-  <section class="eventos mt-5">
-    <div class="container">
-      <h2 class="text-warning mb-4">Welcome, to our Cave!</h2>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card">
-            <img src="./Assets/Hacking event.jpg" alt="Capture the Flag" class="card-img-top">
-            <div class="card-body">
-              <h3 class="card-title text-warning">Community Forum</h3>
-              <p class="card-text">If you have any questions please check our Community forum to seek help on any question you have!</p>
-              <a href="Communityforum.html" class="btn btn-warning">Register Now</a>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index_login.html">
+                <img src="./Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Login.html"><i class="uil uil-signin"></i> Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="uil uil-facebook-f"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="uil uil-twitter"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="uil uil-instagram"></i></a>
+                    </li>
+                </ul>
             </div>
-          </div>
         </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="./Assets/Cybersecurity news.jpg" alt="Latest Security News" class="card-img-top">
-            <div class="card-body">
-              <h3 class="card-title text-warning">Latest Security News</h3>
-              <h5 class="text-muted">Security Breach, December 7th, 2024</h5>
-              <p class="card-text">Stay updated on the latest security breaches and learn how to protect yourself and your systems.</p>
-              <a href="https://www.securityweek.com/" class="btn btn-warning">Read Full Article</a>
+    </nav>
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./Assets/News 1.gif" class="d-block w-100" alt="Noticia 1">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>New Security Breach on Instagram!</h5>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="./Assets/Hacking-tools.png" alt="Hacking Tools and Software" class="card-img-top">
-            <div class="card-body">
-              <h3 class="card-title text-warning">Hacking Tools and Software</h3>
-              <p class="card-text">Explore our collection of hacking tools and software. Learn how to use them and understand their workings.</p>
-              <a href="Login.html" class="btn btn-warning">Explore Now</a>
+            <div class="carousel-item">
+                <img src="./Assets/News 2.gif" class="d-block w-100" alt="Noticia 2">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Which path should we follow to become Cyber Experts?</h5>
+                </div>
             </div>
-          </div>
+            <div class="carousel-item">
+                <img src="./Assets/News 2.jpg" class="d-block w-100" alt="Noticia 3">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Learn Ethical Hacking Now!</h5>
+                </div>
+            </div>
         </div>
-      </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-  </section>
-
-  <section class="boas-vindas mt-5">
-    <div class="container">
-      <h2 class="text-warning">Welcome, Ethical Hacker</h2>
-      <img src="./Assets/Sign in.jpg" alt="Ethical Hacker Group" class="img-fluid rounded mx-auto mb-4" style="width: 300px;">
-      <p>Join our community of ethical hackers who are committed to making the digital world safer.</p>
-      <p>HackHive is a community of ethical hackers who work together to identify and fix vulnerabilities in computer systems. We believe that ethical hacking is essential for keeping the digital world safe.</p>
-      <a href="Login.html" class="btn btn-warning">Sign Up Here</a>
-      <h3 class="mt-4 text-warning">Useful Links</h3>
-      <ul class="nav nav-pills justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link" href="https://thehackernews.com/search/label/Vulnerability">Latest Vulnerabilities</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link
-          href="Login.html">Hacking Tools</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="Aboutus.html">More About Us</a>
-        </li>
-      </ul>
-      <ul class="social-icons mt-4">
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fab fa-facebook-f"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fab fa-twitter"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fab fa-linkedin-in"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fab fa-instagram"></i></a>
-        </li>
-      </ul>
+    <section class="eventos mt-5">
+        <div class="container">
+            <h2 class="text-warning mb-4">Welcome, to our Cave!</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="./Assets/Hacking event.jpg" alt="Capture the Flag" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title text-warning">Community Forum</h3>
+                            <p class="card-text">If you have any questions please check our Community forum to seek help on any question you have!</p>
+                            <a href="Communityforum.html" class="btn btn-warning">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="./Assets/Cybersecurity news.jpg" alt="Latest Security News" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title text-warning">Latest Security News</h3>
+                            <h5 class="text-muted">Security Breach, December 7th, 2024</h5>
+                            <p class="card-text">Stay updated on the latest security breaches and learn how to protect yourself and your systems.</p>
+                            <a href="https://www.securityweek.com/" class="btn btn-warning">Read Full Article</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="./Assets/Hacking-tools.png" alt="Hacking Tools and Software" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title text-warning">Hacking Tools and Software</h3>
+                            <p class="card-text">Explore our collection of hacking tools and software. Learn how to use them and understand their workings.</p>
+                            <a href="Login.html" class="btn btn-warning">Explore Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="boas-vindas mt-5">
+        <div class="container">
+            <h2 class="text-warning">Welcome, Ethical Hacker</h2>
+            <img src="./Assets/Sign in.jpg" alt="Ethical Hacker Group" class="img-fluid rounded mx-auto mb-4" style="width: 300px;">
+            <p>Join our community of ethical hackers who are committed to making the digital world safer.</p>
+            <p>HackHive is a community of ethical hackers who work together to identify and fix vulnerabilities in computer systems. We believe that ethical hacking is essential for keeping the digital world safe.</p>
+            <a href="Login.html" class="btn btn-warning">Sign Up Here</a>
+            <h3 class="mt-4 text-warning">Useful Links</h3>
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://thehackernews.com/search/label/Vulnerability">Latest Vulnerabilities</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Login.html">Hacking Tools</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Aboutus.html">More About Us</a>
+                </li>
+            </ul>
+            <ul class="social-icons mt-4">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fab fa-linkedin-in"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fab fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div class="footer mt-5">
+        <div class="container">
+            <p>&copy; Copyright 2024 - All rights reserved by HackHive</p>
+        </div>
     </div>
-  </section>
-
-  <div class="footer mt-5">
-    <div class="container">
-      <p>&copy; Copyright 2024 - All rights reserved by HackHive</p>
-    </div>
-  </div>
-
-  <script>
-    $(document).ready(function(){
-      $('.carousel').carousel({
-        interval: 5000 
-      });
-    });
-  </script>
-
+    <script>
+        $(document).ready(function(){
+            $('.carousel').carousel({
+                interval: 5000 
+            });
+        });
+        $(document).ready(function() {
+            $('#siteStatusForm').on('submit', function(e) {
+                e.preventDefault();
+                var siteStatus = $('#siteStatus').val();
+                fetch('/api/site-status', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: siteStatus })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Site status changed to: ' + siteStatus);
+                    $('#settingsModal').modal('hide');
+                })
+                .catch(error => console.error('Error updating site status:', error));
+            });
+            $('#addUserForm').on('submit', function(e) {
+                e.preventDefault();
+                var username = $('#username').val();
+                var email = $('#email').val();
+                alert('User added: ' + username + ' (' + email + ')');
+                $('#manageUsersModal').modal('hide');
+            });
+            $('#addPostForm').on('submit', function(e) {
+                e.preventDefault();
+                var postTitle = $('#postTitle').val();
+                var postContent = $('#postContent').val();
+                alert('Post added: ' + postTitle + '\n' + postContent);
+                $('#managePostsModal').modal('hide');
+            });
+        });
+    </script>
 </body>
 </html>
