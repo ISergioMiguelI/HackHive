@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./Styles/Login.css">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
     <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
-    <link rel="stylesheet" href="./Styles/Login.css">
 </head>
 <body>
     <a href="https://front.codes/" class="logo" target="_blank"></a>
@@ -29,7 +28,7 @@
                                     <div class="center-wrap">
                                         <div class="section text-center">
                                             <h4 class="mb-4 pb-3">Log In</h4>
-                                            <form id="loginForm" action="#" method="post">
+                                            <form id="loginForm" action="#" method="post" onsubmit="return validateLogin(event)">
                                                 <div class="form-group">
                                                     <input type="email" name="logemail" id="logemail" class="form-style" placeholder="Email" autocomplete="off">
                                                     <i class="input-icon uil uil-at"></i>
@@ -48,7 +47,7 @@
                                     <div class="center-wrap">
                                         <div class="section text-center"> 
                                             <h4 class="mb-4 pb-3">Sign Up</h4>
-                                            <form id="registerForm" action="#" method="post">
+                                            <form id="registerForm" action="#" method="post" onsubmit="return validateRegister(event)">
                                                 <div class="form-group">
                                                     <input type="text" name="name" class="form-style" placeholder="Full Name" id="regUsername" autocomplete="off">
                                                     <i class="input-icon uil uil-user"></i>
@@ -59,6 +58,10 @@
                                                 </div>  
                                                 <div class="form-group mt-2">
                                                     <input type="password" name="pass" class="form-style" placeholder="Password" id="regPassword" autocomplete="off">
+                                                    <i class="input-icon uil uil-lock-alt"></i>
+                                                </div>
+                                                <div class="form-group mt-2">
+                                                    <input type="password" name="confpass" class="form-style" placeholder="Confirm Password" id="regConfirmPassword" autocomplete="off">
                                                     <i class="input-icon uil uil-lock-alt"></i>
                                                 </div>
                                                 <input type="submit" class="btn mt-4" value="Submit">
@@ -73,75 +76,83 @@
             </div>
         </div>
     </div>    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="Scripts/Autentication.js"></script>
+    <script src="Scripts/index.js"></script>
+
+        <script type="text/JavaScript">
+            function validatePassword(password) {
+                var passwordCheck = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+                return passwordCheck.test(password);
+            }
+
+            const validaLogin = async () => {
+        var dados = {
+            email: document.getElementById("email").value,
+            password: document.getElementById("pswd").value,
+        };
+        const response= await fetch("http://localhost:3000/api/pgs/auth/signin", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dados),
+        })
+        console.log(response.ok);
+        dados= await  response.json()
+        if(!response.ok){
+            alert("Erro ao fazer login");
+        }
+        else{
+            alert("Login efetuado com sucesso");
+            console.log(dados);
+            // Guardar o token no local storage
+            localStorage.setItem("token", dados.token);
+            window.location.href = "http://localhost:3000/index_login.html";
+        }
+    };
+
+            async function validateRegister(event) {
+                event.preventDefault();
+                var name = document.getElementById("regUsername").value;
+                var email = document.getElementById("regEmail").value;
+                var password1 = document.getElementById("regPassword").value;
+                var password2 = document.getElementById("regConfirmPassword").value;
+
+                if (!validatePassword(password1)) {
+                    alert("Invalid password. Password must be 8-15 characters long and include at least one lowercase letter, one uppercase letter, one numeric digit, and one special character.");
+                    return false;
+                }
+                if (password1 !== password2) {
+                    alert("Passwords do not match.");
+                    return false;
+                }
+
+                var dados = {
+                    email: email,
+                    name: name,
+                    password: password1,
+                    isAdmin: false
+                };
+
+                try {
+                    const response = await fetch("http://localhost:3000/api/pgs/Auth/signup", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(dados)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Error registering user");
+                    }
+
+                    const data = await response.json();
+                    alert(name + " has been successfully registered!");
+                } catch (error) {
+                    alert("Registration failed: " + error.message);
+                }
+            }
+        </script>
 </body>
-
-<script>
-    document.getElementById('loginForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        
-        const email = document.getElementById('logemail').value;
-        const password = document.getElementById('logpass').value;
-
-        try {
-            const response = await fetch('/api/users/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-
-            const responseText = await response.text();
-            console.log('Response Text:', responseText); // Adicionando log da resposta
-            let data;
-            try {
-                data = JSON.parse(responseText);
-            } catch (e) {
-                throw new Error('Invalid JSON response');
-            }
-
-            if (response.ok) {
-                alert('Login successful!');
-                // Redirecionar ou armazenar token, conforme necessário
-            } else {
-                alert('Login failed: ' + (data.message || 'Incorrect email or password.'));
-            }
-        } catch (error) {
-            alert('Login failed: ' + error.message);
-        }
-    });
-
-    document.getElementById('registerForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-    
-        const name = document.getElementById('regUsername').value;
-        const email = document.getElementById('regEmail').value;
-        const password = document.getElementById('regPassword').value;
-
-        try {
-            const response = await fetch('/api/users/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, password })
-            });
-
-            const responseText = await response.text();
-            console.log('Response Text:', responseText); // Adicionando log da resposta
-            let data;
-            try {
-                data = JSON.parse(responseText);
-            } catch (e) {
-                throw new Error('Invalid JSON response');
-            }
-
-            if (response.ok) {
-                alert('Registration successful!');
-                // Redirecionar ou armazenar token, conforme necessário
-            } else {
-                alert('Registration failed: ' + (data.message || 'Unknown error.'));
-            }
-        } catch (error) {
-            alert('Registration failed: ' + error.message);
-        }
-    });
-</script>
-
 </html>

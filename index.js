@@ -27,17 +27,6 @@ app.use('/Private/', privateRouter); // Use privateRouter for /Private path
 app.use('/Api/Pgs/', routerPgs); // Use routerPgs for /Api/Pgs path
 app.use('/Api/users', userRouter); // Use userRouter for /api/users path
 
-
-// Example route to demonstrate Prisma Client usage
-app.get('/api/users/login', async (req, res) => {
-  try {
-    const users = await prisma.user.findMany();
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
 const port = process.env.SERVER_PORT || 3000; // Definir a porta do servidor, padrão para 4242 se não especificado
 app.listen(port, () => { // Iniciar o servidor express
     console.log('Express server listening on port', port); // Mensagem de log do servidor escutando

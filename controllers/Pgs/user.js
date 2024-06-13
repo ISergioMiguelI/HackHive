@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const prisma = new PrismaClient();
-const { generateToken } = require('../../utils/auth');
+const { generateToken } = require('../../utils/authenticate');
 
 exports.getAll = async (req, res) => {
   try {
