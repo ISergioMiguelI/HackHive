@@ -219,26 +219,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <button class="btn btn-dark btn-block mb-3" id="underAttack-tab" data-toggle="tab" data-target="#underAttack" type="button" role="tab" aria-controls="underAttack" aria-selected="true">
-                                <i class="uil uil-exclamation-triangle"></i> Under Attack
-                            </button>
-                            <div class="tab-pane fade show active" id="underAttack" role="tabpanel" aria-labelledby="underAttack-tab">
-                                <p>Are you sure you want to set the site status to "Under Attack"? This will display a warning message to visitors.</p>
-                                <a href="underattack.html" class="btn btn-danger">Confirm</a>
-                            </div>
+                    <form id="siteStatusForm">
+                        <div class="form-group">
+                            <label for="siteStatus">Select Site Status:</label>
+                            <select class="form-control" id="siteStatus">
+                                <option value="online">Online</option>
+                                <option value="under-maintenance">Under Maintenance</option>
+                                <option value="being-attacked">Being Attacked</option>
+                            </select>
                         </div>
-                        <div class="col-sm-6">
-                            <button class="btn btn-dark btn-block mb-3" id="underMaintenance-tab" data-toggle="tab" data-target="#underMaintenance" type="button" role="tab" aria-controls="underMaintenance" aria-selected="false">
-                                <i class="uil uil-exclamation-triangle"></i> Under Maintenance
-                            </button>
-                            <div class="tab-pane fade" id="underMaintenance" role="tabpanel" aria-labelledby="underMaintenance-tab">
-                                <p>Are you sure you want to set the site status to "Under Maintenance"? This will inform visitors that the site is currently undergoing maintenance.</p>
-                                <a href="undermaint.html" class="btn btn-danger">Confirm</a>
-                            </div>
-                        </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -248,133 +239,40 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 HackHive - All rights reserved</p>
+        <p>&copy; 2023 HackHive</p>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
-            var users = [
-                { id: 1, name: 'admin', email: 'admin@gmail.com' },
-                { id: 2, name: 'sergio2', email: 'sergio2@gmail.com' },
-                { id: 3, name: 'sergio3', email: 'sergio3@gmail.com' }
-            ];
-
-            function displayUsersInModal() {
-                var userList = $('#user-list');
-                userList.empty();
-
-                users.forEach(function(user) {
-                    var userDiv = $('<div></div>');
-                    userDiv.html('<p>ID: ' + user.id + ', Name: ' + user.name + ', Email: ' + user.email + ' <button class="btn btn-danger btn-sm ml-2 delete-user" data-user-id="' + user.id + '">Delete</button></p>');
-                    userList.append(userDiv);
-                });
-            }
-
-            function addUser(username, email) {
-                var newUser = {
-                    id: users.length + 1,
-                    name: username,
-                    email: email
-                };
-                users.push(newUser);
-                displayUsersInModal();
-                alert('User added successfully.');
-            }
-
-            function deleteUser(userId) {
-                var index = users.findIndex(function(user) {
-                    return user.id === userId;
-                });
-
-                if (index !== -1) {
-                    users.splice(index, 1); 
-                    displayUsersInModal(); 
-                    alert('User deleted successfully.');
-                } else {
-                    alert('User not found.');
-                }
-            }
-
-            $('#manageUsersModal').on('show.bs.modal', function (e) {
-                displayUsersInModal();
+            $('#siteStatusForm').on('submit', function(e) {
+                e.preventDefault();
+                var siteStatus = $('#siteStatus').val();
+                // Exibir um alerta com o status selecionado (simulação de atualização do status do site)
+                alert('Site status changed to: ' + siteStatus);
+                $('#settingsModal').modal('hide');
             });
 
-            $('#user-list').on('click', '.delete-user', function() {
-                var userId = $(this).data('user-id');
-                deleteUser(userId);
-            });
-
-            $('#addUserForm').submit(function(event) {
-                event.preventDefault();
+            $('#addUserForm').on('submit', function(e) {
+                e.preventDefault();
                 var username = $('#username').val();
                 var email = $('#email').val();
-                addUser(username, email);
-            });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            var posts = [
-                { id: 1, title: 'Ajuda', content: 'Preciso de Ajuda com JavaScript, alguém sabe resolver este exercicio' },
-            ];
-
-            function displayPostsInModal() {
-                var postList = $('#post-list');
-                postList.empty();
-
-                posts.forEach(function(post) {
-                    var postDiv = $('<div></div>');
-                    postDiv.html('<p>ID: ' + post.id + ', Title: ' + post.title + ', Content: ' + post.content + ' <button class="btn btn-danger btn-sm ml-2 delete-post" data-post-id="' + post.id + '">Delete</button></p>');
-                    postList.append(postDiv);
-                });
-            }
-
-            function addPost(title, content) {
-                var newPost = {
-                    id: posts.length + 1,
-                    title: title,
-                    content: content
-                };
-                posts.push(newPost);
-                displayPostsInModal();
-                alert('Post added successfully.');
-            }
-
-            function deletePost(postId) {
-                var index = posts.findIndex(function(post) {
-                    return post.id === postId;
-                });
-
-                if (index !== -1) {
-                    posts.splice(index, 1); 
-                    displayPostsInModal(); 
-                    alert('Post deleted successfully.');
-                } else {
-                    alert('Post not found.');
-                }
-            }
-
-            $('#managePostsModal').on('show.bs.modal', function (e) {
-                displayPostsInModal();
+                // Simulação de adição de usuário
+                alert('User added: ' + username + ' (' + email + ')');
+                $('#manageUsersModal').modal('hide');
             });
 
-            $('#post-list').on('click', '.delete-post', function() {
-                var postId = $(this).data('post-id');
-                deletePost(postId);
-            });
-
-            $('#addPostForm').submit(function(event) {
-                event.preventDefault();
+            $('#addPostForm').on('submit', function(e) {
+                e.preventDefault();
                 var postTitle = $('#postTitle').val();
                 var postContent = $('#postContent').val();
-                addPost(postTitle, postContent);
+                // Simulação de adição de post
+                alert('Post added: ' + postTitle + '\n' + postContent);
+                $('#managePostsModal').modal('hide');
             });
         });
     </script>
-
 </body>
 </html>
