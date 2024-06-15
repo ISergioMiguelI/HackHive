@@ -1,6 +1,6 @@
 const routeruser = require('express').Router();
 const { check } = require('express-validator'); 
-const controller = require('../../controllers/Pgs/user');
+const controller = require('../../controllers/Pgs/Users');
 
 routeruser.get('/users',  controller.getUsers);
 routeruser.get('/users/:id',  controller.getUserById);
