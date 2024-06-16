@@ -53,7 +53,7 @@ if (response.ok) {
 
     // Redirect based on user role
     if (responseData.role === 'admin') {
-        window.location.href = 'profileAdmin.html';
+        window.location.href = 'profile_admin.html';
     } else if (responseData.role === 'user') {
         window.location.href = 'index.html';
     } else {

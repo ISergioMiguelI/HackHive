@@ -5,13 +5,18 @@
     const { generateToken } = require('../../utils/authenticate');
 
     exports.getAll = async (req, res) => {
-    try {
-        // Read all records from the 'Utilizador' table
-        const response = await prisma.Utilizador.findMany();
-        res.status(200).json(response); // Send the response with status 200 (OK)
-    } catch (error) {
-        res.status(500).json({ msg: error.message }); // Send error message with status 500 (Internal Server Error)
-    }
+        try {
+            console.log("Iniciando a busca por todos os usuários"); // Log para depuração
+    
+            // Read all records from the 'Utilizador' table
+            const response = await prisma.Utilizador.findMany();
+            console.log("Busca concluída com sucesso"); // Log para depuração
+    
+            res.status(200).json(response); // Send the response with status 200 (OK)
+        } catch (error) {
+            console.error("Erro ao buscar todos os usuários:", error); // Log detalhado do erro
+            res.status(500).json({ msg: error.message }); // Send error message with status 500 (Internal Server Error)
+        }
     }
 
     exports.getById = async (req, res) => {
@@ -97,32 +102,31 @@
     };
 
     exports.login = async (req, res) => {
-    // Get the email and password from the request body
-    const { email, password } = req.body;
-
-    try {
-        // Find user by email
-        const user = await prisma.Utilizador.findUnique({
-            where: { email: email },
-        });
-
-        if (!user) {
-            return res.status(400).json({ msg: "Invalid credentials" });
+        // Get the email and password from the request body
+        const { email, password } = req.body;
+    
+        try {
+            // Find user by email
+            const user = await prisma.Utilizador.findUnique({
+                where: { email: email },
+            });
+    
+            if (!user) {
+                return res.status(400).json({ msg: "Invalid credentials" });
+            }
+    
+            // Check if the password matches
+            if (password !== user.password) {
+                return res.status(400).json({ msg: "Invalid credentials" });
+            }
+    
+            // Return success with user role
+            res.status(200).json({ msg: "Login successful", role: user.isAdmin ? 'admin' : 'user' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ msg: "An error occurred. Please try again later." }); // Send error message with status 500 (Internal Server Error)
         }
-
-        // Check if the password matches
-        if (password !== user.password) {
-            return res.status(400).json({ msg: "Invalid credentials" });
-        }
-
-        // Return success with user role
-        res.status(200).json({ msg: "Login successful", role: user.isAdmin ? 'admin' : 'user' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ msg: "An error occurred. Please try again later." }); // Send error message with status 500 (Internal Server Error)
     }
-    }
-
 
     exports.deleteUser = async (req, res) => {
     const userId = parseInt(req.params.id);
