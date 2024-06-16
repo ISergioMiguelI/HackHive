@@ -349,6 +349,15 @@
 
     // Fetch user data when the page loads
     fetchUserData();
+
+    
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('profileName').textContent = `Nome: ${username}`;
+        } else {
+            document.getElementById('profileName').textContent = 'Nome: Não disponível';
+        }
+
 </script>
 </body>
 </html>

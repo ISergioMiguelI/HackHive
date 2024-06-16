@@ -27,6 +27,8 @@ app.use('/Private/', privateRouter); // Use privateRouter for /Private path
 app.use('/Api/Pgs/', routerPgs); // Use routerPgs for /Api/Pgs path
 app.use('/Api/users', userRouter); // Use userRouter for /api/users path
 
+const JWT_SECRET = process.env.JWT_SECRET || 'sdfksADDFGMLKCZdjfl34ksdfdb323';
+
 const port = process.env.SERVER_PORT || 3000; // Definir a porta do servidor, padrão para 4242 se não especificado
 app.listen(port, () => { // Iniciar o servidor express
     console.log('Express server listening on port', port); // Mensagem de log do servidor escutando

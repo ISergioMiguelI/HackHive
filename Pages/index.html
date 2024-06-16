@@ -273,6 +273,13 @@
                 $('#managePostsModal').modal('hide');
             });
         });
+        
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('welcomeMessage').textContent = `Olá, ${username}!`;
+        } else {
+            document.getElementById('welcomeMessage').textContent = 'Olá, visitante!';
+        }
     </script>
 </body>
 </html>

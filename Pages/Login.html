@@ -386,6 +386,43 @@ h6 span{
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 
+
+<script type="text/JavaScript">
+  // Função para validar o login
+  const validaLogin = async () => {
+    var dados = {
+      email: document.getElementById("email").value,
+      password: document.getElementById("pswd").value,
+    };
+    const response= await fetch("http://localhost:3000/api/pgs/auth/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dados),
+    })
+    console.log(response.ok);
+    dados= await  response.json()
+    if(!response.ok){
+      alert("Erro ao fazer login");
+    }
+    else{
+      alert("Login efetuado com sucesso");
+      console.log(dados);
+      // Guardar o token no local storage
+      localStorage.setItem("token", dados.token);
+      window.location.href = "http://localhost:3000/Pages/index_login";
+    }
+};
+
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      localStorage.setItem('username', username);
+      window.location.href = 'index_login.html'; // Redirecionar para a página index_login.html após o login
+  });
+</script>
+
 </body>
 
 </html>

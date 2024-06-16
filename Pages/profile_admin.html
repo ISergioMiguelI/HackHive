@@ -273,6 +273,14 @@
                 $('#managePostsModal').modal('hide');
             });
         });
+
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('adminProfileName').textContent = `Admin: ${username}`;
+        } else {
+            document.getElementById('adminProfileName').textContent = 'Admin: Não disponível';
+        }
+
     </script>
 </body>
 </html>

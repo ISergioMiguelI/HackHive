@@ -9,7 +9,7 @@
             console.log("Iniciando a busca por todos os usuários"); // Log para depuração
     
             // Read all records from the 'Utilizador' table
-            const response = await prisma.Utilizador.findMany();
+            const response = await prisma.User.findMany();
             console.log("Busca concluída com sucesso"); // Log para depuração
     
             res.status(200).json(response); // Send the response with status 200 (OK)
