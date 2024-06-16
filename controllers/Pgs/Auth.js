@@ -8,7 +8,7 @@ exports.signin = async (req, res) => {
         const { email, password } = req.body;
         console.log('Email:', email, 'Password:', password); // Debug
 
-        const user = await prisma.Utilizador.findUnique({
+        const user = await prisma.user.findUnique({
             where: { email: email },
         });
 
@@ -18,7 +18,7 @@ exports.signin = async (req, res) => {
             if (passwordIsValid) {
                 const role = user.isAdmin ? 'admin' : 'user';
                 const payload = { 
-                    id: user.id_utilizador, 
+                    id: user.id, 
                     name: user.name, 
                     email: user.email,
                     isAdmin: user.isAdmin 
@@ -41,7 +41,6 @@ exports.signin = async (req, res) => {
     }
 };
 
-// Endpoint para Sign Up
 exports.signup = async (req, res) => {
     const { name, email, password, isAdmin } = req.body;
 
@@ -54,7 +53,7 @@ exports.signup = async (req, res) => {
 
     try {
         // Verifica se o email já está em uso
-        const existingUser = await prisma.Utilizador.findUnique({
+        const existingUser = await prisma.user.findUnique({
             where: { email: email },
         });
 
@@ -63,24 +62,23 @@ exports.signup = async (req, res) => {
         }
 
         // Cria um novo usuário
-        const utilizador = await prisma.Utilizador.create({
+        const newUser = await prisma.user.create({
             data: {
                 name: name,
                 email: email,
                 password: bcrypt.hashSync(password, 8),
-                isAdmin: isAdmin
+                isAdmin: isAdmin || false, // Pode definir isAdmin como false se não for fornecido
             },
         });
 
         // Retorna o usuário criado
-        res.status(201).json(utilizador);
+        res.status(201).json(newUser);
     } catch (error) {
         console.error('Signup Error:', error);
         res.status(400).json({ msg: error.message });
     }
 };
 
-// Endpoint para Leitura de Token
 exports.readToken = async (req, res) => {
     try {
         const { token } = req.body;
@@ -92,8 +90,8 @@ exports.readToken = async (req, res) => {
         // Decodifica o token
         const decoded = await authenticateUtil.certifyAccessToken(token);
 
-        const id_utilizador = decoded.id_utilizador;
-        const name = decoded.nome;
+        const id_utilizador = decoded.id;
+        const name = decoded.name;
         const email = decoded.email;
         const isAdmin = decoded.isAdmin ? 'admin' : 'user';
 
