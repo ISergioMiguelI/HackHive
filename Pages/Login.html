@@ -389,6 +389,35 @@ h6 span{
 
 <script type="text/JavaScript">
   // Função para validar o login
+  document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/api/pgs/auth/signin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('username', data.nome); // Armazenar o nome do usuário
+                    window.location.href = 'index_login.html';
+                } else {
+                    const errorData = await response.json();
+                    alert(errorData.msg);
+                }
+            } catch (error) {
+                console.error('An error occurred:', error);
+            }
+        });
+
+
   const validaLogin = async () => {
     var dados = {
       email: document.getElementById("logemail").value,

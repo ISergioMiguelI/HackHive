@@ -240,39 +240,6 @@
                 interval: 5000 
             });
         });
-        $(document).ready(function() {
-            $('#siteStatusForm').on('submit', function(e) {
-                e.preventDefault();
-                var siteStatus = $('#siteStatus').val();
-                fetch('/api/site-status', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ status: siteStatus })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert('Site status changed to: ' + siteStatus);
-                    $('#settingsModal').modal('hide');
-                })
-                .catch(error => console.error('Error updating site status:', error));
-            });
-            $('#addUserForm').on('submit', function(e) {
-                e.preventDefault();
-                var username = $('#username').val();
-                var email = $('#email').val();
-                alert('User added: ' + username + ' (' + email + ')');
-                $('#manageUsersModal').modal('hide');
-            });
-            $('#addPostForm').on('submit', function(e) {
-                e.preventDefault();
-                var postTitle = $('#postTitle').val();
-                var postContent = $('#postContent').val();
-                alert('Post added: ' + postTitle + '\n' + postContent);
-                $('#managePostsModal').modal('hide');
-            });
-        });
         
         const username = localStorage.getItem('username');
         if (username) {

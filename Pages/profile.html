@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
         /* Custom Styles */
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(to right, #8e0b0b, #1a1a1a); /* Gradiente de fundo vermelho e preto */
+    color
         .navbar-brand img {
             width: 40px;
             margin-right: 10px;
@@ -31,6 +36,16 @@
             bottom: 0;
             left: 0;
         }
+
+        .footer img {
+            width: 40px;
+        }
+
+        .btn-outline-primary:hover {
+    background-color: #4f8bf9; /* Cor de fundo do botão de contorno primário ao passar o mouse */
+    color: #ffffff; /* Cor do texto do botão de contorno primário ao passar o mouse */
+}
+         
         .progress {
             border-radius: 10px;
         }
@@ -40,11 +55,22 @@
             object-fit: cover;
             border-radius: 50%;
         }
-        /* Custom table width */
-        #userTable {
-            width: 100%;
+        .default-profile-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #6c757d;
+            font-size: 3rem;
         }
-        /* Additional styling */
+        .card {
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
         .additional-info {
             margin-top: 20px;
         }
@@ -62,6 +88,31 @@
             display: flex;
             justify-content: center;
         }
+        .cta-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .cta-section button {
+            margin-top: 10px;
+        }
+        
+        .additional-info {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #ffffff; /* Fundo branco para contrastar com o fundo escuro */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar */
+    }
+
+    .additional-info h2 {
+        color: #333;
+    }
+
+    .additional-info p {
+        color: #666;
+    }
+
+
     </style>
 </head>
 <body>
@@ -85,6 +136,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="uil uil-instagram"></i></a>
                 </li>
+                </li>
+                <a class="nav-link" id="gohome" href="index_login.html" style="font-size: 16px;">
+                    <i class="material-icons" style="font-size: 16px; vertical-align: middle;">home</i> Home
+                </a>
+                
+            </li>
             </ul>
         </div>
     </div>
@@ -97,14 +154,14 @@
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
                         <label for="profileImageInput">
-                            <img id="profileImage" src="./assets/giphy.gif" alt="Admin" class="rounded-circle profile-image" width="150">
+                            <div id="profileImageContainer" class="default-profile-image">
+                                <span class="material-icons">person</span>
+                            </div>
                             <span class="mt-2">Change Profile Picture</span>
                         </label>
                         <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
                         <div class="mt-3">
                             <h4 id="userName">Sérgio</h4>
-                            <p class="text-secondary mb-1">Student</p>
-                            <p class="text-muted font-size-sm">Novice</p>
                             <div class="btn-container">
                                 <button class="btn btn-primary follow-btn">Follow</button>
                                 <button class="btn btn-outline-primary message-btn">Message</button>
@@ -129,14 +186,14 @@
                             <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            <a href="mailto:sergio.goncalves@ua.pt" id="email">sergio.goncalves@ipvc.pt</a>
+                            <a href="mailto:sergio.goncalves@ua.pt" id="email"></a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="additional-info">
                 <h2>Additional Information</h2>
-                <p id="additionalInfo">Hi! Meet me on HackHive where People and Hackers meet alike :)</p>
+                <p id="additionalInfo">Hi! :)</p>
             </div>
         </div>
         <div class="col-md-8">
@@ -159,14 +216,18 @@
                     </button>
                 </div>
             </div>
-            <div class="cta-section">
-                <h2>Call to the Community</h2>
-                <p>Join HackHive now to connect with a community of like-minded individuals and explore opportunities in the world of hacking and cybersecurity!</p>
-                <button class="btn btn-success" onclick="window.location.href='Communityforum.html'">Join Now</button>
+            <div class="card mb-4 mt-4">
+                <div class="card-header">
+                    <h5 class="card-title">Latest Posts</h5>
+                </div>
+                <div class="card-body" id="latestPosts">
+                    <!-- Latest posts will be dynamically added here -->
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Add Task Modal -->
 <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
@@ -196,45 +257,58 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="taskCompletion">Completion (%)</label>
-                        <input type="number" class="form-control" id="taskCompletion" placeholder="Enter completion percentage">
+                        <label for="taskCompletion">Completion Percentage</label>
+                        <input type="number" class="form-control" id="taskCompletion" min="0" max="100" placeholder="Enter completion percentage">
                     </div>
+                    <button type="button" class="btn btn-primary" id="saveTaskBtn">Save</button>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="addTask()">Save changes</button>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- JavaScript Dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script>
     // Function to fetch user data and populate the profile
     function fetchUserData() {
-        axios.get('/api/user')
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
+    const profileImage = localStorage.getItem('profileImage');
+    const additionalInfo = localStorage.getItem('additionalInfo');
+
+    if (username) {
+        document.getElementById('userName').innerText = username;
+        document.getElementById('fullName').innerText = username;
+    }
+
+    if (email) {
+        document.getElementById('email').innerText = email;
+        document.getElementById('email').href = `mailto:${email}`;
+    }
+
+    if (profileImage) {
+        document.getElementById('profileImageContainer').innerHTML = `<img src="${profileImage}" class="profile-image" alt="Profile Image">`;
+    }
+
+    if (additionalInfo) {
+        document.getElementById('additionalInfo').innerText = additionalInfo;
+    }
+
+    // Chamar a função para preencher os últimos posts
+    fillLatestPosts();
+}
+
+        // Fetch tasks from the API
+        axios.get('/api/user/tasks')
             .then(response => {
-                const data = response.data;
-
-                // Update profile information
-                document.getElementById('userName').innerText = data.fullName;
-                document.getElementById('fullName').innerText = data.fullName;
-                document.getElementById('email').innerText = data.email;
-                document.getElementById('email').href = `mailto:${data.email}`;
-                
-                // Update profile image
-                if (data.profileImage) {
-                    document.getElementById('profileImage').src = data.profileImage;
-                }
-
-                // Update user tasks
+                const tasks = response.data;
                 const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
                 userTable.innerHTML = ''; // Clear existing rows
-                data.tasks.forEach(task => {
+                tasks.forEach(task => {
                     const newRow = userTable.insertRow();
                     newRow.insertCell(0).innerText = task.name;
                     newRow.insertCell(1).innerText = task.status;
@@ -243,35 +317,53 @@
                 });
             })
             .catch(error => {
-                console.error('Error fetching user data', error);
+                console.error('Error fetching tasks', error);
             });
-    }
 
     // Function to add a new task
     function addTask() {
-        const taskName = document.getElementById('taskName').value;
-        const taskStatus = document.querySelector('input[name="taskStatus"]:checked').value;
-        const taskCompletion = document.getElementById('taskCompletion').value;
-        
-        axios.post('/api/user/tasks', {
-            name: taskName,
-            status: taskStatus,
-            completion: taskCompletion
-        })
-        .then(response => {
-            const task = response.data;
-            const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
-            const newRow = userTable.insertRow();
-            newRow.insertCell(0).innerText = task.name;
-            newRow.insertCell(1).innerText = task.status;
-            newRow.insertCell(2).innerText = task.completion + '%';
-            newRow.insertCell(3).innerHTML = `<button class="btn btn-danger btn-sm" onclick="deleteTask('${task.id}', this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask('${task.id}', this)">Edit</button>`;
-        })
-        .catch(error => {
-            console.error('Error adding task', error);
-        });
-    }
+    const taskName = document.getElementById('taskName').value;
+    const taskStatus = document.querySelector('input[name="taskStatus"]:checked').value;
+    const taskCompletion = document.getElementById('taskCompletion').value;
 
+    if (taskName && taskStatus && taskCompletion) {
+        const newRow = document.createElement("tr");
+
+        newRow.innerHTML = `
+            <td>${taskName}</td>
+            <td>${taskStatus}</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: ${taskCompletion}%" aria-valuenow="${taskCompletion}" aria-valuemin="0" aria-valuemax="100">${taskCompletion}%</div>
+                </div>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-danger delete-task">Delete</button>
+            </td>
+        `;
+
+        const userTableBody = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+        userTableBody.appendChild(newRow);
+
+        // Clear form fields
+        document.getElementById('taskName').value = '';
+        document.getElementById('taskCompletion').value = '';
+        document.getElementById('taskStatusPending').checked = true;
+
+        // Add event listener for delete button
+        newRow.querySelector(".delete-task").addEventListener("click", function() {
+            newRow.remove();
+        });
+
+        // Close modal
+        $('#addUserModal').modal('hide');
+    } else {
+        alert("Please fill out all fields.");
+    }
+}
+
+// Event listener for 'Save' button in the modal
+document.getElementById('saveTaskBtn').addEventListener('click', addTask);
     // Function to delete a task
     function deleteTask(taskId, btn) {
         axios.delete(`/api/user/tasks/${taskId}`)
@@ -317,15 +409,99 @@
         };
     }
 
+    saveTaskBtn.addEventListener("click", function() {
+            const taskName = document.getElementById("taskName").value;
+            const taskStatus = document.querySelector('input[name="taskStatus"]:checked').value;
+            const taskCompletion = document.getElementById("taskCompletion").value;
+
+            if (taskName && taskCompletion) {
+                const newRow = document.createElement("tr");
+
+                newRow.innerHTML = `
+                    <td>${taskName}</td>
+                    <td>${taskStatus}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: ${taskCompletion}%" aria-valuenow="${taskCompletion}" aria-valuemin="0" aria-valuemax="100">${taskCompletion}%</div>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-danger delete-task">Delete</button>
+                    </td>
+                `;
+
+                userTableBody.appendChild(newRow);
+
+                // Clear form fields
+                addTaskForm.reset();
+
+                // Add event listener for delete button
+                newRow.querySelector(".delete-task").addEventListener("click", function() {
+                    newRow.remove();
+                });
+
+                // Close modal
+                $('#addUserModal').modal('hide');
+            }
+        });
+
+        const latestPosts = [
+    {
+        title: "I need help with Python!",
+        content: "Can someone solve this code?."
+    },
+    {
+        title: "Getting Started with Cybersecurity",
+        content: "Guys how do i install kali linux?"
+    },
+    {
+        title: "First post",
+        content: "Heelo guys"
+    }
+];
+
+// Função para preencher os últimos posts na página
+function fillLatestPosts() {
+    const latestPostsContainer = document.getElementById('latestPosts');
+
+    latestPosts.forEach(post => {
+        const postCard = document.createElement('div');
+        postCard.classList.add('card', 'mb-3');
+
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+
+        const cardTitle = document.createElement('h5');
+        cardTitle.classList.add('card-title');
+        cardTitle.innerText = post.title;
+
+        const cardContent = document.createElement('p');
+        cardContent.classList.add('card-text');
+        cardContent.innerText = post.content;
+
+        cardBody.appendChild(cardTitle);
+        cardBody.appendChild(cardContent);
+        postCard.appendChild(cardBody);
+
+        latestPostsContainer.appendChild(postCard);
+    });
+}
+
+// Chamada da função para preencher os últimos posts ao carregar a página
+fillLatestPosts();
+
     // Event listener for profile image upload
     document.getElementById('profileImageInput').addEventListener('change', function() {
         const file = this.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                document.getElementById('profileImage').src = e.target.result;
+                document.getElementById('profileImageContainer').innerHTML = `<img src="${e.target.result}" class="profile-image" alt="Profile Image">`;
 
-                // Update the profile image in the database
+                // Update the profile image in the local storage
+                localStorage.setItem('profileImage', e.target.result);
+
+                // Optionally update the profile image in the database
                 axios.put('/api/user/profile-image', {
                     profileImage: e.target.result
                 })
@@ -347,17 +523,15 @@
         alert('Message sent to this user!');
     });
 
+    $('#gohome').click(() => {
+        gohome();
+      });
+
+      const token = localStorage.getItem("token");
+      const username = localStorage.getItem("username");
+
     // Fetch user data when the page loads
     fetchUserData();
-
-    
-        const username = localStorage.getItem('username');
-        if (username) {
-            document.getElementById('profileName').textContent = `Nome: ${username}`;
-        } else {
-            document.getElementById('profileName').textContent = 'Nome: Não disponível';
-        }
-
 </script>
 </body>
 </html>
