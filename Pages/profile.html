@@ -12,19 +12,22 @@
     <style>
         /* Custom Styles */
         body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    background: linear-gradient(to right, #8e0b0b, #1a1a1a); /* Gradiente de fundo vermelho e preto */
-    color
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(to right, #ffed4a, #ffab4a); /* Gradiente de fundo amarelado */
+            color: #000000; /* Cor do texto */
+            margin: 0; /* Remover margem padrão do body */
+        }
+        /* Estilos adicionais */
         .navbar-brand img {
             width: 40px;
             margin-right: 10px;
         }
         .nav-link {
-            color: #ffffff; /* Link Color */
+            color: #ffffff; /* Cor dos links */
         }
         .nav-link:hover {
-            color: #ffc107; /* Link Color on Hover */
+            color: #ffc107; /* Cor dos links ao passar o mouse */
         }
         footer {
             background-color: #343a40;
@@ -36,18 +39,18 @@
             bottom: 0;
             left: 0;
         }
-
         .footer img {
             width: 40px;
         }
-
         .btn-outline-primary:hover {
-    background-color: #4f8bf9; /* Cor de fundo do botão de contorno primário ao passar o mouse */
-    color: #ffffff; /* Cor do texto do botão de contorno primário ao passar o mouse */
-}
-         
+            background-color: #4f8bf9; /* Cor de fundo do botão de contorno primário ao passar o mouse */
+            color: #ffffff; /* Cor do texto do botão de contorno primário ao passar o mouse */
+        }
         .progress {
             border-radius: 10px;
+        }
+        .progress-bar {
+            background-color: #000000; /* Cor da barra de progresso */
         }
         .profile-image {
             width: 150px;
@@ -73,6 +76,9 @@
         }
         .additional-info {
             margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Fundo branco translúcido para melhor legibilidade */
+            padding: 20px;
+            border-radius: 10px;
         }
         .additional-info h2 {
             color: #333;
@@ -83,6 +89,7 @@
         .follow-btn, .message-btn {
             width: 120px;
             margin: 5px;
+            color: #000000; /* Cor do texto dos botões */
         }
         .btn-container {
             display: flex;
@@ -94,23 +101,30 @@
         }
         .cta-section button {
             margin-top: 10px;
+            color: #000000; /* Cor do texto dos botões */
         }
         
-        .additional-info {
-        margin-top: 20px;
-        padding: 20px;
-        background-color: #ffffff; /* Fundo branco para contrastar com o fundo escuro */
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar */
-    }
+        .btn-primary {
+    background-color: #000000; /* Cor de fundo do botão primário (Follow) */
+    border-color: #000000; /* Cor da borda do botão primário */
+    color: #ffffff; /* Cor do texto do botão primário */
+}
 
-    .additional-info h2 {
-        color: #333;
-    }
+.btn-primary:hover {
+    background-color: #4f4f4f; /* Cor de fundo do botão primário ao passar o mouse */
+    border-color: #4f4f4f; /* Cor da borda do botão primário ao passar o mouse */
+    color: #ffffff; /* Cor do texto do botão primário ao passar o mouse */
+}
 
-    .additional-info p {
-        color: #666;
-    }
+.btn-outline-primary {
+    color: #000000; /* Cor do texto do botão de contorno primário */
+    border-color: #000000; /* Cor da borda do botão de contorno primário */
+}
+
+.btn-outline-primary:hover {
+    background-color: #4f4f4f; /* Cor de fundo do botão de contorno primário ao passar o mouse */
+    color: #ffffff; /* Cor do texto do botão de contorno primário ao passar o mouse */
+}
 
 
     </style>
@@ -235,8 +249,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addUserModalLabel">Add Task</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="btn btn-primary" id="addTaskBtn" data-toggle="modal" data-target="#addUserModal">
+                    Add Task
                 </button>
             </div>
             <div class="modal-body">
@@ -267,12 +281,63 @@
     </div>
 </div>
 
+<!-- Modal de Mensagem -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel">Send Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="sendMessageForm">
+                    <div class="form-group">
+                        <label for="messageContent">Message:</label>
+                        <textarea class="form-control" id="messageContent" rows="3" placeholder="Type your message here..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="sendMessageBtn">Send Message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- JavaScript Dependencies -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script>
+    
+       // Event listener para abrir o modal de mensagem
+       document.querySelector('.message-btn').addEventListener('click', function() {
+        $('#messageModal').modal('show');
+    });
+
+    // Event listener para enviar a mensagem
+    document.getElementById('sendMessageBtn').addEventListener('click', function() {
+        const messageContent = document.getElementById('messageContent').value;
+
+        if (messageContent.trim() !== '') {
+            // Aqui você pode adicionar a lógica para enviar a mensagem (exemplo: via API)
+            alert('Message sent successfully!'); // Apenas um alerta de exemplo
+
+            // Limpar o campo de mensagem após o envio
+            document.getElementById('messageContent').value = '';
+
+            // Fechar o modal após enviar a mensagem
+            $('#messageModal').modal('hide');
+        } else {
+            alert('Please enter a message.');
+        }
+    });
+
+
     // Function to fetch user data and populate the profile
     function fetchUserData() {
     const username = localStorage.getItem('username');
@@ -321,7 +386,7 @@
             });
 
     // Function to add a new task
-    function addTask() {
+function addTask() {
     const taskName = document.getElementById('taskName').value;
     const taskStatus = document.querySelector('input[name="taskStatus"]:checked').value;
     const taskCompletion = document.getElementById('taskCompletion').value;
@@ -357,6 +422,10 @@
 
         // Close modal
         $('#addUserModal').modal('hide');
+
+        // Manter estilo do botão "Add Task" como preto após adicionar nova tarefa
+        document.getElementById('addTaskBtn').classList.remove('btn-primary');
+        document.getElementById('addTaskBtn').classList.add('btn-primary');
     } else {
         alert("Please fill out all fields.");
     }
@@ -516,11 +585,6 @@ fillLatestPosts();
     // Follow Button Logic
     document.querySelector('.follow-btn').addEventListener('click', function() {
         alert('You are now following this user!');
-    });
-
-    // Message Button Logic
-    document.querySelector('.message-btn').addEventListener('click', function() {
-        alert('Message sent to this user!');
     });
 
     $('#gohome').click(() => {
