@@ -25,7 +25,7 @@ exports.signin = async (req, res) => {
                 };
                 console.log('Token Payload:', payload); // Debug
 
-                const accessToken = authenticateUtil.generateAccessToken(payload);
+                const accessToken = authenticateUtil.generateToken(payload);
                 res.status(200).json({ nome: user.name, email: user.email, token: accessToken, role: role });
             } else {
                 console.log('Invalid password'); // Debug

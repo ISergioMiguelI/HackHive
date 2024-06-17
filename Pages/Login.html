@@ -326,7 +326,7 @@ h6 span{
                                     <div class="center-wrap">
                                         <div class="section text-center">
                                             <h4 class="mb-4 pb-3">Log In</h4>
-                                            <form id="loginForm" action="http://localhost:3000/api/pgs/auth/signin" method="post" onsubmit="return validateLogin(event)">
+                                            <form id="loginForm" action="http://localhost:3000/api/pgs/auth/signin" method="post" onsubmit="return validaLogin(event)">
                                                 <div class="form-group">
                                                     <input type="email" name="logemail" id="logemail" class="form-style" placeholder="Email" autocomplete="off">
                                                     <i class="input-icon uil uil-at"></i>
@@ -391,8 +391,8 @@ h6 span{
   // Função para validar o login
   const validaLogin = async () => {
     var dados = {
-      email: document.getElementById("email").value,
-      password: document.getElementById("pswd").value,
+      email: document.getElementById("logemail").value,
+      password: document.getElementById("logpass").value,
     };
     const response= await fetch("http://localhost:3000/api/pgs/auth/signin", {
       method: "POST",
@@ -411,7 +411,14 @@ h6 span{
       console.log(dados);
       // Guardar o token no local storage
       localStorage.setItem("token", dados.token);
-      window.location.href = "http://localhost:3000/Pages/index_login";
+      localStorage.setItem("role", dados.role);
+      localStorage.setItem("username", dados.nome);
+
+      if(dados.role == "admin") {
+        window.location.href = "http://localhost:3000/profile_admin.html";
+        return;
+      }
+      window.location.href = "http://localhost:3000/Index_login.html";
     }
 };
 
