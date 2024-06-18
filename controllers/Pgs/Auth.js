@@ -61,7 +61,7 @@ exports.signup = async (req, res) => {
             return res.status(400).json({ msg: "Email already in use." });
         }
 
-        // Cria um novo usuário
+        // Cria um novo users
         const newUser = await prisma.user.create({
             data: {
                 name: name,
@@ -71,7 +71,7 @@ exports.signup = async (req, res) => {
             },
         });
 
-        // Retorna o usuário criado
+        // Retorna o users criado
         res.status(201).json(newUser);
     } catch (error) {
         console.error('Signup Error:', error);
@@ -95,7 +95,7 @@ exports.readToken = async (req, res) => {
         const email = decoded.email;
         const isAdmin = decoded.isAdmin ? 'admin' : 'user';
 
-        // Responde com os dados do usuário
+        // Responde com os dados do users
         res.status(200).json({ id_utilizador, name, email, isAdmin });
     } catch (error) {
         console.error('ReadToken Error:', error);

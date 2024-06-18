@@ -388,35 +388,6 @@ h6 span{
 
 
 <script type="text/JavaScript">
-  // Função para validar o login
-  document.getElementById('loginForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            try {
-                const response = await fetch('http://localhost:3000/api/pgs/auth/signin', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('username', data.nome); // Armazenar o nome do usuário
-                    window.location.href = 'index_login.html';
-                } else {
-                    const errorData = await response.json();
-                    alert(errorData.msg);
-                }
-            } catch (error) {
-                console.error('An error occurred:', error);
-            }
-        });
-
 
   const validaLogin = async () => {
     var dados = {
@@ -430,7 +401,7 @@ h6 span{
       },
       body: JSON.stringify(dados),
     })
-    console.log(response.ok);
+
     dados= await  response.json()
     if(!response.ok){
       alert("Erro ao fazer login");
@@ -442,6 +413,7 @@ h6 span{
       localStorage.setItem("token", dados.token);
       localStorage.setItem("role", dados.role);
       localStorage.setItem("username", dados.nome);
+      localStorage.setItem("email", dados.email);
 
       if(dados.role == "admin") {
         window.location.href = "http://localhost:3000/profile_admin.html";

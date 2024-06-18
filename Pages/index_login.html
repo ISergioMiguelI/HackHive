@@ -235,18 +235,19 @@
   </div>
 
   <script>
-    $(document).ready(function(){
+     
+     $(document).ready(function(){
       $('.carousel').carousel({
         interval: 3000 
       });
 
       const token = localStorage.getItem("token");
       const username = localStorage.getItem("username");
+      
 
       if(!token) {
         window.location.href = "login.html";
       } else {
-        // Exibe o nome do usuário na mensagem de boas-vindas
         $('h2.text-warning').text(`Welcome, ${username}! To our Cave!`);
       }
 

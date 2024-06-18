@@ -4,23 +4,9 @@
     const prisma = new PrismaClient();
     const { generateToken } = require('../../utils/authenticate');
 
-    exports.getAll = async (req, res) => {
-        try {
-            console.log("Iniciando a busca por todos os usuários"); // Log para depuração
-    
-            // Read all records from the 'Utilizador' table
-            const response = await prisma.User.findMany();
-            console.log("Busca concluída com sucesso"); // Log para depuração
-    
-            res.status(200).json(response); // Send the response with status 200 (OK)
-        } catch (error) {
-            console.error("Erro ao buscar todos os usuários:", error); // Log detalhado do erro
-            res.status(500).json({ msg: error.message }); // Send error message with status 500 (Internal Server Error)
-        }
-    }
-
+ 
     exports.getById = async (req, res) => {
-    // Get the ID from the request parameters
+    
     const id = req.params.id * 1;
     try {
         // Find the user with the given ID
@@ -67,7 +53,7 @@
         });
 
         if (existingUser) {
-            return res.status(400).json({ error: 'E-mail já registrado' });
+            return res.status(400).json({ error: 'E-mail already registred' });
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -85,7 +71,7 @@
 
         res.status(201).json({ token, userId: user.id });
     } catch (error) {
-        res.status(500).json({ error: 'Erro ao criar usuário', details: error.message });
+        res.status(500).json({ error: 'Error getting User', details: error.message });
     }
     };
 

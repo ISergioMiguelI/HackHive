@@ -1,10 +1,11 @@
-const toolrouter = require('express').Router();
-const controller = require('../../controllers/Pgs/tool');
+const express = require('express');
+const toolRouter = express.Router();
+const toolController = require('../../controllers/Pgs/tool');
 
-toolrouter.get('/tools',  controller.getTools);
-toolrouter.get('/tools/:id',  controller.getToolById);
-toolrouter.post('/tools',  controller.createTool);
-toolrouter.put('/tools/:id',  controller.updateTool);
-toolrouter.delete('/tools/:id',  controller.deleteTool);
+toolRouter.get('/tools', toolController.getTools);
+toolRouter.get('/tools/:id', toolController.getToolById);
+toolRouter.post('/tools', toolController.createTool);
+toolRouter.put('/tools/:id', toolController.updateTool);
+toolRouter.delete('/tools/:id', toolController.deleteTool);
 
-module.exports = toolrouter;
+module.exports = toolRouter;
