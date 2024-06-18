@@ -137,6 +137,15 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="uil uil-exclamation-triangle"></i> Manage Tool Requests</h5>
+                        <p class="card-text">Review and accept tool requests.</p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#manageToolRequestsModal"><i class="uil uil-tools"></i> Manage Tool Requests</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -158,37 +167,58 @@
             </div>
         </div>
     </div>
-<!-- Modal to manage posts -->
-<div class="modal fade" id="managePostsModal" tabindex="-1" aria-labelledby="managePostsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="managePostsModalLabel">Manage Posts</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="post-list"></div>
-                <hr>
-                <form id="addPostForm">
-                    <div class="form-group">
-                        <label for="postTitle">Post Title:</label>
-                        <input type="text" class="form-control" id="postTitle" placeholder="Enter post title">
-                    </div>
-                    <div class="form-group">
-                        <label for="postContent">Post Content:</label>
-                        <textarea class="form-control" id="postContent" rows="3" placeholder="Enter post content"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add Post</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    
+    <!-- Modal to manage posts -->
+    <div class="modal fade" id="managePostsModal" tabindex="-1" aria-labelledby="managePostsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="managePostsModalLabel">Manage Posts</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="post-list"></div>
+                    <hr>
+                    <form id="addPostForm">
+                        <div class="form-group">
+                            <label for="postTitle">Post Title:</label>
+                            <input type="text" class="form-control" id="postTitle" placeholder="Enter post title">
+                        </div>
+                        <div class="form-group">
+                            <label for="postContent">Post Content:</label>
+                            <textarea class="form-control" id="postContent" rows="3" placeholder="Enter post content"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Post</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- Modal to manage tool requests -->
+    <div class="modal fade" id="manageToolRequestsModal" tabindex="-1" aria-labelledby="manageToolRequestsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="manageToolRequestsModalLabel">Manage Tool Requests</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="tool-request-list"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal to change site status -->
     <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
@@ -257,6 +287,10 @@
                 getUsers();
             });
 
+            $('#manageToolRequestsModal').on('show.bs.modal', function () {
+                fetchToolRequests();
+            });
+
             checkSiteStatus();
         });
 
@@ -306,6 +340,72 @@
             }
         }
 
+        async function fetchToolRequests() {
+            try {
+                const response = await fetch("/api/tool-requests", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                const toolRequests = await response.json();
+                const toolRequestList = document.getElementById('tool-request-list');
+                toolRequestList.innerHTML = ''; // Clear existing requests
+                toolRequests.forEach(request => {
+                    const requestItem = document.createElement('div');
+                    requestItem.className = 'tool-request-item';
+                    requestItem.innerHTML = `
+                        <h5>${request.name}</h5>
+                        <p>${request.description}</p>
+                        <button class="btn btn-success btn-sm" onclick="acceptToolRequest(${request.id})">Accept</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteToolRequest(${request.id})">Delete</button>
+                        <hr>
+                    `;
+                    toolRequestList.appendChild(requestItem);
+                });
+            } catch (error) {
+                console.error('Error fetching tool requests:', error);
+            }
+        }
+
+        async function acceptToolRequest(requestId) {
+            try {
+                const response = await fetch(`/api/tool-requests/${requestId}/accept`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    alert('Tool request accepted successfully!');
+                    fetchToolRequests(); // Refresh the request list
+                } else {
+                    alert('Failed to accept tool request.');
+                }
+            } catch (error) {
+                console.error('Error accepting tool request:', error);
+            }
+        }
+
+        async function deleteToolRequest(requestId) {
+            try {
+                const response = await fetch(`/api/tool-requests/${requestId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert('Tool request deleted successfully!');
+                    fetchToolRequests(); // Refresh the request list
+                } else {
+                    alert('Failed to delete tool request.');
+                }
+            } catch (error) {
+                console.error('Error deleting tool request:', error);
+            }
+        }
+
         function checkSiteStatus() {
             var siteStatus = localStorage.getItem('siteStatus');
             if (siteStatus === 'under-maintenance') {
@@ -319,64 +419,6 @@
             localStorage.clear();
             window.location.href = "index.html";
         }
-
-        document.getElementById('requestForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const tool = document.getElementById('tool').value;
-        const description = document.getElementById('description').value;
-
-        const requestData = {
-            name: tool,
-            description: description,
-            url: '' // Note: You can add the URL if needed
-        };
-
-        fetch('/api/tools', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData),
-        })
-        .then(response => {
-            if (response.ok) {
-                alert('Request submitted successfully!');
-                document.getElementById('requestForm').reset(); 
-                populateToolsTable(); 
-            } else {
-                throw new Error('Failed to submit request');
-            }
-        })
-        .catch(error => console.error('Error submitting request:', error));
-    });
-
-    
-    const populateToolsTable = () => {
-        fetch('/api/tools')
-            .then(response => response.json())
-            .then(data => {
-                const toolsTable = document.getElementById('toolsTable');
-                toolsTable.querySelector('tbody').innerHTML = ''; 
-                data.forEach(tool => {
-                    const row = `
-                        <tr>
-                            <td>${tool.name}</td>
-                            <td>${tool.description}</td>
-                            <td><a href="${tool.url}" target="_blank">Official Site</a></td>
-                        </tr>
-                    `;
-                    toolsTable.querySelector('tbody').insertAdjacentHTML('beforeend', row);
-                });
-            })
-            .catch(error => console.error('Error fetching tools:', error));
-    };
-
-    // Populate the table when the page loads
-    populateToolsTable();
-
     </script>
 </body>
 </html>
