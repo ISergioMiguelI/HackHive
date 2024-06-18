@@ -124,62 +124,70 @@
     res.status(204).send();
     };
 
-    exports.forgotpassword = async (req, res) => {
-    // Get the data from the request body
-    const { email } = req.body;
-
-    try {
-        // Find the user by ID and update with new data
-        const utilizador = await prisma.Utilizador.findUnique({
-            where: {
-                email: email,
-            },
-        });
-        // Send the updated user with status 200 (OK)
-        res.status(200).json(utilizador);
-    } catch (error) {
-        res.status(400).json({ msg: error.message }); // Send error message with status 400 (Bad Request)
-    }
-    }
-
-    exports.resetpassword = async (req, res) => {
-    // Get the data from the request body
-    const { id_utilizador, password } = req.body;
-
-    try {
-        // Find the user by ID and update with new data
-        const utilizador = await prisma.Utilizador.update({
-            where: {
-                id_utilizador: id_utilizador,
-            },
-            data: {
-                password,
-            },
-        });
-        // Send the updated user with status 200 (OK)
-        res.status(200).json(utilizador);
-    } catch (error) {
-        res.status(400).json({ msg: error.message }); // Send error message with status 400 (Bad Request)
-    }
-    }
-
-    exports.changepassword = async (req, res) => {
-    // Get the data from the request body
-    const { id_utilizador, password } = req.body;
-
-    try {
-        // Find the user by ID and update with new data
-        const utilizador = await prisma.Utilizador.update({
-            where: {
-                id_utilizador: id_utilizador,
-            },
-            data: {
-                password,
-            },
-        });
-        // Send the updated user with status 200 (OK)
-        res.status(200).json(utilizador);
-    } catch (error) {
-        res.status(400).json({ msg: error.message }); // Send error message with status 400 (Bad Request)
-    }
-    }
+    exports.forgotPassword = async (req, res) => {
+        const { email } = req.body;
+        try {
+            const user = await prisma.user.findUnique({ where: { email } });
+            if (!user) {
+                return res.status(404).json({ message: 'Email not found' });
+            }
+    
+            const token = crypto.randomBytes(32).toString('hex');
+            const tokenExpiry = new Date(Date.now() + 3600000); // 1 hour from now
+    
+            await prisma.user.update({
+                where: { email },
+                data: { resetPasswordToken: token, resetPasswordExpires: tokenExpiry }
+            });
+    
+            const transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                    user: 'your-email@gmail.com',
+                    pass: 'your-email-password'
+                }
+            });
+    
+            const mailOptions = {
+                to: user.email,
+                from: 'passwordreset@hackhive.com',
+                subject: 'HackHive Password Reset',
+                text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
+                       Please click on the following link, or paste this into your browser to complete the process:\n\n
+                       http://${req.headers.host}/recover-password?token=${token}\n\n
+                       If you did not request this, please ignore this email and your password will remain unchanged.\n`
+            };
+    
+            await transporter.sendMail(mailOptions);
+    
+            res.status(200).json({ message: 'Email sent' });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    };
+    
+    exports.resetPassword = async (req, res) => {
+        const { token, password } = req.body;
+        try {
+            const user = await prisma.user.findFirst({
+                where: {
+                    resetPasswordToken: token,
+                    resetPasswordExpires: { gt: new Date() }
+                }
+            });
+    
+            if (!user) {
+                return res.status(400).json({ message: 'Password reset token is invalid or has expired.' });
+            }
+    
+            const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
+            await prisma.user.update({
+                where: { id: user.id },
+                data: { password: hashedPassword, resetPasswordToken: null, resetPasswordExpires: null }
+            });
+    
+            res.status(200).json({ message: 'Password has been updated' });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    };
