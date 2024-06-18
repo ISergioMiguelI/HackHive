@@ -1,5 +1,7 @@
 const authenticateUtil = require('../utils/authenticate.js');
 
+module.exports.verificarToken = async (req, res, next) => {
+    
 module.exports = async (req, res, next) => {
     const accessToken = req.headers['authorization']; // req.headers['x-access-token'];
 
@@ -18,4 +20,6 @@ module.exports = async (req, res, next) => {
     } catch (err) {
         return res.status(401).send("Não está autorizado");
     }
+}
+
 }

@@ -429,6 +429,33 @@ h6 span{
       localStorage.setItem('username', username);
       window.location.href = 'index_login.html'; // Redirecionar para a página index_login.html após o login
   });
+
+  const leTokenSFF = async () => {
+    var dados = {
+      token: localStorage.getItem("token"),
+    };
+    console.log(JSON.stringify(dados));
+    const response= await fetch("http://localhost:3000/api/pgs/auth/letoken", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dados),
+    })
+    console.log(response);
+    dados= await  response.json()
+    console.log(dados); 
+    if(!response.ok){
+      alert("Erro ao fazer login");
+    }
+    else{
+      alert("token lido com sucesso");
+      console.log(dados);
+    }
+};
+
+
+
 </script>
 
 </body>

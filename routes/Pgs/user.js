@@ -10,4 +10,5 @@ routeruser.delete('/users/:id', controller.deleteUser);
 routeruser.post('/forgot-password', controller.forgotPassword);
 routeruser.post('/recover-password', controller.recoverPassword);
 
+
 module.exports = routeruser;
