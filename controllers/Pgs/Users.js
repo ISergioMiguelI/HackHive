@@ -123,35 +123,62 @@ exports.forgotPassword = async (req, res) => {
 
     res.status(200).json({ message: 'Reset link sent to your email' });
 };
-exports.recoverPassword = async (req, res) => {
-    const { token, newPassword } = req.body;
+
+exports.verifyOldPassword = async (req, res) => {
+    const { email, password } = req.body;
+
+    console.log('Verifying old password for:', email); // Adicione este log
 
     try {
-        const user = await prisma.user.findFirst({
-            where: {
-                resetPasswordToken: token,
-                resetPasswordExpires: { gt: new Date() },
-            },
+        const user = await prisma.user.findUnique({
+            where: { email: email },
         });
 
         if (!user) {
-            return res.status(400).json({ message: 'Token is invalid or has expired' });
+            console.log('User not found'); 
+            return res.status(404).json({ msg: 'User not found' });
         }
 
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(newPassword, salt);
+        const isMatch = await bcrypt.compare(password, user.password);
 
-        await prisma.user.update({
-            where: { id: user.id },
-            data: {
-                password: hashedPassword,
-                resetPasswordToken: null,
-                resetPasswordExpires: null,
-            },
+        if (!isMatch) {
+            console.log('Invalid old password');
+            return res.status(400).json({ msg: 'Invalid old password' });
+        }
+
+        const token = jwt.sign({ email: user.email }, 'your_jwt_secret', { expiresIn: '1h' });
+
+        res.status(200).json({ msg: 'Old password verified', token });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(400).json({ msg: error.message });
+    }
+};
+
+exports.resetPassword = async (req, res) => {
+    const { token, newPassword } = req.body;
+
+    try {
+        const decoded = jwt.verify(token, 'your_jwt_secret');
+        const email = decoded.email;
+
+        const user = await prisma.user.findUnique({
+            where: { email: email },
         });
 
-        res.status(200).json({ message: 'Password has been reset' });
+        if (!user) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        await prisma.user.update({
+            where: { email: email },
+            data: { password: hashedPassword },
+        });
+
+        res.status(200).json({ msg: 'Password has been reset' });
     } catch (error) {
-        res.status(500).json({ message: 'An error occurred. Please try again later.', error: error.message });
+        res.status(400).json({ msg: error.message });
     }
 };
