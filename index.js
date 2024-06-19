@@ -14,6 +14,7 @@ const publicRouter = require('./routes/Publico');
 const privateRouter = require('./routes/Privado');
 const userRouter = require('./routes/Pgs/user');
 const toolRouter = require('./routes/Pgs/tool');
+const postRouter = require('./routes/Pgs/post'); // Import postRouter
 
 const app = express(); // Create an instance of express
 
@@ -35,10 +36,11 @@ app.get('/attack', (req, res) => {
 
 // Main routes
 app.use('/', publicRouter); // Use publicRouter for the root path
-app.use('/Private', privateRouter); // Use privateRouter for /Private path
-app.use('/Api/Pgs', routerPgs); // Use routerPgs for /Api/Pgs path
-app.use('/Api/users', userRouter); // Use userRouter for /Api/users path
-app.use('/Api/tools', toolRouter); // Use toolRouter for /Api/tools path
+app.use('/private', privateRouter); // Use privateRouter for /Private path
+app.use('/api/pgs', routerPgs); // Use routerPgs for /Api/Pgs path
+app.use('/api/users', userRouter); // Use userRouter for /Api/users path
+app.use('/api/tools', toolRouter); // Use toolRouter for /Api/tools path
+app.use('/api/posts', postRouter); // Use postRouter for /Api/posts path
 
 // JWT Secret from environment variables
 const JWT_SECRET = process.env.JWT_SECRET || 'sdfksADDFGMLKCZdjfl34ksdfdb323';

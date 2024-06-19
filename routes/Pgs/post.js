@@ -1,10 +1,10 @@
-const postrouter = require('express').Router();
+const postRouter = require('express').Router();
 const controller = require('../../controllers/Pgs/post');
 
-postrouter.get('/posts', controller.getPosts);
-postrouter.get('/posts/:id', controller.getPostById);
-postrouter.post('/posts',  controller.createPost);
-postrouter.put('/posts/:id',  controller.updatePost);
-postrouter.delete('/posts/:id',  controller.deletePost);
+postRouter.get('/', controller.getPosts);
+postRouter.get('/:id', controller.getPostById);
+postRouter.post('/', controller.createPost);
+postRouter.put('/:id', controller.updatePost);
+postRouter.delete('/:id', controller.deletePost);
 
-module.exports = postrouter;
+module.exports = postRouter;
