@@ -7,19 +7,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
     <link rel="stylesheet" href="./Styles/discussionforum.css">
+    <style>
+        body {
+            background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20230701/pngtree-d-rendering-of-black-and-yellow-abstract-concept-in-4k-wallpaper-image_3694585.jpg'); /* Caminho para a imagem de fundo fornecida */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-color: #f8f9fa; /* Cor de fundo alternativa para garantir contraste */
+            min-height: 100vh;
+            padding-top: 70px; /* Espaçamento acima do conteúdo para acomodar a barra de navegação */
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffd700;">
-        <a class="navbar-brand" href="#"><i class="uil uil-comment-dots"></i> Discussion Forum</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index_login.html"><i class="uil uil-home"></i> Home <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ffd700;">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="uil uil-comment-dots"></i> Discussion Forum</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index_login.html"><i class="uil uil-home"></i> Home <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -27,10 +41,10 @@
         <div class="container">
             <h2 class="text-warning text-center mt-5">Discussion Forum</h2>
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-8 mx-auto">
                     <div class="card mb-4">
-                        <div class="card-header">
-                            <a class="navbar-brand" href="Communityforum.html"><i class="uil uil-arrow-left"></i> Back to Community Forum</a>
+                        <div class="card-header bg-primary text-white">
+                            <a class="navbar-brand text-white" href="Communityforum.html"><i class="uil uil-arrow-left"></i> Back to Community Forum</a>
                         </div>
                         <div class="card-body">
                             <form id="postForm">
@@ -49,7 +63,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4">
-                        <div class="card-header">
+                        <div class="card-header bg-primary text-white">
                             <h5 class="card-title">Latest Posts</h5>
                         </div>
                         <div class="card-body" id="latestPosts">
@@ -61,11 +75,10 @@
         </div>
     </section>
 
-    
     <div class="modal fade" id="postDetailsModal" tabindex="-1" role="dialog" aria-labelledby="postDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-primary text-white">
                     <h5 class="modal-title" id="postDetailsModalLabel">Post Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -80,7 +93,7 @@
         </div>
     </div>
 
-    <div class="footer mt-5 text-center">
+    <div class="footer mt-5 text-center text-white">
         <div class="container">
             <p>&copy; Copyright 2024 - All rights reserved by HackHive</p>
         </div>

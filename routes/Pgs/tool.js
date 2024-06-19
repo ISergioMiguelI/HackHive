@@ -11,3 +11,5 @@ toolRouter.delete('/tools/:id', toolController.deleteTool);
 
 
 module.exports = toolRouter;
+
+//Não foi usado

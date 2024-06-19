@@ -25,16 +25,6 @@
         .dropdown-menu {
             margin-top: 0.5rem; /* Adjust dropdown menu margin */
         }
-        /* Form styling */
-        .form-section {
-            margin-top: 50px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-        }
-        .form-section h3 {
-            margin-bottom: 20px;
-        }
         /* Table styling */
         .table-section {
             margin-top: 50px;
@@ -108,25 +98,25 @@
                 <td>Nmap is a network scanner utility used for port mapping, host discovery, and vulnerability scanning</td>
                 <td><a href="https://nmap.org/">Official Site</a></td>
             </tr>
+            <tr>
+                <td>Wireshark</td>
+                <td>Network protocol analyzer used for troubleshooting, analysis, software and protocol development</td>
+                <td><a href="https://www.wireshark.org/">Official Site</a></td>
+            </tr>
+            <tr>
+                <td>John the Ripper</td>
+                <td>Password cracking software for testing weak passwords</td>
+                <td><a href="https://www.openwall.com/john/">Official Site</a></td>
+            </tr>
+            <tr>
+                <td>OWASP ZAP</td>
+                <td>Open-source web application security scanner</td>
+                <td><a href="https://www.zaproxy.org/">Official Site</a></td>
+            </tr>
         </tbody>
     </table>
 </section>
 
-<form id="requestForm">
-    <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
-    </div>
-    <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea class="form-control" id="description" rows="3" placeholder="Provide a brief description" required></textarea>
-    </div>
-    <div class="form-group">
-        <label for="url">URL:</label>
-        <input type="text" class="form-control" id="url" placeholder="Enter URL" required>
-    </div>
-    <button type="submit" class="btn btn-warning mt-3">Submit Request</button>
-</form>
 <!-- Footer -->
 <div class="footer mt-5">
     <div class="container">
@@ -138,67 +128,43 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- JavaScript for fetching and populating tools -->
 <script>
-    async function addTool(name, description, url) {
-    try {
-        const response = await fetch('/api/tools', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name, description, url })
-        });
-
-        if (response.ok) {
-            
-            await populateToolsTable();
-        } else {
-            
-            throw new Error('Failed to add tool');
-        }
-    } catch (error) {
-        console.error('Error adding tool:', error);
-        throw error; 
-    }
-}
-
-
-   
-    async function populateToolsTable() {
-        try {
-            const response = await fetch('/api/tools');
-            if (!response.ok) {
-                throw new Error('Failed to fetch tools');
-            }
-            const tools = await response.json();
-            const toolsTable = document.getElementById('toolsTable');
-            toolsTable.innerHTML = `
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Tool/Software</th>
-                        <th>Description</th>
-                        <th>Resources</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${tools.map(tool => `
-                        <tr>
-                            <td>${tool.name}</td>
-                            <td>${tool.description}</td>
-                            <td><a href="${tool.url}">Official Site</a></td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-            `;
-        } catch (error) {
-            console.error('Error fetching tools:', error);
-        }
-    }
-
-    
     document.addEventListener('DOMContentLoaded', () => {
         populateToolsTable();
     });
+
+    function populateToolsTable() {
+        const tools = [
+            { name: 'Metasploitable', description: 'Intentionally vulnerable Linux virtual machine that can be used to conduct security training', url: 'https://www.metasploit.com/' },
+            { name: 'Nmap', description: 'Nmap is a network scanner utility used for port mapping, host discovery, and vulnerability scanning', url: 'https://nmap.org/' },
+            { name: 'Wireshark', description: 'Network protocol analyzer used for troubleshooting, analysis, software and protocol development', url: 'https://www.wireshark.org/' },
+            { name: 'John the Ripper', description: 'Password cracking software for testing weak passwords', url: 'https://www.openwall.com/john/' },
+            { name: 'OWASP ZAP', description: 'Open-source web application security scanner', url: 'https://www.zaproxy.org/' }
+            // Add more tools as needed
+        ];
+
+        const toolsTable = document.getElementById('toolsTable');
+        toolsTable.innerHTML = `
+            <thead class="thead-dark">
+                <tr>
+                    <th>Tool/Software</th>
+                    <th>Description</th>
+                    <th>Resources</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${tools.map(tool => `
+                    <tr>
+                        <td>${tool.name}</td>
+                        <td>${tool.description}</td>
+                        <td><a href="${tool.url}" target="_blank">Official Site</a></td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        `;
+    }
 </script>
 
 </body>

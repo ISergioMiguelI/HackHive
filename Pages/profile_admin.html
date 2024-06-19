@@ -159,19 +159,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="uil uil-exclamation-triangle"></i> Manage Tool Requests</h5>
-                        <p class="card-text">Review and accept tool requests.</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#manageToolRequestsModal"><i class="uil uil-tools"></i> Manage Tool
-                            Requests</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+           </div>
     </div>
 
     <div class="modal fade" id="manageUsersModal" tabindex="-1" aria-labelledby="manageUsersModalLabel"
@@ -396,80 +384,15 @@
             }
         }
 
-        async function fetchToolRequests() {
-            try {
-                const response = await fetch("/api/tool-requests", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
 
-                const toolRequests = await response.json();
-                const toolRequestList = document.getElementById('tool-request-list');
-                toolRequestList.innerHTML = ''; // Clear existing requests
-                toolRequests.forEach(request => {
-                    const requestItem = document.createElement('div');
-                    requestItem.className = 'tool-request-item';
-                    requestItem.innerHTML = `
-                        <h5>${request.name}</h5>
-                        <p>${request.description}</p>
-                        <button class="btn btn-success btn-sm" onclick="acceptToolRequest(${request.id})">Accept</button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteToolRequest(${request.id})">Delete</button>
-                        <hr>
-                    `;
-                    toolRequestList.appendChild(requestItem);
-                });
-            } catch (error) {
-                console.error('Error fetching tool requests:', error);
+        function checkSiteStatus() {
+            var siteStatus = localStorage.getItem('siteStatus');
+            if (siteStatus === 'under-maintenance') {
+                window.location.href = 'undermaint.html';
+            } else if (siteStatus === 'being-attacked') {
+                window.location.href = 'underattack.html'; // Assuming you have an attack.html page
             }
         }
-
-        async function acceptToolRequest(requestId) {
-            try {
-                const response = await fetch(`/api/tool-requests/${requestId}/accept`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    alert('Tool request accepted successfully!');
-                    fetchToolRequests(); // Refresh the request list
-                } else {
-                    alert('Failed to accept tool request.');
-                }
-            } catch (error) {
-                console.error('Error accepting tool request:', error);
-            }
-        }
-
-        async function deleteToolRequest(requestId) {
-            try {
-                const response = await fetch(`/api/tool-requests/${requestId}`, {
-                    method: 'DELETE'
-                });
-
-                if (response.ok) {
-                    alert('Tool request deleted successfully!');
-                    fetchToolRequests(); // Refresh the request list
-                } else {
-                    alert('Failed to delete tool request.');
-                }
-            } catch (error) {
-                console.error('Error deleting tool request:', error);
-            }
-        }
-
-        // function checkSiteStatus() {
-        //     var siteStatus = localStorage.getItem('siteStatus');
-        //     if (siteStatus === 'under-maintenance') {
-        //         window.location.href = 'undermaint.html';
-        //     } else if (siteStatus === 'being-attacked') {
-        //         window.location.href = 'underattack.html'; // Assuming you have an attack.html page
-        //     }
-        // }
 
         function signout() {
             localStorage.clear();
@@ -568,6 +491,7 @@
                 console.error('Error deleting post:', error);
             }
         }
+     
 
         $(document).ready(function () {
             const token = localStorage.getItem("token");
