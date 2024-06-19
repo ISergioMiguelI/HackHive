@@ -235,8 +235,18 @@
     </div>
   
     <script>
+         function checkSiteStatus() {
+            
+            var siteStatus = localStorage.getItem('siteStatus');
+            if (siteStatus === 'under-maintenance') {
+                window.location.href = 'undermaint.html';
+            } else if (siteStatus === 'being-attacked') {
+                window.location.href = 'underattack.html'; // Assuming you have an attack.html page
+            }
+        }
 
-        localStorage.clear();       
+        checkSiteStatus();
+        //localStorage.clear();       
  
         $(document).ready(function(){
             $('.carousel').carousel({
@@ -250,6 +260,8 @@
         } else {
             document.getElementById('welcomeMessage').textContent = 'Olá, visitante!';
         }
+
+
     </script>
 </body>
 </html>

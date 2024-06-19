@@ -3,11 +3,11 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
-// Middleware para servir arquivos estáticos
+
 app.use(express.static('public'));
 app.use(express.json());
 
-// Endpoint para obter o status atual do site
+
 app.get('/api/site-status', (req, res) => {
     fs.readFile('siteStatus.json', (err, data) => {
         if (err) {
@@ -17,7 +17,7 @@ app.get('/api/site-status', (req, res) => {
     });
 });
 
-// Endpoint para atualizar o status do site
+
 app.post('/api/site-status', (req, res) => {
     const newStatus = req.body.status;
     fs.writeFile('siteStatus.json', JSON.stringify({ status: newStatus }), (err) => {

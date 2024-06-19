@@ -46,13 +46,13 @@ exports.signup = async (req, res) => {
 
     console.log({ name, email, password, isAdmin });
 
-    // Validação dos campos necessários
+  
     if (!name || !email || !password) {
         return res.status(400).json({ msg: "All fields are required." });
     }
 
     try {
-        // Verifica se o email já está em uso
+        
         const existingUser = await prisma.user.findUnique({
             where: { email: email },
         });
@@ -61,17 +61,17 @@ exports.signup = async (req, res) => {
             return res.status(400).json({ msg: "Email already in use." });
         }
 
-        // Cria um novo users
+       
         const newUser = await prisma.user.create({
             data: {
                 name: name,
                 email: email,
                 password: bcrypt.hashSync(password, 8),
-                isAdmin: isAdmin || false, // Pode definir isAdmin como false se não for fornecido
+                isAdmin: isAdmin || false, 
             },
         });
 
-        // Retorna o users criado
+       
         res.status(201).json(newUser);
     } catch (error) {
         console.error('Signup Error:', error);
@@ -95,7 +95,7 @@ exports.readToken = async (req, res) => {
         const email = decoded.email;
         const isAdmin = decoded.isAdmin ? 'admin' : 'user';
 
-        // Responde com os dados do users
+        
         res.status(200).json({ id_user, name, email, isAdmin });
     } catch (error) {
         console.error('ReadToken Error:', error);

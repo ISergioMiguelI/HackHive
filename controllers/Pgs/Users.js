@@ -127,8 +127,7 @@ exports.forgotPassword = async (req, res) => {
 exports.verifyOldPassword = async (req, res) => {
     const { email, password } = req.body;
 
-    console.log('Verifying old password for:', email); // Adicione este log
-
+    console.log('Verifying old password for:', email);
     try {
         const user = await prisma.user.findUnique({
             where: { email: email },

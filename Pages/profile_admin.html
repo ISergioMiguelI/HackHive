@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,38 +13,48 @@
             background-color: #1e1e1e;
             color: #ffffff;
         }
+
         .navbar {
             background-color: #8b0000 !important;
         }
+
         .navbar-brand img {
             width: 40px;
             margin-right: 10px;
         }
+
         .nav-link {
             color: #ffffff;
         }
+
         .nav-link:hover {
             color: #ffc107;
         }
+
         .card {
             background-color: #3c3c3c;
             color: #ffffff;
             border: 1px solid #8b0000;
         }
+
         .card-title {
             color: #ffc107;
         }
+
         .card-text {
             color: #ffffff;
         }
+
         .btn-primary {
             background-color: #8b0000;
             border-color: #8b0000;
         }
+
         .btn-primary:hover {
             background-color: #ff6347;
             border-color: #ff6347;
         }
+
         footer {
             background-color: #3c3c3c;
             color: #ffffff;
@@ -54,43 +65,52 @@
             bottom: 0;
             left: 0;
         }
+
         footer p {
             margin-bottom: 0;
         }
+
         .modal-content {
             background-color: #1e1e1e;
             color: #ffffff;
         }
+
         .modal-header {
             border-bottom: 1px solid #8b0000;
             background-color: #1e1e1e;
         }
+
         .modal-footer {
             border-top: 1px solid #8b0000;
             background-color: #1e1e1e;
         }
+
         .modal-title {
             color: #ffc107;
         }
+
         .modal-body {
             color: #ffffff;
         }
+
         .modal-footer .btn {
             background-color: #8b0000;
             border-color: #8b0000;
         }
+
         .modal-footer .btn:hover {
             background-color: #ff6347;
             border-color: #ff6347;
         }
-        
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container">
             <a class="navbar-brand">
-                <img src="/Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive Admin Panel
+                <img src="/Assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive Admin
+                Panel
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -114,7 +134,8 @@
                     <div class="card-body">
                         <h5 class="card-title"><i class="uil uil-exclamation-triangle"></i> Manage Users</h5>
                         <p class="card-text">Add, remove, or edit users.</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#manageUsersModal"><i class="uil uil-user-plus"></i> Manage Users</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#manageUsersModal"><i class="uil uil-user-plus"></i> Manage Users</button>
                     </div>
                 </div>
             </div>
@@ -123,7 +144,8 @@
                     <div class="card-body">
                         <h5 class="card-title"><i class="uil uil-exclamation-triangle"></i> Add/Edit Posts</h5>
                         <p class="card-text">Create or edit forum posts.</p>
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#managePostsModal"><i class="uil uil-message"></i> Manage Posts</a>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#managePostsModal"><i
+                                class="uil uil-message"></i> Manage Posts</a>
                     </div>
                 </div>
             </div>
@@ -143,14 +165,17 @@
                     <div class="card-body">
                         <h5 class="card-title"><i class="uil uil-exclamation-triangle"></i> Manage Tool Requests</h5>
                         <p class="card-text">Review and accept tool requests.</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#manageToolRequestsModal"><i class="uil uil-tools"></i> Manage Tool Requests</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#manageToolRequestsModal"><i class="uil uil-tools"></i> Manage Tool
+                            Requests</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="manageUsersModal" tabindex="-1" aria-labelledby="manageUsersModalLabel" aria-hidden="true">
+    <div class="modal fade" id="manageUsersModal" tabindex="-1" aria-labelledby="manageUsersModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -168,41 +193,43 @@
             </div>
         </div>
     </div>
-    
-  <!-- Modal to manage posts -->
-<div class="modal fade" id="managePostsModal" tabindex="-1" aria-labelledby="managePostsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="managePostsModalLabel">Manage Posts</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div id="post-list"></div>
-                    </div>
-                    <div class="col-md-5">
-                        <div id="postDetails">
-                            <!-- Details of the selected post will be shown here -->
+
+    <!-- Modal to manage posts -->
+    <div class="modal fade" id="managePostsModal" tabindex="-1" aria-labelledby="managePostsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="managePostsModalLabel">Manage Posts</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div id="post-list"></div>
+                        </div>
+                        <div class="col-md-5">
+                            <div id="postDetails">
+                                <!-- Details of the selected post will be shown here -->
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
 
     <!-- Modal to manage tool requests -->
-    <div class="modal fade" id="manageToolRequestsModal" tabindex="-1" aria-labelledby="manageToolRequestsModalLabel" aria-hidden="true">
+    <div class="modal fade" id="manageToolRequestsModal" tabindex="-1" aria-labelledby="manageToolRequestsModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -259,8 +286,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#siteStatusForm').on('submit', function(e) {
+        $(document).ready(function () {
+            $('#siteStatusForm').on('submit', function (e) {
                 e.preventDefault();
                 var siteStatus = $('#siteStatus').val();
                 localStorage.setItem('siteStatus', siteStatus);
@@ -268,7 +295,7 @@
                 $('#settingsModal').modal('hide');
             });
 
-            $('#addUserForm').on('submit', function(e) {
+            $('#addUserForm').on('submit', function (e) {
                 e.preventDefault();
                 var username = $('#username').val();
                 var email = $('#email').val();
@@ -276,7 +303,7 @@
                 $('#manageUsersModal').modal('hide');
             });
 
-            $('#addPostForm').on('submit', function(e) {
+            $('#addPostForm').on('submit', function (e) {
                 e.preventDefault();
                 var postTitle = $('#postTitle').val();
                 var postContent = $('#postContent').val();
@@ -292,8 +319,8 @@
             });
 
             $('#managePostsModal').on('show.bs.modal', function () {
-             fetchPosts();
-});
+                fetchPosts();
+            });
 
 
             checkSiteStatus();
@@ -309,7 +336,7 @@
                 });
 
                 const dados = await response.json();
-                $('#user-list').empty(); 
+                $('#user-list').empty();
                 dados.forEach(user => {
                     $('#user-list').append(`
                         <div id="user-${user.id}" class="mb-3">
@@ -326,28 +353,28 @@
         }
 
         async function showPostDetails(postId) {
-    try {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-        });
+            try {
+                const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                });
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
 
-        const post = await response.json();
-        const postDetails = document.getElementById('postDetails');
-        postDetails.innerHTML = `
+                const post = await response.json();
+                const postDetails = document.getElementById('postDetails');
+                postDetails.innerHTML = `
             <h5>${post.title}</h5>
             <p>${post.content}</p>
             <p><small>By ${post.author.name} (${post.author.email})</small></p>
         `;
-    } catch (error) {
-        console.error('Error fetching post details:', error);
-    }
-}
+            } catch (error) {
+                console.error('Error fetching post details:', error);
+            }
+        }
 
         async function deleteUser(userId) {
             try {
@@ -435,14 +462,14 @@
             }
         }
 
-        function checkSiteStatus() {
-            var siteStatus = localStorage.getItem('siteStatus');
-            if (siteStatus === 'under-maintenance') {
-                window.location.href = 'undermaint.html';
-            } else if (siteStatus === 'being-attacked') {
-                window.location.href = 'underattack.html'; // Assuming you have an attack.html page
-            }
-        }
+        // function checkSiteStatus() {
+        //     var siteStatus = localStorage.getItem('siteStatus');
+        //     if (siteStatus === 'under-maintenance') {
+        //         window.location.href = 'undermaint.html';
+        //     } else if (siteStatus === 'being-attacked') {
+        //         window.location.href = 'underattack.html'; // Assuming you have an attack.html page
+        //     }
+        // }
 
         function signout() {
             localStorage.clear();
@@ -450,26 +477,26 @@
         }
 
         async function fetchPosts() {
-    try {
-        const response = await fetch("http://localhost:3000/api/posts", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+            try {
+                const response = await fetch("http://localhost:3000/api/posts", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch posts.');
-        }
+                if (!response.ok) {
+                    throw new Error('Failed to fetch posts.');
+                }
 
-        const posts = await response.json();
-        const postList = document.getElementById('post-list');
-        postList.innerHTML = ''; // Clear existing posts
+                const posts = await response.json();
+                const postList = document.getElementById('post-list');
+                postList.innerHTML = '';
 
-        posts.forEach(post => {
-            const postItem = document.createElement('div');
-            postItem.className = 'post-item mb-3';
-            postItem.innerHTML = `
+                posts.forEach(post => {
+                    const postItem = document.createElement('div');
+                    postItem.className = 'post-item mb-3';
+                    postItem.innerHTML = `
                 <div class="row">
                     <div class="col-md-8">
                         <h4 class="post-title">${post.title}</h4>
@@ -485,29 +512,29 @@
                 </div>
                 <hr>
             `;
-            postItem.addEventListener('click', () => showPostDetails(post.id));
-            postList.appendChild(postItem);
-        });
-    } catch (error) {
-        console.error('Error fetching posts:', error);
-    }
-}
-
-async function showPostDetails(postId) {
-    try {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+                    postItem.addEventListener('click', () => showPostDetails(post.id));
+                    postList.appendChild(postItem);
+                });
+            } catch (error) {
+                console.error('Error fetching posts:', error);
+            }
         }
 
-        const post = await response.json();
-        const postDetails = document.getElementById('postDetails');
-        postDetails.innerHTML = `
+        async function showPostDetails(postId) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const post = await response.json();
+                const postDetails = document.getElementById('postDetails');
+                postDetails.innerHTML = `
             <h5>${post.title}</h5>
             <p>${post.content}</p>
             <div class="post-meta">
@@ -515,36 +542,41 @@ async function showPostDetails(postId) {
                 <p><strong>Email:</strong> ${post.author.email}</p>
             </div>
         `;
-    } catch (error) {
-        console.error('Error fetching post details:', error);
-    }
-}
-
-async function deletePost(postId) {
-    try {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to delete post.');
+            } catch (error) {
+                console.error('Error fetching post details:', error);
+            }
         }
 
-        console.log(`Post with ID ${postId} deleted successfully.`);
-        $('#post-' + postId).remove(); // Remove the post from the DOM
-        $('#postDetails').empty(); // Clear post details after deletion
-    } catch (error) {
-        console.error('Error deleting post:', error);
-    }
-}
+        async function deletePost(postId) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
 
+                if (!response.ok) {
+                    throw new Error('Failed to delete post.');
+                }
 
-        $(document).ready(function() {
-            fetchPosts();
+                await fetchPosts();
+
+                console.log(`Post with ID ${postId} deleted successfully.`);
+
+            } catch (error) {
+                console.error('Error deleting post:', error);
+            }
+        }
+
+        $(document).ready(function () {
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                window.location.href = "login.html";
+            }
         });
     </script>
 </body>
+
 </html>
