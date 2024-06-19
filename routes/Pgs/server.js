@@ -31,3 +31,28 @@ app.post('/api/site-status', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
+let isUnderAttack = true; 
+
+app.use(express.static('public'));
+
+app.get('/api/status', (req, res) => {
+    res.json({ underAttack: isUnderAttack });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
+
+
+let isUnderMaintenance = true; 
+
+app.use(express.static('public'));
+
+app.get('/api/status', (req, res) => {
+    res.json({ underMaintenance: isUnderMaintenance });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});

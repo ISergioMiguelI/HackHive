@@ -29,9 +29,28 @@
 </head>
 <body>
     <span id="warning-symbol">&#9888;</span> 
-    <h1>Site Under Attack</h1>
-    <p>We are currently experiencing a cyber attack. We apologize for any inconvenience.</p>
-    <p>Please check back later.</p>
-    <img src="./Assets/giphy.gif" alt="Explosão" style="width: 200px; height: auto;"> 
+    <h1 id="status-title">Site Under Attack</h1>
+    <p id="status-message">We are currently experiencing a cyber attack. We apologize for any inconvenience.</p>
+    <p id="status-check">Please check back later.</p>
+    <img src="./Assets/giphy.gif" alt="Explosão" style="width: 200px; height: auto;">
+    <script>
+        async function fetchStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                if (!data.underAttack) {
+                    document.getElementById('warning-symbol').style.display = 'none';
+                    document.getElementById('status-title').innerText = 'Site is Safe';
+                    document.getElementById('status-message').innerText = 'The site is now safe. Thank you for your patience.';
+                    document.body.style.color = 'green';
+                }
+            } catch (error) {
+                console.error('Error fetching status:', error);
+            }
+        }
+
+        fetchStatus();
+        setInterval(fetchStatus, 30000);
+    </script>
 </body>
 </html>
