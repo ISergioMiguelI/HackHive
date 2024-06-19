@@ -10,8 +10,8 @@ const { generateToken } = require('../../utils/authenticate');
 exports.getById = async (req, res) => {
     const id = req.params.id * 1;
     try {
-        const response = await prisma.Utilizador.findUnique({
-            where: { id_utilizador: id },
+        const response = await prisma.User.findUnique({
+            where: { id_user: id },
         });
         res.status(200).json(response);
     } catch (error) {
@@ -80,7 +80,7 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const user = await prisma.Utilizador.findUnique({ where: { email } });
+        const user = await prisma.User.findUnique({ where: { email } });
 
         if (!user || !await bcrypt.compare(password, user.password)) {
             return res.status(400).json({ msg: 'Invalid credentials' });

@@ -90,13 +90,13 @@ exports.readToken = async (req, res) => {
         // Decodifica o token
         const decoded = await authenticateUtil.certifyAccessToken(token);
 
-        const id_utilizador = decoded.id;
+        const id_user = decoded.id;
         const name = decoded.name;
         const email = decoded.email;
         const isAdmin = decoded.isAdmin ? 'admin' : 'user';
 
         // Responde com os dados do users
-        res.status(200).json({ id_utilizador, name, email, isAdmin });
+        res.status(200).json({ id_user, name, email, isAdmin });
     } catch (error) {
         console.error('ReadToken Error:', error);
         res.status(401).json({ msg: error.message });
