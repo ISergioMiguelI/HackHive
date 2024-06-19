@@ -1,61 +1,101 @@
-function addTask() {
-    var taskName = document.getElementById('taskName').value;
-    var taskDescription = document.getElementById('taskDescription').value;
-    var taskCompleted = document.getElementById('taskCompleted').checked;
-    var taskProgress = document.getElementById('taskProgress').value;
+// JavaScript file for handling profile page functionality
 
-    // Create a new task object
-    var task = {
-        name: taskName,
-        description: taskDescription,
-        completed: taskCompleted,
-        progress: taskProgress
-    };
+document.addEventListener("DOMContentLoaded", function () {
+    const profileImageInput = document.getElementById("profileImageInput");
+    const profileImageContainer = document.getElementById("profileImageContainer");
+    const tasksTableBody = document.getElementById("tasksTableBody");
+    const editTaskForm = document.getElementById("editTaskForm");
 
-    // Add the task to the task list
-    var taskList = document.getElementById('taskList');
-    var listItem = document.createElement('li');
-    listItem.classList.add('list-group-item');
-    listItem.innerHTML = `
-        <input type="checkbox" class="form-check-input" ${task.completed ? 'checked' : ''}>
-        <span>${task.name}</span>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: ${task.progress}%" aria-valuenow="${task.progress}" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-    `;
-    taskList.appendChild(listItem);
-}
+    profileImageInput.addEventListener("change", function () {
+        const file = profileImageInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                profileImageContainer.style.backgroundImage = `url(${e.target.result})`;
+                profileImageContainer.innerHTML = ''; // Clear the default icon
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 
-// Add task form submission event listener
-document.getElementById('addTaskForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
+    function fetchUserData() {
+        // Simulate an API call to get user data
+        const userData = {
+            fullName: "John Doe",
+            email: "john.doe@example.com",
+            additionalInfo: "Hello there! I'm passionate about programming and technology, with a keen interest in crafting efficient solutions to complex problems."
+        };
 
-    // Add the task
-    addTask();
-
-    // Clear the form fields
-    document.getElementById('taskName').value = '';
-    document.getElementById('taskDescription').value = '';
-    document.getElementById('taskCompleted').checked = false;
-    document.getElementById('taskProgress').value = '';
-});
-
-// Function to update task completion and progress
-function updateTask(event) {
-    var checkbox = event.target;
-    var taskItem = checkbox.parentElement;
-
-    // Toggle task completion
-    if (checkbox.checked) {
-        taskItem.classList.add('completed');
-    } else {
-        taskItem.classList.remove('completed');
+        document.getElementById("fullName").textContent = userData.fullName;
+        document.getElementById("email").textContent = userData.email;
+        document.getElementById("additionalInfo").textContent = userData.additionalInfo;
+        document.getElementById("userName").textContent = userData.fullName;
     }
-}
 
-// Task list event delegation for dynamic checkbox
-document.getElementById('taskList').addEventListener('change', function(event) {
-    if (event.target.type === 'checkbox') {
-        updateTask(event);
+    function fetchTasks() {
+        // Simulate an API call to get tasks
+        const tasks = [
+            { id: 1, title: "Task 1", description: "Description 1", status: "Pending" },
+            { id: 2, title: "Task 2", description: "Description 2", status: "In Progress" },
+            { id: 3, title: "Task 3", description: "Description 3", status: "Completed" }
+        ];
+
+        tasksTableBody.innerHTML = '';
+
+        tasks.forEach(task => {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${task.title}</td>
+                <td>${task.description}</td>
+                <td>${task.status}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary edit-task" data-id="${task.id}" data-toggle="modal" data-target="#editTaskModal">Edit</button>
+                    <button class="btn btn-sm btn-outline-danger delete-task" data-id="${task.id}">Delete</button>
+                </td>
+            `;
+
+            tasksTableBody.appendChild(row);
+        });
+
+        document.querySelectorAll(".edit-task").forEach(button => {
+            button.addEventListener("click", function () {
+                const taskId = this.getAttribute("data-id");
+                const task = tasks.find(t => t.id == taskId);
+                document.getElementById("editTaskId").value = task.id;
+                document.getElementById("editTaskTitle").value = task.title;
+                document.getElementById("editTaskDescription").value = task.description;
+                document.getElementById("editTaskStatus").value = task.status;
+            });
+        });
+
+        document.querySelectorAll(".delete-task").forEach(button => {
+            button.addEventListener("click", function () {
+                const taskId = this.getAttribute("data-id");
+                // Simulate an API call to delete the task
+                const index = tasks.findIndex(t => t.id == taskId);
+                if (index > -1) {
+                    tasks.splice(index, 1);
+                    fetchTasks();
+                }
+            });
+        });
     }
+
+    editTaskForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const taskId = document.getElementById("editTaskId").value;
+        const taskTitle = document.getElementById("editTaskTitle").value;
+        const taskDescription = document.getElementById("editTaskDescription").value;
+        const taskStatus = document.getElementById("editTaskStatus").value;
+
+        // Simulate an API call to update the task
+        // ...
+
+        fetchTasks(); // Refresh the tasks list
+        $('#editTaskModal').modal('hide');
+    });
+
+    fetchUserData();
+    fetchTasks();
 });

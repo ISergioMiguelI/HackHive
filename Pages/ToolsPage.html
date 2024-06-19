@@ -112,28 +112,25 @@
     </table>
 </section>
 
-<section class="form-section container mt-5">
-    <h3 class="text-warning">Request Hacking Tools and Software</h3>
-    <form id="requestForm">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-        </div>
-        <div class="form-group">
-            <label for="tool">Tool/Software Needed:</label>
-            <input type="text" class="form-control" id="tool" placeholder="Enter the tool/software you need" required>
-        </div>
-        <div class="form-group">    
-            <label for="description">Url:</label>
-            <textarea class="form-control" id="description" rows="3" placeholder="Provide a brief description of your need" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-warning mt-3">Submit Request</button>
-    </form>
-</section>
+<form id="requestForm">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+    </div>
+    <div class="form-group">
+        <label for="tool">Tool/Software Needed:</label>
+        <input type="text" class="form-control" id="tool" placeholder="Enter the tool/software you need" required>
+    </div>
+    <div class="form-group">    
+        <label for="description">Description:</label>
+        <textarea class="form-control" id="description" rows="3" placeholder="Provide a brief description of your need" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-warning mt-3">Submit Request</button>
+</form>
 
 <!-- Footer -->
 <div class="footer mt-5">
@@ -147,103 +144,76 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    async function fetchTools() {
-            try {
-                const response = await fetch('/api/tool', {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const data = await response.json();
-                const latestPostsContainer = $('#latestPosts');
-                latestPostsContainer.empty();
-                data.forEach(post => {
-                    latestPostsContainer.append(`<div class="post-item" data-id="${post.id}">
-                        <a href="#" class="post-link" data-toggle="modal" data-target="#postDetailsModal" onclick="showPostDetails(${post.id})">
-                            ${post.title} by ${post.author.name}
-                        </a>
-                    </div>`);
-                });
-            } catch (error) {
-                console.error('Error fetching posts:', error);
-            }
-        }
-
-    async function addTool(name, tool, description, url) {
-            try {
-                const response = await fetch('/api/tool', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    },
-                    body: JSON.stringify({ name, tool, description, url})
-                });
-                if (response.ok) {
-                    await fetchTools();
-                    $('#postName').val('');
-                    $('#postTool').val('');
-                    $('#postDescription').val('');
-                    $('#postUrl').val('');
-
-                } else {
-                    console.error('Error adding post:', await response.text());
-                }
-            } catch (error) {
-                console.error('Error adding post:', error);
-            }
-        }
-
-        async function populateToolsTable() {
-            try {
-                const response = await fetch('/api/tools');
-                if (response.ok) {
-                    const tools = await response.json();
-                    const toolsTable = document.getElementById('toolsTable');
-                    toolsTable.innerHTML = `
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Tool/Software</th>
-                                <th>Description</th>
-                                <th>Resources</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${tools.map(tool => `
-                                <tr>
-                                    <td>${tool.name}</td>
-                                    <td>${tool.description}</td>
-                                    <td><a href="${tool.url}">Official Site</a></td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    `;
-                } else {
-                    throw new Error('Failed to fetch tools');
-                }
-            } catch (error) {
-                console.error('Error fetching tools:', error);
-            }
-        }
-
-        populateToolsTable();
-        $('#postTool').submit(function(event) {
-            event.preventDefault();
-            const name = $('#postName').val();
-            const tool = $('#postTool').val();
-            const description = $('#postDescription');
-            const url = $('#postUrl');
-            addTool(name, tool, description, url);
+    async function addTool(name, description, url) {
+    try {
+        const response = await fetch('/api/tools', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                
+            },
+            body: JSON.stringify({ name, description, url })
         });
+        
+        if (response.ok) {
+            await populateToolsTable(); 
+            $('#name').val(''); 
+            $('#description').val('');
+            $('#url').val('');
+        } else {
+            console.error('Error adding tool:', await response.text());
+        }
+    } catch (error) {
+        console.error('Error adding tool:', error);
+    }
+}
 
-        $(document).ready(function() {
-            fetchTools();
-        });
+async function populateToolsTable() {
+    try {
+        const response = await fetch('/api/tools');
+        if (response.ok) {
+            const tools = await response.json();
+            const toolsTable = document.getElementById('toolsTable');
+            toolsTable.innerHTML = `
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Tool/Software</th>
+                        <th>Description</th>
+                        <th>Resources</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${tools.map(tool => `
+                        <tr>
+                            <td>${tool.name}</td>
+                            <td>${tool.description}</td>
+                            <td><a href="${tool.url}">Official Site</a></td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            `;
+        } else {
+            throw new Error('Failed to fetch tools');
+        }
+    } catch (error) {
+        console.error('Error fetching tools:', error);
+    }
+}
+
+
+$('#requestForm').submit(function(event) {
+    event.preventDefault();
+    const name = $('#name').val();
+    const description = $('#description').val();
+    const url = $('#url').val();
+    addTool(name, description, url);
+});
+
+
+$(document).ready(function() {
+    populateToolsTable();
+});
+
 
 </script>
 </body>

@@ -1,640 +1,609 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="./styles/profile.css">
-    <link rel="stylesheet" href="./styles/navbar.css">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <style>
-        /* Custom Styles */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(to right, #ffed4a, #ffab4a); /* Gradiente de fundo amarelado */
-            color: #000000; /* Cor do texto */
-            margin: 0; /* Remover margem padrão do body */
-        }
-        /* Estilos adicionais */
-        .navbar-brand img {
-            width: 40px;
-            margin-right: 10px;
-        }
-        .nav-link {
-            color: #ffffff; /* Cor dos links */
-        }
-        .nav-link:hover {
-            color: #ffc107; /* Cor dos links ao passar o mouse */
-        }
-        footer {
-            background-color: #343a40;
-            color: #ffffff;
-            padding: 20px 0;
-            text-align: center;
-            width: 100%;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-        }
-        .footer img {
-            width: 40px;
-        }
-        .btn-outline-primary:hover {
-            background-color: #4f8bf9; /* Cor de fundo do botão de contorno primário ao passar o mouse */
-            color: #ffffff; /* Cor do texto do botão de contorno primário ao passar o mouse */
-        }
-        .progress {
-            border-radius: 10px;
-        }
-        .progress-bar {
-            background-color: #000000; /* Cor da barra de progresso */
-        }
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        .default-profile-image {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            background-color: #e9ecef;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #6c757d;
-            font-size: 3rem;
-        }
-        .card {
-            border: none;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-        }
-        .additional-info {
-            margin-top: 20px;
-            background-color: rgba(255, 255, 255, 0.9); /* Fundo branco translúcido para melhor legibilidade */
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .additional-info h2 {
-            color: #333;
-        }
-        .additional-info p {
-            color: #666;
-        }
-        .follow-btn, .message-btn {
-            width: 120px;
-            margin: 5px;
-            color: #000000; /* Cor do texto dos botões */
-        }
-        .btn-container {
-            display: flex;
-            justify-content: center;
-        }
-        .cta-section {
-            margin-top: 30px;
-            text-align: center;
-        }
-        .cta-section button {
-            margin-top: 10px;
-            color: #000000; /* Cor do texto dos botões */
-        }
-        
-        .btn-primary {
-    background-color: #000000; /* Cor de fundo do botão primário (Follow) */
-    border-color: #000000; /* Cor da borda do botão primário */
-    color: #ffffff; /* Cor do texto do botão primário */
-}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile</title>
+        <link rel="stylesheet" href="./styles/profile.css">
+        <link rel="stylesheet" href="./styles/navbar.css">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <style>
+            /* Custom Styles */
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                background: linear-gradient(to right, #ffed4a, #ffab4a); /* Gradiente de fundo amarelado */
+                color: #000000; /* Cor do texto */
+                margin: 0; /* Remover margem padrão do body */
+            }
+            /* Estilos adicionais */
+            .navbar-brand img {
+                width: 40px;
+                margin-right: 10px;
+            }
+            .nav-link {
+                color: #ffffff; /* Cor dos links */
+            }
+            .nav-link:hover {
+                color: #ffc107; /* Cor dos links ao passar o mouse */
+            }
+            footer {
+                background-color: #343a40;
+                color: #ffffff;
+                padding: 20px 0;
+                text-align: center;
+                width: 100%;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+            }
+            .footer img {
+                width: 40px;
+            }
+            .btn-outline-primary:hover {
+                background-color: #4f8bf9; /* Cor de fundo do botão de contorno primário ao passar o mouse */
+                color: #ffffff; /* Cor do texto do botão de contorno primário ao passar o mouse */
+            }
+            .progress {
+                border-radius: 10px;
+            }
+            .progress-bar {
+                background-color: #000000; /* Cor da barra de progresso */
+            }
+            .profile-image {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+            .default-profile-image {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 50%;
+                background-color: #e9ecef;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #6c757d;
+                font-size: 3rem;
+            }
+            .card {
+                border: none;
+                box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            }
+            .additional-info {
+                margin-top: 20px;
+                background-color: rgba(255, 255, 255, 0.9); /* Fundo branco translúcido para melhor legibilidade */
+                padding: 20px;
+                border-radius: 10px;
+            }
+            .additional-info h2 {
+                color: #333;
+            }
+            .additional-info p {
+                color: #666;
+            }
+            .follow-btn, .message-btn {
+                width: 120px;
+                margin: 5px;
+                color: #000000; /* Cor do texto dos botões */
+            }
+            .btn-container {
+                display: flex;
+                justify-content: center;
+            }
+            .cta-section {
+                margin-top: 30px;
+                text-align: center;
+            }
+            .cta-section button {
+                margin-top: 10px;
+                color: #000000; /* Cor do texto dos botões */
+            }
+            
+            .btn-primary {
+        background-color: #000000; /* Cor de fundo do botão primário (Follow) */
+        border-color: #000000; /* Cor da borda do botão primário */
+        color: #ffffff; /* Cor do texto do botão primário */
+    }
 
-.btn-primary:hover {
-    background-color: #4f4f4f; /* Cor de fundo do botão primário ao passar o mouse */
-    border-color: #4f4f4f; /* Cor da borda do botão primário ao passar o mouse */
-    color: #ffffff; /* Cor do texto do botão primário ao passar o mouse */
-}
+    .btn-primary:hover {
+        background-color: #4f4f4f; /* Cor de fundo do botão primário ao passar o mouse */
+        border-color: #4f4f4f; /* Cor da borda do botão primário ao passar o mouse */
+        color: #ffffff; /* Cor do texto do botão primário ao passar o mouse */
+    }
 
-.btn-outline-primary {
-    color: #000000; /* Cor do texto do botão de contorno primário */
-    border-color: #000000; /* Cor da borda do botão de contorno primário */
-}
+    .btn-outline-primary {
+        color: #000000; /* Cor do texto do botão de contorno primário */
+        border-color: #000000; /* Cor da borda do botão de contorno primário */
+    }
 
-.btn-outline-primary:hover {
-    background-color: #4f4f4f; /* Cor de fundo do botão de contorno primário ao passar o mouse */
-    color: #ffffff; /* Cor do texto do botão de contorno primário ao passar o mouse */
-}
+    .btn-outline-primary:hover {
+        background-color: #4f4f4f; /* Cor de fundo do botão de contorno primário ao passar o mouse */
+        color: #ffffff; /* Cor do texto do botão de contorno primário ao passar o mouse */
+    }
 
 
-    </style>
-</head>
-<body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index_login.html">
-            <img src="/assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <!-- Links para Redes Sociais -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="uil uil-facebook-f"></i></a>
+        </style>
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index_login.html">
+                <img src="/assets/HackHive.jpg" alt="Avatar Logo" class="rounded-pill icone-interativo"> HackHive
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <!-- Links para Redes Sociais -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="uil uil-facebook-f"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="uil uil-twitter"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="uil uil-instagram"></i></a>
+                    </li>
+                    </li>
+                    <a class="nav-link" id="gohome" href="index_login.html" style="font-size: 16px;">
+                        <i class="material-icons" style="font-size: 16px; vertical-align: middle;">home</i> Home
+                    </a>
+                    
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="uil uil-twitter"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="uil uil-instagram"></i></a>
-                </li>
-                </li>
-                <a class="nav-link" id="gohome" href="index_login.html" style="font-size: 16px;">
-                    <i class="material-icons" style="font-size: 16px; vertical-align: middle;">home</i> Home
-                </a>
-                
-            </li>
-            </ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <label for="profileImageInput">
+                                <div id="profileImageContainer" class="default-profile-image">
+                                    <span class="material-icons">person</span>
+                                </div>
+                                <span class="mt-2">Change Profile Picture</span>
+                            </label>
+                            <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
+                            <div class="mt-3">
+                                <h4 id="userName"></h4>
+                                <div class="btn-container">
+                                    <button class="btn btn-primary follow-btn">Follow</button>
+                                    <button class="btn btn-outline-primary message-btn">Message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Full Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary" id="fullName">
+                                <!-- Nome Completo -->
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email:</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary" id="email">
+                                <!-- Email -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="additional-info">
+                    <h2>Additional Information</h2>
+                    <p id="additionalInfo">Hello there! I'm passionate about programming and technology, with a keen interest in crafting efficient solutions to complex problems.</p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="userTable" class="table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Completion (%)</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tr>
+                                <td>Autenticação</td>
+                                <td>100% done</td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger delete-task">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Posts</td>
+                                <td>90% done</td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger delete-task">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tools</td>
+                                <td>20% done</td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger delete-task">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Painel de Administrador</td>
+                                <td>65% done</td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger delete-task">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
+                            Add Task
+                        </button>
+                    </div>
+                </div>
+                <div class="card mb-4 mt-4">
+                    <div class="card-header">
+                        <h5 class="card-title">Latest Posts</h5>
+                    </div>
+                    <div class="card-body" id="latestPosts">
+                        <!-- Latest posts will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
 
-<div class="container mt-5">
-    <div class="row gutters-sm">
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-column align-items-center text-center">
-                        <label for="profileImageInput">
-                            <div id="profileImageContainer" class="default-profile-image">
-                                <span class="material-icons">person</span>
-                            </div>
-                            <span class="mt-2">Change Profile Picture</span>
-                        </label>
-                        <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
-                        <div class="mt-3">
-                            <h4 id="userName"></h4>
-                            <div class="btn-container">
-                                <button class="btn btn-primary follow-btn">Follow</button>
-                                <button class="btn btn-outline-primary message-btn">Message</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <h6 class="mb-0">Full Name</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary" id="fullName">
-                            <!-- Nome Completo -->
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <h6 class="mb-0">Email:</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary" id="email">
-                            <!-- Email -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="additional-info">
-                <h2>Additional Information</h2>
-                <p id="additionalInfo">Hello there! I'm passionate about programming and technology, with a keen interest in crafting efficient solutions to complex problems. My journey into the world of coding began with a curiosity-driven exploration of how software shapes our digital experiences. Over the years, I've honed my skills in various programming languages such as Python, JavaScript, and Java, leveraging frameworks like React and Spring to build robust applications.
 
-                    My experience spans from front-end development, where I specialize in creating intuitive user interfaces with HTML, CSS, and React, to back-end development, designing scalable APIs and databases using Node.js and MongoDB. I thrive in collaborative environments, where I enjoy brainstorming innovative solutions and contributing to the success of projects.
-                    
-                    Apart from coding, I'm deeply fascinated by artificial intelligence and machine learning, exploring how these technologies can revolutionize industries and enhance user experiences. I'm also committed to continuous learning, staying updated with the latest advancements in technology and embracing new tools and methodologies to improve my craft.
-                    
-                    In my spare time, you can find me contributing to open-source projects, attending tech meetups to expand my network, or simply exploring new coding challenges on platforms like LeetCode and HackerRank. I'm enthusiastic about the impact that technology can have on society, and I'm eager to collaborate on projects that make a difference.
-                    
-                    Let's connect and explore how we can innovate together in the exciting world of programming!</p>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-12">
-                    <table id="userTable" class="table">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Completion (%)</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                        <tr>
-                            <td>Autenticação</td>
-                            <td>100% done</td>
-                            <td>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn btn-sm btn-danger delete-task">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Posts</td>
-                            <td>90% done</td>
-                            <td>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn btn-sm btn-danger delete-task">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Tools</td>
-                            <td>20% done</td>
-                            <td>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn btn-sm btn-danger delete-task">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Painel de Administrador</td>
-                            <td>65% done</td>
-                            <td>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn btn-sm btn-danger delete-task">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                    </table>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
+    <!-- Add Task Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Add Task</h5>
+                    <button type="button" class="btn btn-primary" id="addTaskBtn" data-toggle="modal" data-target="#addUserModal">
                         Add Task
                     </button>
                 </div>
-            </div>
-            <div class="card mb-4 mt-4">
-                <div class="card-header">
-                    <h5 class="card-title">Latest Posts</h5>
-                </div>
-                <div class="card-body" id="latestPosts">
-                    <!-- Latest posts will be dynamically added here -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Add Task Modal -->
-<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addUserModalLabel">Add Task</h5>
-                <button type="button" class="btn btn-primary" id="addTaskBtn" data-toggle="modal" data-target="#addUserModal">
-                    Add Task
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="addTaskForm">
-                    <div class="form-group">
-                        <label for="taskName">Task Name</label>
-                        <input type="text" class="form-control" id="taskName" placeholder="Enter task name">
-                    </div>
-                    <div class="form-group">
-                        <label for="taskStatus">Status</label><br>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="taskStatusCompleted" name="taskStatus" value="Completed">
-                            <label class="form-check-label" for="taskStatusCompleted">Completed</label>
+                <div class="modal-body">
+                    <form id="addTaskForm">
+                        <div class="form-group">
+                            <label for="taskName">Task Name</label>
+                            <input type="text" class="form-control" id="taskName" placeholder="Enter task name">
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="taskStatusPending" name="taskStatus" value="Pending" checked>
-                            <label class="form-check-label" for="taskStatusPending">Pending</label>
+                        <div class="form-group">
+                            <label for="taskStatus">Status</label><br>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="taskStatusCompleted" name="taskStatus" value="Completed">
+                                <label class="form-check-label" for="taskStatusCompleted">Completed</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="taskStatusPending" name="taskStatus" value="Pending" checked>
+                                <label class="form-check-label" for="taskStatusPending">Pending</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="taskCompletion">Completion Percentage</label>
-                        <input type="number" class="form-control" id="taskCompletion" min="0" max="100" placeholder="Enter completion percentage">
-                    </div>
-                    <button type="button" class="btn btn-primary" id="saveTaskBtn">Save</button>
-                </form>
+                        <div class="form-group">
+                            <label for="taskCompletion">Completion Percentage</label>
+                            <input type="number" class="form-control" id="taskCompletion" min="0" max="100" placeholder="Enter completion percentage">
+                        </div>
+                        <button type="button" class="btn btn-primary" id="saveTaskBtn">Save</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="col-md-4">
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5 class="card-title">Latest Posts</h5>
-        </div>
-        <div class="card-body" id="latestPosts">
-            <!-- Latest posts will be dynamically added here -->
-        </div>
-    </div>
-</div>
-</div>
-</div>
-</section>
-
-
-<!-- Modal de Mensagem -->
-<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="messageModalLabel">Send Message</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="sendMessageForm">
-                    <div class="form-group">
-                        <label for="messageContent">Message:</label>
-                        <textarea class="form-control" id="messageContent" rows="3" placeholder="Type your message here..."></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="sendMessageBtn">Send Message</button>
+    <!-- Modal de Mensagem -->
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel">Send Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="sendMessageForm">
+                        <div class="form-group">
+                            <label for="messageContent">Message:</label>
+                            <textarea class="form-control" id="messageContent" rows="3" placeholder="Type your message here..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="sendMessageBtn">Send Message</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- JavaScript Dependencies -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script>
-    
-       // Event listener para abrir o modal de mensagem
-       document.querySelector('.message-btn').addEventListener('click', function() {
-        $('#messageModal').modal('show');
-    });
-
-    // Event listener para enviar a mensagem
-    document.getElementById('sendMessageBtn').addEventListener('click', function() {
-        const messageContent = document.getElementById('messageContent').value;
-
-        if (messageContent.trim() !== '') {
-            // Aqui você pode adicionar a lógica para enviar a mensagem (exemplo: via API)
-            alert('Message sent successfully!'); // Apenas um alerta de exemplo
-
-            // Limpar o campo de mensagem após o envio
-            document.getElementById('messageContent').value = '';
-
-            // Fechar o modal após enviar a mensagem
-            $('#messageModal').modal('hide');
-        } else {
-            alert('Please enter a message.');
-        }
-    });
-
-
-    // Function to fetch user data and populate the profile
-    function fetchUserData() {
-    const username = localStorage.getItem('username');
-    const email = localStorage.getItem('email');
-    const profileImage = localStorage.getItem('profileImage');
-    const additionalInfo = localStorage.getItem('additionalInfo');
-
-    if (username) {
-        document.getElementById('userName').innerText = username;
-        document.getElementById('fullName').innerText = username;
-    }
-
-    if (email) {
-        document.getElementById('email').innerText = email;
-        document.getElementById('email').href = `mailto:${email}`;
-    }
-
-    if (profileImage) {
-        document.getElementById('profileImageContainer').innerHTML = `<img src="${profileImage}" class="profile-image" alt="Profile Image">`;
-    }
-
-    if (additionalInfo) {
-        document.getElementById('additionalInfo').innerText = additionalInfo;
-    }
-
-    // Chamar a função para preencher os últimos posts
-    fillLatestPosts();
-}
-
-        // Fetch tasks from the API
-        axios.get('/api/user/tasks')
-            .then(response => {
-                const tasks = response.data;
-                const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
-                userTable.innerHTML = ''; // Clear existing rows
-                tasks.forEach(task => {
-                    const newRow = userTable.insertRow();
-                    newRow.insertCell(0).innerText = task.name;
-                    newRow.insertCell(1).innerText = task.status;
-                    newRow.insertCell(2).innerText = task.completion + '%';
-                    newRow.insertCell(3).innerHTML = `<button class="btn btn-danger btn-sm" onclick="deleteTask('${task.id}', this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask('${task.id}', this)">Edit</button>`;
+    <!-- JavaScript Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        
+        async function fetchPosts() {
+            try {
+                const response = await fetch('/api/posts', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
                 });
-            })
-            .catch(error => {
-                console.error('Error fetching tasks', error);
-            });
 
-    // Function to add a new task
-function addTask() {
-    const taskName = document.getElementById('taskName').value;
-    const taskStatus = document.querySelector('input[name="taskStatus"]:checked').value;
-    const taskCompletion = document.getElementById('taskCompletion').value;
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
 
-    if (taskName && taskStatus && taskCompletion) {
-        const newRow = document.createElement("tr");
-
-        newRow.innerHTML = `
-            <td>${taskName}</td>
-            <td>${taskStatus}</td>
-            <td>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: ${taskCompletion}%" aria-valuenow="${taskCompletion}" aria-valuemin="0" aria-valuemax="100">${taskCompletion}%</div>
-                </div>
-            </td>
-            <td>
-                <button class="btn btn-sm btn-danger delete-task">Delete</button>
-            </td>
-        `;
-
-        const userTableBody = document.getElementById('userTable').getElementsByTagName('tbody')[0];
-        userTableBody.appendChild(newRow);
-
-        // Clear form fields
-        document.getElementById('taskName').value = '';
-        document.getElementById('taskCompletion').value = '';
-        document.getElementById('taskStatusPending').checked = true;
-
-        // Add event listener for delete button
-        newRow.querySelector(".delete-task").addEventListener("click", function() {
-            newRow.remove();
-        });
-
-        // Close modal
-        $('#addUserModal').modal('hide');
-
-        // Manter estilo do botão "Add Task" como preto após adicionar nova tarefa
-        document.getElementById('addTaskBtn').classList.remove('btn-primary');
-        document.getElementById('addTaskBtn').classList.add('btn-primary');
-    } else {
-        alert("Please fill out all fields.");
-    }
-}
-
-// Event listener for 'Save' button in the modal
-document.getElementById('saveTaskBtn').addEventListener('click', addTask);
-    // Function to delete a task
-    function deleteTask(taskId, btn) {
-        axios.delete(`/api/user/tasks/${taskId}`)
-            .then(() => {
-                const row = btn.parentNode.parentNode;
-                row.parentNode.removeChild(row);
-            })
-            .catch(error => {
-                console.error('Error deleting task', error);
-            });
-    }
-
-    // Function to edit a task
-    function editTask(taskId, btn) {
-        const row = btn.parentNode.parentNode;
-        const taskName = row.cells[0].innerText;
-        const taskStatus = row.cells[1].innerText;
-        const taskCompletion = row.cells[2].innerText.split('%')[0];
-        document.getElementById('taskName').value = taskName;
-        if (taskStatus === 'Completed') {
-            document.getElementById('taskStatusCompleted').checked = true;
-        } else {
-            document.getElementById('taskStatusPending').checked = true;
-        }
-        document.getElementById('taskCompletion').value = taskCompletion;
-        $('#addUserModal').modal('show');
-
-        document.querySelector('.modal-footer .btn-primary').onclick = function() {
-            axios.put(`/api/user/tasks/${taskId}`, {
-                name: taskName,
-                status: document.querySelector('input[name="taskStatus"]:checked').value,
-                completion: document.getElementById('taskCompletion').value
-            })
-            .then(() => {
-                row.cells[0].innerText = taskName;
-                row.cells[1].innerText = document.querySelector('input[name="taskStatus"]:checked').value;
-                row.cells[2].innerText = document.getElementById('taskCompletion').value + '%';
-                $('#addUserModal').modal('hide');
-            })
-            .catch(error => {
-                console.error('Error editing task', error);
-            });
-        };
-    }
-    
-     
-    async function fetchPosts() {
-    try {
-        const response = await fetch("http://localhost:3000/api/posts", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch posts.');
+                const data = await response.json();
+                const latestPostsContainer = $('#latestPosts');
+                latestPostsContainer.empty();
+                const userEmail = localStorage.getItem('email');
+                data.forEach(post => {
+                    if (post.author.email === userEmail) {
+                        latestPostsContainer.append(`<div class="post-item" data-id="${post.id}">
+                            <a href="#" class="post-link" data-toggle="modal" data-target="#postDetailsModal" onclick="showPostDetails(${post.id})">
+                                ${post.title} by ${post.author.name}
+                            </a>
+                        </div>`);
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching posts:', error);
+            }
         }
 
-        const posts = await response.json();
-        const postList = document.getElementById('post-list');
-        postList.innerHTML = ''; // Clear existing posts
+        function signout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('email');
+            window.location.href = '/login';
+        }
 
-        posts.forEach(post => {
-            const postItem = document.createElement('div');
-            postItem.className = 'post-item mb-3';
-            postItem.innerHTML = `
-                <div class="row">
-                    <div class="col-md-8">
-                        <h4 class="post-title">${post.title}</h4>
-                        <p>${post.content}</p>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="post-author">
-                            <p><strong>Author:</strong> ${post.author.name}</p>
-                            <p><strong>Email:</strong> ${post.author.email}</p>
-                        </div>
-                        <button class="btn btn-danger btn-sm" onclick="deletePost(${post.id})">Remove</button>
-                    </div>
-                </div>
-                <hr>
-            `;
-            postItem.addEventListener('click', () => showPostDetails(post.id));
-            postList.appendChild(postItem);
+        $(document).ready(function() {
+            fetchPosts();
         });
-    } catch (error) {
-        console.error('Error fetching posts:', error);
+
+        // Event listener para abrir o modal de mensagem
+        document.querySelector('.message-btn').addEventListener('click', function() {
+            $('#messageModal').modal('show');
+        });
+
+        // Event listener para enviar a mensagem
+        document.getElementById('sendMessageBtn').addEventListener('click', function() {
+            const messageContent = document.getElementById('messageContent').value;
+
+            if (messageContent.trim() !== '') {
+                // Aqui você pode adicionar a lógica para enviar a mensagem (exemplo: via API)
+                alert('Message sent successfully!'); // Apenas um alerta de exemplo
+
+                // Limpar o campo de mensagem após o envio
+                document.getElementById('messageContent').value = '';
+
+                // Fechar o modal após enviar a mensagem
+                $('#messageModal').modal('hide');
+            } else {
+                alert('Please enter a message.');
+            }
+        });
+
+
+        // Function to fetch user data and populate the profile
+        function fetchUserData() {
+        const username = localStorage.getItem('username');
+        const email = localStorage.getItem('email');
+        const profileImage = localStorage.getItem('profileImage');
+        const additionalInfo = localStorage.getItem('additionalInfo');
+
+        if (username) {
+            document.getElementById('userName').innerText = username;
+            document.getElementById('fullName').innerText = username;
+        }
+
+        if (email) {
+            document.getElementById('email').innerText = email;
+            document.getElementById('email').href = `mailto:${email}`;
+        }
+
+        if (profileImage) {
+            document.getElementById('profileImageContainer').innerHTML = `<img src="${profileImage}" class="profile-image" alt="Profile Image">`;
+        }
+
+        if (additionalInfo) {
+            document.getElementById('additionalInfo').innerText = additionalInfo;
+        }
+
     }
-}
-    
 
-    
-
-    // Event listener for profile image upload
-    document.getElementById('profileImageInput').addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('profileImageContainer').innerHTML = `<img src="${e.target.result}" class="profile-image" alt="Profile Image">`;
-
-                // Update the profile image in the local storage
-                localStorage.setItem('profileImage', e.target.result);
-
-                // Optionally update the profile image in the database
-                axios.put('/api/user/profile-image', {
-                    profileImage: e.target.result
+            // Fetch tasks from the API
+            axios.get('/api/user/tasks')
+                .then(response => {
+                    const tasks = response.data;
+                    const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+                    userTable.innerHTML = ''; // Clear existing rows
+                    tasks.forEach(task => {
+                        const newRow = userTable.insertRow();
+                        newRow.insertCell(0).innerText = task.name;
+                        newRow.insertCell(1).innerText = task.status;
+                        newRow.insertCell(2).innerText = task.completion + '%';
+                        newRow.insertCell(3).innerHTML = `<button class="btn btn-danger btn-sm" onclick="deleteTask('${task.id}', this)">Delete</button> <button class="btn btn-primary btn-sm" onclick="editTask('${task.id}', this)">Edit</button>`;
+                    });
                 })
                 .catch(error => {
-                    console.error('Error updating profile image', error);
+                    console.error('Error fetching tasks', error);
+                });
+
+        // Function to add a new task
+    function addTask() {
+        const taskName = document.getElementById('taskName').value;
+        const taskStatus = document.querySelector('input[name="taskStatus"]:checked').value;
+        const taskCompletion = document.getElementById('taskCompletion').value;
+
+        if (taskName && taskStatus && taskCompletion) {
+            const newRow = document.createElement("tr");
+
+            newRow.innerHTML = `
+                <td>${taskName}</td>
+                <td>${taskStatus}</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: ${taskCompletion}%" aria-valuenow="${taskCompletion}" aria-valuemin="0" aria-valuemax="100">${taskCompletion}%</div>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-danger delete-task">Delete</button>
+                </td>
+            `;
+
+            const userTableBody = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+            userTableBody.appendChild(newRow);
+
+            // Clear form fields
+            document.getElementById('taskName').value = '';
+            document.getElementById('taskCompletion').value = '';
+            document.getElementById('taskStatusPending').checked = true;
+
+            // Add event listener for delete button
+            newRow.querySelector(".delete-task").addEventListener("click", function() {
+                newRow.remove();
+            });
+
+            // Close modal
+            $('#addUserModal').modal('hide');
+
+            // Manter estilo do botão "Add Task" como preto após adicionar nova tarefa
+            document.getElementById('addTaskBtn').classList.remove('btn-primary');
+            document.getElementById('addTaskBtn').classList.add('btn-primary');
+        } else {
+            alert("Please fill out all fields.");
+        }
+    }
+
+    // Event listener for 'Save' button in the modal
+    document.getElementById('saveTaskBtn').addEventListener('click', addTask);
+        // Function to delete a task
+        function deleteTask(taskId, btn) {
+            axios.delete(`/api/user/tasks/${taskId}`)
+                .then(() => {
+                    const row = btn.parentNode.parentNode;
+                    row.parentNode.removeChild(row);
+                })
+                .catch(error => {
+                    console.error('Error deleting task', error);
+                });
+        }
+
+        // Function to edit a task
+        function editTask(taskId, btn) {
+            const row = btn.parentNode.parentNode;
+            const taskName = row.cells[0].innerText;
+            const taskStatus = row.cells[1].innerText;
+            const taskCompletion = row.cells[2].innerText.split('%')[0];
+            document.getElementById('taskName').value = taskName;
+            if (taskStatus === 'Completed') {
+                document.getElementById('taskStatusCompleted').checked = true;
+            } else {
+                document.getElementById('taskStatusPending').checked = true;
+            }
+            document.getElementById('taskCompletion').value = taskCompletion;
+            $('#addUserModal').modal('show');
+
+            document.querySelector('.modal-footer .btn-primary').onclick = function() {
+                axios.put(`/api/user/tasks/${taskId}`, {
+                    name: taskName,
+                    status: document.querySelector('input[name="taskStatus"]:checked').value,
+                    completion: document.getElementById('taskCompletion').value
+                })
+                .then(() => {
+                    row.cells[0].innerText = taskName;
+                    row.cells[1].innerText = document.querySelector('input[name="taskStatus"]:checked').value;
+                    row.cells[2].innerText = document.getElementById('taskCompletion').value + '%';
+                    $('#addUserModal').modal('hide');
+                })
+                .catch(error => {
+                    console.error('Error editing task', error);
                 });
             };
-            reader.readAsDataURL(file);
         }
-    });
+        
 
-    // Follow Button Logic
-    document.querySelector('.follow-btn').addEventListener('click', function() {
-        alert('You are now following this user!');
-    });
+        // Event listener for profile image upload
+        document.getElementById('profileImageInput').addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profileImageContainer').innerHTML = `<img src="${e.target.result}" class="profile-image" alt="Profile Image">`;
 
-    $('#gohome').click(() => {
-        gohome();
-      });
+                    // Update the profile image in the local storage
+                    localStorage.setItem('profileImage', e.target.result);
 
-      const token = localStorage.getItem("token");
-      const username = localStorage.getItem("username");
+                    // Optionally update the profile image in the database
+                    axios.put('/api/user/profile-image', {
+                        profileImage: e.target.result
+                    })
+                    .catch(error => {
+                        console.error('Error updating profile image', error);
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
-    // Fetch user data when the page loads
-    fetchUserData();
-</script>
-</body>
-</html>
+        // Follow Button Logic
+        document.querySelector('.follow-btn').addEventListener('click', function() {
+            alert('You are now following this user!');
+        });
+
+        $('#gohome').click(() => {
+            gohome();
+        });
+
+        const token = localStorage.getItem("token");
+        const username = localStorage.getItem("username");
+
+        // Fetch user data when the page loads
+        fetchUserData();
+
+    </script>
+    </body>
+    </html>
