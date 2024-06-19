@@ -12,9 +12,9 @@
   };
 
   exports.getPostById = async (req, res) => {
-      const postId = parseInt(req.params.id);
+      const email = parseInt(req.params.id);
       try {
-          const post = await prisma.post.findUnique({ where: { id: postId } });
+          const post = await prisma.post.findUnique({ where: { email } });
           if (post) {
               res.status(200).json(post);
           } else {
@@ -26,7 +26,7 @@
   };
 
   exports.createPost = async (req, res) => {
-    const { title, content, userId } = req.body;
+    const { title, content, email } = req.body;
 
     try {
         const newPost = await prisma.post.create({
@@ -34,7 +34,7 @@
                 title,
                 content,
                 author: { 
-                    connect: { id: userId }
+                    connect: { email }
                 }
             }
         });
@@ -46,11 +46,11 @@
   };
 
   exports.updatePost = async (req, res) => {
-      const postId = parseInt(req.params.id);
+      const email = parseInt(req.params.id);
       const { title, content } = req.body;
       try {
           const updatedPost = await prisma.post.update({
-              where: { id: postId },
+              where: { email },
               data: { title, content }
           });
           res.status(200).json(updatedPost);

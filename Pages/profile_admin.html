@@ -340,6 +340,34 @@
             }
         }
 
+        async function getPost() {
+            try {
+                const response = await fetch("http://localhost:3000/api/post/post", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                const dados = await response.json();
+                $('#post-list').empty(); 
+                dados.forEach(post => {
+                    $('#post-list').append(`
+                        <div id="user-${user.post}" class="mb-3">
+                            <p>Email: ${user.email}</p>
+                          
+                        </div>
+                        <hr>
+                    `);
+                });
+            } catch (error) {
+                console.error('Error fetching Posts:', error);
+            }
+        }
+
+
+        
+
         async function fetchToolRequests() {
             try {
                 const response = await fetch("/api/tool-requests", {
