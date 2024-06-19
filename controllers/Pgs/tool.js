@@ -1,4 +1,6 @@
-const Tool = require('../../utils/tool');
+const { PrismaClient } = require('@prisma/client');
+const { validationResult } = require('express-validator');
+const prisma = new PrismaClient();
 
 exports.getTools = async (req, res) => {
     try {
