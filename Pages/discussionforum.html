@@ -73,9 +73,16 @@
                 </div>
                 <div class="modal-body">
                     <div id="postDetails">
+                        <!-- Post details will be dynamically added here -->
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="footer mt-5 text-center">
+        <div class="container">
+            <p>&copy; Copyright 2024 - All rights reserved by HackHive</p>
         </div>
     </div>
 
@@ -100,16 +107,18 @@
                 const latestPostsContainer = $('#latestPosts');
                 latestPostsContainer.empty();
                 data.forEach(post => {
-                    latestPostsContainer.append(`<div class="post-item" data-id="${post.id}"><a href="#" class="post-link">${post.title} by ${post.email}</a></div>`);
+                    latestPostsContainer.append(`<div class="post-item" data-id="${post.id}">
+                        <a href="#" class="post-link" data-toggle="modal" data-target="#postDetailsModal" onclick="showPostDetails(${post.id})">
+                            ${post.title} by ${post.author.name}
+                        </a>
+                    </div>`);
                 });
             } catch (error) {
                 console.error('Error fetching posts:', error);
             }
         }
 
-        async function addPost(title, content) {
-            const email = localStorage.getItem('email');
-
+        async function addPost(title, content, email) {
             try {
                 const response = await fetch('/api/posts', {
                     method: 'POST',
@@ -121,7 +130,6 @@
                 });
                 if (response.ok) {
                     await fetchPosts();
-                    $('#postemail').val('')
                     $('#postTitle').val('');
                     $('#postContent').val('');
                 } else {
@@ -132,20 +140,40 @@
             }
         }
 
+        async function showPostDetails(postId) {
+            try {
+                const response = await fetch(`/api/posts/${postId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const post = await response.json();
+                const postDetails = $('#postDetails');
+                postDetails.empty();
+                postDetails.append(`<h5>${post.title}</h5>
+                    <p>${post.content}</p>
+                    <p><small>By ${post.author.name} (${post.author.email})</small></p>`);
+            } catch (error) {
+                console.error('Error fetching post details:', error);
+            }
+        }
+
         $('#postForm').submit(function(event) {
             event.preventDefault();
             const title = $('#postTitle').val();
             const content = $('#postContent').val();
-            const email = $('postemail').val();
+            const email = localStorage.getItem('email');
             addPost(title, content, email);
         });
 
+        $(document).ready(function() {
+            fetchPosts();
+        });
     </script>
-
-    <div class="footer mt-5 text-center">
-        <div class="container">
-            <p>&copy; Copyright 2024 - All rights reserved by HackHive</p>
-        </div>
-    </div>
 </body>
 </html>

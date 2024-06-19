@@ -83,6 +83,7 @@
             background-color: #ff6347;
             border-color: #ff6347;
         }
+        
     </style>
 </head>
 <body>
@@ -168,37 +169,37 @@
         </div>
     </div>
     
-    <!-- Modal to manage posts -->
-    <div class="modal fade" id="managePostsModal" tabindex="-1" aria-labelledby="managePostsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="managePostsModalLabel">Manage Posts</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="post-list"></div>
-                    <hr>
-                    <form id="addPostForm">
-                        <div class="form-group">
-                            <label for="postTitle">Post Title:</label>
-                            <input type="text" class="form-control" id="postTitle" placeholder="Enter post title">
+  <!-- Modal to manage posts -->
+<div class="modal fade" id="managePostsModal" tabindex="-1" aria-labelledby="managePostsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="managePostsModalLabel">Manage Posts</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div id="post-list"></div>
+                    </div>
+                    <div class="col-md-5">
+                        <div id="postDetails">
+                            <!-- Details of the selected post will be shown here -->
                         </div>
-                        <div class="form-group">
-                            <label for="postContent">Post Content:</label>
-                            <textarea class="form-control" id="postContent" rows="3" placeholder="Enter post content"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add Post</button>
-                    </form>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
+
+
+
 
     <!-- Modal to manage tool requests -->
     <div class="modal fade" id="manageToolRequestsModal" tabindex="-1" aria-labelledby="manageToolRequestsModalLabel" aria-hidden="true">
@@ -279,8 +280,7 @@
                 e.preventDefault();
                 var postTitle = $('#postTitle').val();
                 var postContent = $('#postContent').val();
-                alert('Post added: ' + postTitle + '\n' + postContent);
-                $('#managePostsModal').modal('hide');
+                addPost(postTitle, postContent);
             });
 
             $('#manageUsersModal').on('show.bs.modal', function () {
@@ -290,6 +290,11 @@
             $('#manageToolRequestsModal').on('show.bs.modal', function () {
                 fetchToolRequests();
             });
+
+            $('#managePostsModal').on('show.bs.modal', function () {
+             fetchPosts();
+});
+
 
             checkSiteStatus();
         });
@@ -320,6 +325,30 @@
             }
         }
 
+        async function showPostDetails(postId) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const post = await response.json();
+        const postDetails = document.getElementById('postDetails');
+        postDetails.innerHTML = `
+            <h5>${post.title}</h5>
+            <p>${post.content}</p>
+            <p><small>By ${post.author.name} (${post.author.email})</small></p>
+        `;
+    } catch (error) {
+        console.error('Error fetching post details:', error);
+    }
+}
+
         async function deleteUser(userId) {
             try {
                 const response = await fetch(`http://localhost:3000/api/users/users/${userId}`, {
@@ -339,34 +368,6 @@
                 console.error('Error deleting user:', error);
             }
         }
-
-        async function getPost() {
-            try {
-                const response = await fetch("http://localhost:3000/api/post/post", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
-
-                const dados = await response.json();
-                $('#post-list').empty(); 
-                dados.forEach(post => {
-                    $('#post-list').append(`
-                        <div id="user-${user.post}" class="mb-3">
-                            <p>Email: ${user.email}</p>
-                          
-                        </div>
-                        <hr>
-                    `);
-                });
-            } catch (error) {
-                console.error('Error fetching Posts:', error);
-            }
-        }
-
-
-        
 
         async function fetchToolRequests() {
             try {
@@ -447,6 +448,103 @@
             localStorage.clear();
             window.location.href = "index.html";
         }
+
+        async function fetchPosts() {
+    try {
+        const response = await fetch("http://localhost:3000/api/posts", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch posts.');
+        }
+
+        const posts = await response.json();
+        const postList = document.getElementById('post-list');
+        postList.innerHTML = ''; // Clear existing posts
+
+        posts.forEach(post => {
+            const postItem = document.createElement('div');
+            postItem.className = 'post-item mb-3';
+            postItem.innerHTML = `
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="post-title">${post.title}</h4>
+                        <p>${post.content}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="post-author">
+                            <p><strong>Author:</strong> ${post.author.name}</p>
+                            <p><strong>Email:</strong> ${post.author.email}</p>
+                        </div>
+                        <button class="btn btn-danger btn-sm" onclick="deletePost(${post.id})">Remove</button>
+                    </div>
+                </div>
+                <hr>
+            `;
+            postItem.addEventListener('click', () => showPostDetails(post.id));
+            postList.appendChild(postItem);
+        });
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+    }
+}
+
+async function showPostDetails(postId) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const post = await response.json();
+        const postDetails = document.getElementById('postDetails');
+        postDetails.innerHTML = `
+            <h5>${post.title}</h5>
+            <p>${post.content}</p>
+            <div class="post-meta">
+                <p><strong>Author:</strong> ${post.author.name}</p>
+                <p><strong>Email:</strong> ${post.author.email}</p>
+            </div>
+        `;
+    } catch (error) {
+        console.error('Error fetching post details:', error);
+    }
+}
+
+async function deletePost(postId) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to delete post.');
+        }
+
+        console.log(`Post with ID ${postId} deleted successfully.`);
+        $('#post-' + postId).remove(); // Remove the post from the DOM
+        $('#postDetails').empty(); // Clear post details after deletion
+    } catch (error) {
+        console.error('Error deleting post:', error);
+    }
+}
+
+
+        $(document).ready(function() {
+            fetchPosts();
+        });
     </script>
 </body>
 </html>
