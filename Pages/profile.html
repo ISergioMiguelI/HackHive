@@ -356,7 +356,7 @@
         </div>
     </div>
 
-    <!-- JavaScript Dependencies -->
+ 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -403,23 +403,22 @@
             fetchPosts();
         });
 
-        // Event listener para abrir o modal de mensagem
         document.querySelector('.message-btn').addEventListener('click', function() {
             $('#messageModal').modal('show');
         });
 
-        // Event listener para enviar a mensagem
+       
         document.getElementById('sendMessageBtn').addEventListener('click', function() {
             const messageContent = document.getElementById('messageContent').value;
 
             if (messageContent.trim() !== '') {
-                // Aqui você pode adicionar a lógica para enviar a mensagem (exemplo: via API)
-                alert('Message sent successfully!'); // Apenas um alerta de exemplo
+                
+                alert('Message sent successfully!'); 
 
-                // Limpar o campo de mensagem após o envio
+               
                 document.getElementById('messageContent').value = '';
 
-                // Fechar o modal após enviar a mensagem
+            
                 $('#messageModal').modal('hide');
             } else {
                 alert('Please enter a message.');
@@ -454,7 +453,7 @@
 
     }
 
-            // Fetch tasks from the API
+           
             axios.get('/api/user/tasks')
                 .then(response => {
                     const tasks = response.data;
@@ -497,20 +496,20 @@
             const userTableBody = document.getElementById('userTable').getElementsByTagName('tbody')[0];
             userTableBody.appendChild(newRow);
 
-            // Clear form fields
+          
             document.getElementById('taskName').value = '';
             document.getElementById('taskCompletion').value = '';
             document.getElementById('taskStatusPending').checked = true;
 
-            // Add event listener for delete button
+          
             newRow.querySelector(".delete-task").addEventListener("click", function() {
                 newRow.remove();
             });
 
-            // Close modal
+      
             $('#addUserModal').modal('hide');
 
-            // Manter estilo do botão "Add Task" como preto após adicionar nova tarefa
+           
             document.getElementById('addTaskBtn').classList.remove('btn-primary');
             document.getElementById('addTaskBtn').classList.add('btn-primary');
         } else {
@@ -518,9 +517,9 @@
         }
     }
 
-    // Event listener for 'Save' button in the modal
+    
     document.getElementById('saveTaskBtn').addEventListener('click', addTask);
-        // Function to delete a task
+        
         function deleteTask(taskId, btn) {
             axios.delete(`/api/user/tasks/${taskId}`)
                 .then(() => {
@@ -532,7 +531,7 @@
                 });
         }
 
-        // Function to edit a task
+      
         function editTask(taskId, btn) {
             const row = btn.parentNode.parentNode;
             const taskName = row.cells[0].innerText;
@@ -566,7 +565,7 @@
         }
         
 
-        // Event listener for profile image upload
+        
         document.getElementById('profileImageInput').addEventListener('change', function() {
             const file = this.files[0];
             if (file) {
@@ -574,10 +573,10 @@
                 reader.onload = function(e) {
                     document.getElementById('profileImageContainer').innerHTML = `<img src="${e.target.result}" class="profile-image" alt="Profile Image">`;
 
-                    // Update the profile image in the local storage
+                   
                     localStorage.setItem('profileImage', e.target.result);
 
-                    // Optionally update the profile image in the database
+                    
                     axios.put('/api/user/profile-image', {
                         profileImage: e.target.result
                     })
@@ -589,7 +588,7 @@
             }
         });
 
-        // Follow Button Logic
+       
         document.querySelector('.follow-btn').addEventListener('click', function() {
             alert('You are now following this user!');
         });
@@ -601,7 +600,7 @@
         const token = localStorage.getItem("token");
         const username = localStorage.getItem("username");
 
-        // Fetch user data when the page loads
+        
         fetchUserData();
 
     </script>

@@ -409,7 +409,7 @@ h6 span{
     else{
       alert("Login efetuado com sucesso");
       console.log(dados);
-      // Guardar o token no local storage
+     
       localStorage.setItem("token", dados.token);
       localStorage.setItem("role", dados.role);
       localStorage.setItem("username", dados.nome);
@@ -427,7 +427,7 @@ h6 span{
       event.preventDefault();
       const username = document.getElementById('username').value;
       localStorage.setItem('username', username);
-      window.location.href = 'index_login.html'; // Redirecionar para a página index_login.html após o login
+      window.location.href = 'index_login.html'; 
   });
 
   const leTokenSFF = async () => {

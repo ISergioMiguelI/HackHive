@@ -26,10 +26,15 @@ exports.getToolById = async (req, res) => {
 
 exports.createTool = async (req, res) => {
     const { name, description, url } = req.body;
-    const newTool = new Tool({ name, description, url });
     try {
-        const savedTool = await newTool.save();
-        res.status(201).json(savedTool);
+        const newTool = await prisma.tool.create({
+            data: {
+                name,
+                description,
+                url
+            }
+        });
+        res.status(201).json(newTool);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

@@ -118,20 +118,15 @@
         <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
     </div>
     <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+        <label for="description">Description:</label>
+        <textarea class="form-control" id="description" rows="3" placeholder="Provide a brief description" required></textarea>
     </div>
     <div class="form-group">
-        <label for="tool">Tool/Software Needed:</label>
-        <input type="text" class="form-control" id="tool" placeholder="Enter the tool/software you need" required>
-    </div>
-    <div class="form-group">    
-        <label for="description">Description:</label>
-        <textarea class="form-control" id="description" rows="3" placeholder="Provide a brief description of your need" required></textarea>
+        <label for="url">URL:</label>
+        <input type="text" class="form-control" id="url" placeholder="Enter URL" required>
     </div>
     <button type="submit" class="btn btn-warning mt-3">Submit Request</button>
 </form>
-
 <!-- Footer -->
 <div class="footer mt-5">
     <div class="container">
@@ -150,28 +145,31 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                
             },
             body: JSON.stringify({ name, description, url })
         });
-        
+
         if (response.ok) {
-            await populateToolsTable(); 
-            $('#name').val(''); 
-            $('#description').val('');
-            $('#url').val('');
+            
+            await populateToolsTable();
         } else {
-            console.error('Error adding tool:', await response.text());
+            
+            throw new Error('Failed to add tool');
         }
     } catch (error) {
         console.error('Error adding tool:', error);
+        throw error; 
     }
 }
 
-async function populateToolsTable() {
-    try {
-        const response = await fetch('/api/tools');
-        if (response.ok) {
+
+   
+    async function populateToolsTable() {
+        try {
+            const response = await fetch('/api/tools');
+            if (!response.ok) {
+                throw new Error('Failed to fetch tools');
+            }
             const tools = await response.json();
             const toolsTable = document.getElementById('toolsTable');
             toolsTable.innerHTML = `
@@ -192,29 +190,16 @@ async function populateToolsTable() {
                     `).join('')}
                 </tbody>
             `;
-        } else {
-            throw new Error('Failed to fetch tools');
+        } catch (error) {
+            console.error('Error fetching tools:', error);
         }
-    } catch (error) {
-        console.error('Error fetching tools:', error);
     }
-}
 
-
-$('#requestForm').submit(function(event) {
-    event.preventDefault();
-    const name = $('#name').val();
-    const description = $('#description').val();
-    const url = $('#url').val();
-    addTool(name, description, url);
-});
-
-
-$(document).ready(function() {
-    populateToolsTable();
-});
-
-
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        populateToolsTable();
+    });
 </script>
+
 </body>
 </html>
